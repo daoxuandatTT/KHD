@@ -8,6 +8,7 @@ use App\Http\Requests\UpdatePost;
 use App\Service\PostServiceInterface;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
@@ -31,7 +32,7 @@ class PostController extends Controller
         return view('post.create', compact('categories'));
     }
 
-    public function store(StorePost $request,$id)
+    public function store(Request $request,$id)
     {
         $this->postService->store($request);
         Session::flash('message', 'Add successfully');
@@ -45,17 +46,19 @@ class PostController extends Controller
         return view('post.edit', compact('post','categories'));
     }
 
-    public function update(UpdatePost $request, $id)
+    public function update(Request $request, $id)
     {
+        $userId=Auth::user()->id;
         $this->postService->update($request, $id);
         Session::flash('message', 'Update successful');
-        return redirect()->route('post.list');
+        return redirect()->route('page.myPost',$userId );
     }
 
     public function delete($id)
     {
+        $userId = Auth::user()->id;
         $this->postService->delete($id);
         Session::flash('message', 'Delete successful');
-        return redirect()->route('post.list');
+        return redirect()->route('page.myPost',$userId);
     }
 }

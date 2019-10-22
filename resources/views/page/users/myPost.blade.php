@@ -40,12 +40,20 @@
                         @foreach($posts as $post)
                         <div class="col-md-4 ftco-animate">
                             <div class="blog-entry">
-                                <a href="single.html" class="img-2"><img src="{{asset('storage/upload/images/'.$post->image) }}"  class="img-fluid" alt="Colorlib Template"></a>
+                                <a href="single.html" class="img-2"><img style="width:200px; height: 250px" src="{{asset('storage/upload/images/'.$post->image) }}"  class="img-fluid" alt="Colorlib Template"></a>
                                 <div class="text pt-3">
                                     <p class="meta d-flex"><span class="pr-3">Dessert</span><span class="ml-auto pl-3">March 01, 2018</span></p>
-                                    <h3><a href="single.html">{{ $post->name }}</a></h3>
-                                    <a href=""><i class="fa fa-edit">delete</i></a>
-                                    <a href=""><i class="fa fa-edit">update</i></a>
+                                    <h3><a href="data/single.html">{{$post->title}}</a></h3>
+{{--                                    <a href=""><i class="fa fa-edit">delete</i></a>--}}
+{{--                                    <a href=""><i class="fa fa-edit">update</i></a>--}}
+                                    <a href="{{route('post.delete',$post->id)}}" class="btn btn-default btn-rounded mb-4">
+                                        <i class="icon icon-delete">
+                                            <button type="button" onclick="return confirm('delete')">Delete</button>
+                                        </i>
+                                    </a>
+                                    <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalRegisterForm1">
+                                        <i class="icon icon-add"><button type="button">Update</button></i>
+                                    </a>
                                     <p class="mb-0"><a href="{{ route('page.showDetail',$post->id) }}" class="btn btn-black py-2">Read More <span class="icon-arrow_forward ml-4"></span></a></p>
                                 </div>
                             </div>
@@ -72,55 +80,6 @@
 
                     <div class="col-12 grid-margin stretch-card">
                         <div class="card">
-                                <form id="form1" class="forms-sample" method="POST" action="{{ route('post.store',Auth::user()->id) }}" enctype="multipart/form-data">
-                                    @csrf
-                                    <h4 class="card-title text-center">Create New Post</h4>
-                                    <div class="form-group">
-                                        <label for="exampleInputName1">Title</label>
-                                        <input type="text" name="name" class="form-control" id="exampleInputName1" placeholder="enter title...">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail3">Category</label>
-                                        <select name="category_id" id="">
-                                            @foreach($categories as $category)
-                                                <option value="{{ $category->id }}">{{$category->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword4">Descriptions</label>
-                                        <textarea class="form-control" cols="98" rows="5" name="description"></textarea>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="exampleSelectGender"> Mode: </label>
-                                        <label for="exampleSelectGender"> public </label>
-                                        <input type="checkbox" value="public" name="mode"/>
-                                        <label for="exampleSelectGender">private</label>
-                                        <input type="checkbox" value="private" name="mode"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Upload image</label>
-                                        <input type="file"
-                                               onchange="document.getElementById('image').src = window.URL.createObjectURL(this.files[0])"
-                                               class="form-control-file"
-                                               name="image"
-                                        ><br>
-                                        <img id="image" src=""
-                                             style="height: 70px"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword4">Material</label>
-                                        <textarea class="form-control" cols="98" rows="5" name="material"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword4">Recipe</label>
-                                        <textarea class="form-control" cols="98" rows="5" name="recipe"></textarea>
-                                    </div>
-
-                                    <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
-                                    <button class="btn btn-light">Cancel</button>
-                                </form>
                         </div>
                     </div>
 
@@ -139,9 +98,11 @@
                         </div>
                         <div class="sidebar-box p-4 ftco-animate text-center">
 {{--                           <button><a class="icon icon-add" href="#">New Post</a></button>--}}
-                            <button id="formButton" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#ModalLoginForm">
-                               <i class="icon icon-add_box" > New Post</i>
-                            </button>
+                                <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalRegisterForm">
+                                    <button id="formButton" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#ModalLoginForm">
+                                        <i class="icon icon-add">New Post</i>  </button>
+                                </a>
+
                         </div>
 
 {{--                        form--}}
@@ -210,6 +171,159 @@
         </div>
     </section>
 
+
+{{--    modal --}}
+    <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Create New Post</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body mx-3">
+                    <form id="form2" class="forms-sample" method="POST" action="{{ route('post.store',Auth::user()->id) }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <label for="exampleInputName1">Title</label>
+                            <input type="text" name="title" class="form-control" id="exampleInputName1" placeholder="enter title...">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail3">Category</label>
+                            <select name="category_id" id="">
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{$category->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword4">Descriptions</label>
+                            <textarea class="form-control" cols="98" rows="5" name="description"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleSelectGender"> Mode: </label>
+                            <label for="exampleSelectGender"> public </label>
+                            <input type="checkbox" value="public" name="mode"/>
+                            <label for="exampleSelectGender">private</label>
+                            <input type="checkbox" value="private" name="mode"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Upload image</label>
+                            <input type="file"
+                                   onchange="document.getElementById('image').src = window.URL.createObjectURL(this.files[0])"
+                                   class="form-control-file"
+                                   name="image"
+                            ><br>
+                            <img id="image" src=""
+                                 style="height: 70px"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword4">Material</label>
+                            <textarea class="form-control" cols="98" rows="5" name="material"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword4">Recipe</label>
+                            <textarea class="form-control" cols="98" rows="5" name="recipe"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
+                        <button class="btn btn-light">Cancel</button>
+                    </form>
+
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button class="btn btn-deep-orange">Sign up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{{--    endmodal--}}
+
+
+{{--    modal form update--}}
+    <div class="modal fade" id="modalRegisterForm1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Update Post</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body mx-3">
+                    <form id="form2" class="forms-sample" method="POST" action="{{ route('post.update',$post->id) }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <label for="exampleInputName1">Title</label>
+                            <input type="text" name="title" class="form-control" id="exampleInputName1" value="{{ $post->title }}" >
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail3">Category</label>
+                            <select name="category_id" id="">
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{$category->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword4">Descriptions</label>
+                            <textarea class="form-control" cols="98" rows="5" name="description">{{$post->description}}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleSelectGender"> Mode: </label>
+                            <label for="exampleSelectGender"> public </label>
+                            <input
+                               @if($post->mode == 'public')
+                                   {{'checked'}}
+                               @endif
+                               type="radio" value="public" name="mode"/>
+                            <label for="exampleSelectGender">private</label>
+                            <input
+                                @if($post->mode == 'private')
+                                    {{'checked'}}
+                                    @endif
+                                type="radio" value="private" name="mode"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Upload image</label>
+                            <input type="file"
+                                   onchange="document.getElementById('image1').src = window.URL.createObjectURL(this.files[0])"
+                                   class="form-control-file"
+                                   name="image"
+                            ><br>
+                            <img id="image1" src="{{asset('storage/upload/images/'.$post->image) }}"
+                                 style="height: 70px" />
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword4">Material</label>
+                            <textarea class="form-control" cols="98" rows="5" name="material">{{$post->material}}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword4">Recipe</label>
+                            <textarea class="form-control" cols="98" rows="5" name="recipe">{{$post->recipe}}</textarea>
+                        </div>
+                        <a href="">
+                            <button class="btn btn-light">Cancel</button>
+                        </a>
+                        <button type="submit" class="btn btn-gradient-primary mr-2">Update</button>
+                    </form>
+
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button class="btn btn-deep-orange">Sign up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{--    end modal--}}
 @endsection
 @push('js')
     <script>
@@ -219,5 +333,6 @@
             });
         });
     </script>
+
 
     @endpush
