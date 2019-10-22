@@ -27,13 +27,17 @@ class PostService implements PostServiceInterface
     {
         $post = new Post();
         $imageFile = $request->file('image');
+        $videoFile = $request->file('video');
         $post->title = $request->title;
         $post->material = $request->material;
         $post->recipe = $request->recipe;
         $post->description = $request->description;
+        $post->region = $request->region;
         $post->mode = $request->mode;
         $post->image = $imageFile->getClientOriginalName();
+        $post->video = $videoFile->getClientOriginalName();
         $imageFile->storeAs('public/upload/images', $imageFile->getClientOriginalName());
+        $videoFile->storeAs('public/upload/videos', $videoFile->getClientOriginalName());
         $post->category_id = $request->category_id;
         $post->user_id = Auth::user()->id;
         $this->postRepository->save($post);
