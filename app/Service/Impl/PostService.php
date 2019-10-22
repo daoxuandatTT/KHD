@@ -27,10 +27,11 @@ class PostService implements PostServiceInterface
     {
         $post = new Post();
         $imageFile = $request->file('image');
-        $post->title = $request->name;
+        $post->title = $request->title;
         $post->material = $request->material;
         $post->recipe = $request->recipe;
         $post->description = $request->description;
+        $post->mode = $request->mode;
         $post->image = $imageFile->getClientOriginalName();
         $imageFile->storeAs('public/upload/images', $imageFile->getClientOriginalName());
         $post->category_id = $request->category_id;
@@ -48,10 +49,11 @@ class PostService implements PostServiceInterface
     {
         $post = $this->postRepository->findById($id);
         $imageFile = $request->file('image');
-        $post->name = $request->name;
+        $post->title = $request->title;
         $post->material = $request->material;
         $post->recipe = $request->recipe;
         $post->description = $request->description;
+        $post->mode = $request->mode;
         $post->image = $imageFile->getClientOriginalName();
         $imageFile->storeAs('public/upload/images', $imageFile->getClientOriginalName());
         $post->category_id = $request->category_id;

@@ -2,6 +2,7 @@
 
 use App\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UserTableSeeder extends Seeder
 {
@@ -15,19 +16,40 @@ class UserTableSeeder extends Seeder
         $user = new User();
         $user->name="Tong Nguyen Khanh";
         $user->email="nguyenkhanheng@gmail.com";
-        $user->password="124khanh";
+        $user->job="student";
+        $user->dob="2000-01-01";
+        $user->phone="0363792188";
+        $user->address="Hai Phong";
+        $user->gender="Male";
+        $user->description="Com chao gi tam nay";
+        $user->image="dog.jpg";
+        $user->password=Hash::make('password');
         $user->save();
 
         $user = new User();
         $user->name="Dao Xuan Dat";
         $user->email="dxdat@gmail.com";
-        $user->password="dat123";
+        $user->job="teacher";
+        $user->dob="2000-01-01";
+        $user->phone="0363792189";
+        $user->address="Hai Phong";
+        $user->gender="Male";
+        $user->description="Com chao gi tam nay";
+        $user->image="dog.jpg";
+        $user->password=Hash::make('password');
         $user->save();
 
         $user = new User();
         $user->name="Nguyen Dang Huy";
         $user->email="huy@gmail.com";
-        $user->password="huy111";
+        $user->job="student";
+        $user->dob="2000-01-01";
+        $user->phone="0363792188";
+        $user->address="Hai Phong";
+        $user->gender="Name";
+        $user->description="Com chao gi tam nay";
+        $user->image="dog.jpg";
+        $user->password=Hash::make('password');
         $user->save();
     }
 }
