@@ -74,11 +74,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('page.myPost', function($view)
-        {
-            $view
-                ->with('posts', $posts=Post::all());
+      view()->composer('page.index',function ($view){
 
+          $posts=Post::where('mode','public')->get()->sortByDesc('created_at');
+          $view->with('posts',$posts);
+      });
+        view()->composer('page.index',function ($view){
+            $postNewest=Post::where('mode','public')->orderBy('updated_at','desc')->first();
+            $view->with('postNewest',$postNewest);
         });
     }
 }

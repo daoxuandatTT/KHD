@@ -18,6 +18,153 @@
 
 @endpush
 @section('content')
+    @if(count($posts)==0)
+        <div class="text-center">
+            <p class="btn btn-danger">Khong co bai viet nao</p>
+        </div>
+        <div class="col-lg-3">
+            <div class="sidebar-wrap">
+                <div class="sidebar-box p-4 about text-center ftco-animate">
+                    <h2 class="heading mb-4">About Me</h2>
+                    <img src="images/author.jpg" class="img-fluid" alt="Colorlib Template">
+                    <div class="text pt-4">
+                        <p>Hi! My name is <strong>Cathy Deon</strong>, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+                    </div>
+                </div>
+                <div class="sidebar-box p-4 ftco-animate text-center">
+                    {{--                           <button><a class="icon icon-add" href="#">New Post</a></button>--}}
+                    <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalRegisterForm">
+                        <button id="formButton" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#ModalLoginForm">
+                            <i class="icon icon-add">New Post</i>  </button>
+                    </a>
+
+                </div>
+
+                {{--                        form--}}
+
+                <div class="sidebar-box p-4 ftco-animate">
+                    <form action="#" class="search-form">
+                        <div class="form-group">
+                            <span class="icon icon-search"></span>
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                    </form>
+                </div>
+                <div class="sidebar-box categories text-center ftco-animate">
+                    <h2 class="heading mb-4">Categories</h2>
+                    <ul class="category-image">
+                        <li>
+                            <a href="#" class="img d-flex align-items-center justify-content-center text-center" style="background-image: url(images/category-1.jpg);">
+                                <div class="text">
+                                    <h3>Foods</h3>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="img d-flex align-items-center justify-content-center text-center" style="background-image: url(images/category-2.jpg);">
+                                <div class="text">
+                                    <h3>Lifestyle</h3>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="img d-flex align-items-center justify-content-center text-center" style="background-image: url(images/category-2.jpg);">
+                                <div class="text">
+                                    <h3>Others</h3>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold">Create New Post</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body mx-3">
+                        <form id="form2" class="forms-sample" method="POST" action="{{ route('post.store',Auth::user()->id) }}" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="exampleInputName1">Title</label>
+                                <input type="text" name="title" class="form-control" id="exampleInputName1" placeholder="enter title...">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail3">Category</label>
+                                <select name="category_id" id="">
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}">{{$category->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword4">Descriptions</label>
+                                <textarea class="form-control" cols="98" rows="5" name="description"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleSelectGender"> Mode: </label>
+                                <label for="exampleSelectGender"> public </label>
+                                <input type="radio" value="public" name="mode"/>
+                                <label for="exampleSelectGender">private</label>
+                                <input type="radio" value="private" name="mode"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Upload image</label>
+                                <input type="file"
+                                       onchange="document.getElementById('image').src = window.URL.createObjectURL(this.files[0])"
+                                       class="form-control-file"
+                                       name="image"
+                                ><br>
+                                <img id="image" src=""
+                                     style="height: 70px"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Upload video</label>
+                                <input type="file"
+                                       onchange="document.getElementById('video').src = window.URL.createObjectURL(this.files[0])"
+                                       class="form-control-file"
+                                       name="video"
+                                ><br>
+                                <video id="video" width="320" height="240" controls>
+                                    <source src="" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword4">Material</label>
+                                <textarea class="form-control" cols="98" rows="5" name="material"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleSelectGender">bac</label>
+                                <input type="checkbox" value="bac" name="region"/>
+                                <label for="exampleSelectGender">trung</label>
+                                <input type="checkbox" value="trung" name="region"/>
+                                <label for="exampleSelectGender"> nam </label>
+                                <input type="checkbox" value="nam" name="region"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword4">Recipe</label>
+                                <textarea class="form-control" cols="98" rows="5" name="recipe"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
+                            <button class="btn btn-light">Cancel</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    @else
     <section class="hero-wrap hero-wrap-2" style="background-image: url('{{asset('data/images/bg_4.jpg')}}');">
         <div class="overlay"></div>
         <div class="container">
@@ -172,7 +319,7 @@
     </section>
 
 
-{{--    modal --}}
+{{--    modal create --}}
     <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -199,17 +346,17 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="exampleSelectGender"> Mode: </label>
+                            <label for="exampleSelectGender"> public </label>
+                            <input type="radio" value="public" name="mode"/>
+                            <label for="exampleSelectGender">private</label>
+                            <input type="radio" value="private" name="mode"/>
+                        </div>
+                        <div class="form-group">
                             <label for="exampleInputPassword4">Descriptions</label>
                             <textarea class="form-control" cols="98" rows="5" name="description"></textarea>
                         </div>
 
-                        <div class="form-group">
-                            <label for="exampleSelectGender"> Mode: </label>
-                            <label for="exampleSelectGender"> public </label>
-                            <input type="checkbox" value="public" name="mode"/>
-                            <label for="exampleSelectGender">private</label>
-                            <input type="checkbox" value="private" name="mode"/>
-                        </div>
                         <div class="form-group">
                             <label>Upload image</label>
                             <input type="file"
@@ -221,8 +368,34 @@
                                  style="height: 70px"/>
                         </div>
                         <div class="form-group">
+                            <label>Upload video</label>
+                            <input type="file"
+                                   onchange="document.getElementById('video').src = window.URL.createObjectURL(this.files[0])"
+                                   class="form-control-file"
+                                   name="video"
+                            ><br>
+                            <video id="video" width="320" height="240" controls>
+                                <source src="" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+
+{{--                            <video id="video" width="320" height="240" controls>--}}
+{{--                                <source src="" type="video/mp4">--}}
+{{--                                Your browser does not support the video tag.--}}
+{{--                            </video>--}}
+                        <div class="form-group">
                             <label for="exampleInputPassword4">Material</label>
                             <textarea class="form-control" cols="98" rows="5" name="material"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Region</label><br>
+                            <label for="exampleSelectGender">Mien Bac</label>
+                            <input type="checkbox" value="Mien Bac" name="region"/>
+                            <label for="exampleSelectGender">Mien Trung</label>
+                            <input type="checkbox" value="Mien Trung" name="region"/>
+                            <label for="exampleSelectGender">Mien Nam</label>
+                            <input type="checkbox" value="Mien Nam" name="region"/>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword4">Recipe</label>
@@ -233,9 +406,6 @@
                         <button class="btn btn-light">Cancel</button>
                     </form>
 
-                </div>
-                <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn btn-deep-orange">Sign up</button>
                 </div>
             </div>
         </div>
@@ -306,6 +476,14 @@
                             <textarea class="form-control" cols="98" rows="5" name="material">{{$post->material}}</textarea>
                         </div>
                         <div class="form-group">
+                            <label for="exampleSelectGender">bac</label>
+                            <input type="checkbox" value="bac" name="region"/>
+                            <label for="exampleSelectGender">trung</label>
+                            <input type="checkbox" value="trung" name="region"/>
+                            <label for="exampleSelectGender"> nam </label>
+                            <input type="checkbox" value="nam" name="region"/>
+                        </div>
+                        <div class="form-group">
                             <label for="exampleInputPassword4">Recipe</label>
                             <textarea class="form-control" cols="98" rows="5" name="recipe">{{$post->recipe}}</textarea>
                         </div>
@@ -316,13 +494,10 @@
                     </form>
 
                 </div>
-                <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn btn-deep-orange">Sign up</button>
-                </div>
             </div>
         </div>
     </div>
-
+@endif
     {{--    end modal--}}
 @endsection
 @push('js')

@@ -50,19 +50,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-7 heading-section ftco-animate">
-                    <h2 class="mb-4"><span>Recent Stories</span></h2>
+                    <h2 class="mb-4"><span>Bài Viết gần đây </span></h2>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 order-md-last col-lg-6 ftco-animate">
                     <div class="blog-entry">
                         <div class="img img-big d-flex align-items-end"
-                             style="background-image: url({{asset('data/images/image_2.jpg')}});">
+                             style="background-image: url({{asset('storage/upload/images/'.$postNewest->image)}});">
                             <div class="overlay"></div>
                             <div class="text">
                                 <span class="subheading">Food</span>
-                                <h3><a href="data/single.html">Tasty &amp; Delicious Foods</a></h3>
-                                <p class="mb-0"><a href="data/single.html" class="btn-custom">Read More <span
+                                <h3><a href="data/single.html">{{$postNewest->title}}</a></h3>
+                                <p class="mb-0"><a href="{{route('page.showDetail',$postNewest->id)}}" class="btn-custom">Read More <span
                                             class="icon-arrow_forward ml-4"></span></a></p>
                             </div>
                         </div>
@@ -70,66 +70,21 @@
                 </div>
                 <div class="col-md-6">
                     <div class="row">
+                        @foreach($posts as $post)
                         <div class="col-md-6 ftco-animate">
                             <div class="blog-entry">
                                 <a href="data/single.html" class="img d-flex align-items-end"
-                                   style="background-image: url({{asset('data/images/image_1.jpg')}});">
+                                   style="background-image: url({{asset('storage/upload/images/'.$post->image)}});">
                                     <div class="overlay"></div>
                                 </a>
                                 <div class="text pt-3">
-                                    <p class="meta d-flex"><span class="pr-3">Dessert</span><span class="ml-auto pl-3">March 01, 2018</span>
-                                    </p>
-                                    <h3><a href="data/single.html">Tasty &amp; Delicious Foods</a></h3>
-                                    <p class="mb-0"><a href="data/single.html" class="btn-custom">Read More <span
+                                    <h3><a href="data/single.html">{{ $post->title }}</a></h3>
+                                    <p class="mb-0"><a href="{{route('page.showDetail',$post->id)}}" class="btn-custom">Read More <span
                                                 class="icon-arrow_forward ml-4"></span></a></p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 ftco-animate">
-                            <div class="blog-entry">
-                                <a href="data/single.html" class="img d-flex align-items-end"
-                                   style="background-image: url({{asset('images/image_3.jpg')}});">
-                                    <div class="overlay"></div>
-                                </a>
-                                <div class="text pt-3">
-                                    <p class="meta d-flex"><span class="pr-3">Dessert</span><span class="ml-auto pl-3">March 01, 2018</span>
-                                    </p>
-                                    <h3><a href="data/single.html">Tasty &amp; Delicious Foods from Scotland</a></h3>
-                                    <p class="mb-0"><a href="data/single.html" class="btn-custom">Read More <span
-                                                class="icon-arrow_forward ml-4"></span></a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 ftco-animate">
-                            <div class="blog-entry">
-                                <a href="data/single.html" class="img d-flex align-items-end"
-                                   style="background-image: url({{asset('data/images/image_4.jpg')}});">
-                                    <div class="overlay"></div>
-                                </a>
-                                <div class="text pt-3">
-                                    <p class="meta d-flex"><span class="pr-3">Dessert</span><span class="ml-auto pl-3">March 01, 2018</span>
-                                    </p>
-                                    <h3><a href="data/single.html">Tasty &amp; Delicious Foods</a></h3>
-                                    <p class="mb-0"><a href="data/single.html" class="btn-custom">Read More <span
-                                                class="icon-arrow_forward ml-4"></span></a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 ftco-animate">
-                            <div class="blog-entry">
-                                <a href="data/single.html" class="img d-flex align-items-end"
-                                   style="background-image: url({{asset('data/images/image_5.jpg')}});">
-                                    <div class="overlay"></div>
-                                </a>
-                                <div class="text pt-3">
-                                    <p class="meta d-flex"><span class="pr-3">Dessert</span><span class="ml-auto pl-3">March 01, 2018</span>
-                                    </p>
-                                    <h3><a href="data/single.html">Tasty &amp; Delicious Foods</a></h3>
-                                    <p class="mb-0"><a href="data/single.html" class="btn-custom">Read More <span
-                                                class="icon-arrow_forward ml-4"></span></a></p>
-                                </div>
-                            </div>
-                        </div>
+                            @endforeach
                     </div>
                 </div>
             </div>
@@ -142,18 +97,18 @@
                 <div class="col-lg-9">
                     <div class="row">
                         <div class="col-md-12 heading-section ftco-animate">
-                            <h2 class="mb-4"><span>Featured Posts</span></h2>
+                            <h2 class="mb-4"><span>Món ăn theo vùng   </span></h2>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4 ftco-animate">
                             <div class="blog-entry">
-                                <a href="data/single.html" class="img-2"><img src="{{asset('data/images/blog-1.jpg')}}"
+                                <a href="data/single.html" class="img-2"><img src="{{asset('data/images/blog-2.jpg')}}"
                                                                               class="img-fluid" alt="Colorlib Template"></a>
                                 <div class="text pt-3">
                                     <p class="meta d-flex"><span class="pr-3">Dessert</span><span class="ml-auto pl-3">March 01, 2018</span>
                                     </p>
-                                    <h3><a href="#">Tasty &amp; Delicious Foods</a></h3>
+                                    <h3><a href="#">Mien Bac</a></h3>
                                     <p class="mb-0"><a href="data/single.html" class="btn btn-black py-2">Read More
                                             <span class="icon-arrow_forward ml-4"></span></a></p>
                                 </div>
@@ -166,7 +121,7 @@
                                 <div class="text pt-3">
                                     <p class="meta d-flex"><span class="pr-3">Dessert</span><span class="ml-auto pl-3">March 01, 2018</span>
                                     </p>
-                                    <h3><a href="#">Tasty &amp; Delicious Foods</a></h3>
+                                    <h3><a href="#">Mien Trung</a></h3>
                                     <p class="mb-0"><a href="data/single.html" class="btn btn-black py-2">Read More
                                             <span class="icon-arrow_forward ml-4"></span></a></p>
                                 </div>
@@ -179,7 +134,7 @@
                                 <div class="text pt-3">
                                     <p class="meta d-flex"><span class="pr-3">Dessert</span><span class="ml-auto pl-3">March 01, 2018</span>
                                     </p>
-                                    <h3><a href="#">Tasty &amp; Delicious Foods</a></h3>
+                                    <h3><a href="#">Mien Nam</a></h3>
                                     <p class="mb-0"><a href="data/single.html" class="btn btn-black py-2">Read More
                                             <span class="icon-arrow_forward ml-4"></span></a></p>
                                 </div>
@@ -213,26 +168,6 @@
         </div>
     </section>
 
-    <section class="ftco-section ftco-no-pt ftco-section-about ftco-no-pb bg-darken">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-6 col-md-6 col-lg-9 order-md-last img py-5"
-                     style="background-image: url({{asset('data/images/bg_3.jpg')}});"></div>
-
-                <div class="col-sm-6 col-md-6 col-lg-3 py-4 text d-flex align-items-center ftco-animate">
-                    <div class="text-2 py-5 px-4">
-                        <p class="mb-5"><a href="https://vimeo.com/45830194" class="btn-custom popup-vimeo">Watch Video
-                                <span class="ion-ios-play ml-4"></span></a></p>
-                        <h1 class="mb-5">Roger <br> Bosch</h1>
-                        <p class="mb-md-5">A small river named Duden flows by their place and supplies it with the
-                            necessary regelialia. Far far away, behind the word mountains, far from the countries
-                            Vokalia and Consonantia, there live the blind texts.</p>
-                        <span class="signature">Roger.Bosch</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <section class="ftco-section">
         <div class="container">
@@ -240,7 +175,7 @@
                 <div class="col-md-9">
                     <div class="row">
                         <div class="col-md-12 heading-section ftco-animate">
-                            <h2 class="mb-4"><span>Holiday Seasons Recipes</span></h2>
+                            <h2 class="mb-4"><span>Nhung mon an ua chuong nhat</span></h2>
                         </div>
                     </div>
                     <div class="row">
@@ -313,58 +248,5 @@
         </div>
     </section>
 
-    <section class="ftco-counter ftco-section ftco-no-pt ftco-no-pb img" id="section-counter">
-        <div class="container">
-            <div class="row d-flex">
-                <div class="col-md-6 d-flex">
-                    <div class="img d-flex align-self-stretch"
-                         style="background-image:url({{asset('data/images/about.jpg')}});"></div>
-                </div>
-                <div class="col-md-6 pl-md-5 py-5">
-                    <div class="row justify-content-start pb-3">
-                        <div class="col-md-12 heading-section ftco-animate">
-                            <h2 class="mb-4">About Stories</h2>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and
-                                Consonantia</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 justify-content-center counter-wrap ftco-animate">
-                            <div class="block-18 text-center py-5 bg-light mb-4">
-                                <div class="text">
-                                    <strong class="number" data-number="10">0</strong>
-                                    <span>Years of Experienced</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 justify-content-center counter-wrap ftco-animate">
-                            <div class="block-18 text-center py-5 bg-light mb-4">
-                                <div class="text">
-                                    <strong class="number" data-number="200">0</strong>
-                                    <span>Foods</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 justify-content-center counter-wrap ftco-animate">
-                            <div class="block-18 text-center py-5 bg-light mb-4">
-                                <div class="text">
-                                    <strong class="number" data-number="300">0</strong>
-                                    <span>Lifestyle</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 justify-content-center counter-wrap ftco-animate">
-                            <div class="block-18 text-center py-5 bg-light mb-4">
-                                <div class="text">
-                                    <strong class="number" data-number="40">0</strong>
-                                    <span>Happy Customers</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
 @endsection

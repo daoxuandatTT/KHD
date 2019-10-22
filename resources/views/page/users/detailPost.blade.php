@@ -21,18 +21,26 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 order-lg-last ftco-animate">
-                    <h2 class="mb-3">#1. MO ta</h2>
+                    <h2 class="mb-3">#1. Desription</h2>
                     <p>{{$post->description}}</p>
 
 {{--                    <p>{{$post->recipe}}</p>--}}
                     <p>
                         <img src="{{asset('data/images/image_6.jpg')}}" alt="" class="img-fluid">
                     </p>
-                    <h2 class="mb-3 mt-5">#2. Nguyen Lieu</h2>
+                    <h2 class="mb-3 mt-5">#2. Material</h2>
+{{--                        image--}}
+<p>{{$post->material}}</p>
+                    <h2 class="mb-3 mt-5">#3. Recipe</h2>
+<p>
+    {{$post->recipe}}
+</p>
 
 
-                    <h2 class="mb-3 mt-5">#3. Cong Thuc</h2>
-
+                    <video id="video" width="560" height="365" controls autoplay>
+                        <source src="{{asset('storage/upload/videos/' . $post->video)}}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
 {{--                 VIDEO--}}
 
                     <div class="tag-widget post-tag-container mb-5 mt-5">
