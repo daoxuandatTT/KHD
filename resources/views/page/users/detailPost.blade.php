@@ -26,7 +26,7 @@
 
 {{--                    <p>{{$post->recipe}}</p>--}}
                     <p>
-                        <img src="{{asset('data/images/image_6.jpg')}}" alt="" class="img-fluid">
+                        <img src="{{asset('storage/upload/images/' . $post->image)}}" alt="" class="img-fluid">
                     </p>
                     <h2 class="mb-3 mt-5">#2. Material</h2>
 {{--                        image--}}
