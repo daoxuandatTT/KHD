@@ -8,6 +8,8 @@ use App\Post;
 use App\Repositories\Contract\PostRepositoryInterface;
 use App\Service\PostServiceInterface;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class PostService implements PostServiceInterface
 {
@@ -34,10 +36,15 @@ class PostService implements PostServiceInterface
         $post->description = $request->description;
         $post->region = $request->region;
         $post->mode = $request->mode;
+        $post->link = $request->link;
         $post->image = $imageFile->getClientOriginalName();
-        $post->video = $videoFile->getClientOriginalName();
+        if($videoFile){
+            $post->video = $videoFile->getClientOriginalName();
+            $videoFile->storeAs('public/upload/videos', $videoFile->getClientOriginalName());
+        }else{
+            $post->video=null;
+        }
         $imageFile->storeAs('public/upload/images', $imageFile->getClientOriginalName());
-        $videoFile->storeAs('public/upload/videos', $videoFile->getClientOriginalName());
         $post->category_id = $request->category_id;
         $post->user_id = Auth::user()->id;
         $this->postRepository->save($post);

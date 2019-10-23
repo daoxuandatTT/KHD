@@ -73,7 +73,7 @@
                         @foreach($posts as $post)
                         <div class="col-md-6 ftco-animate">
                             <div class="blog-entry">
-                                <a href="data/single.html" class="img d-flex align-items-end"
+                                <a href="{{route('page.showDetail',$post->id)}}" class="img d-flex align-items-end"
                                    style="background-image: url({{asset('storage/upload/images/'.$post->image)}});">
                                     <div class="overlay"></div>
                                 </a>

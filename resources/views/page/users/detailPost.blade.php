@@ -36,12 +36,16 @@
     {{$post->recipe}}
 </p>
 
-
-                    <video id="video" width="560" height="365" controls autoplay>
-                        <source src="{{asset('storage/upload/videos/' . $post->video)}}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-{{--                 VIDEO--}}
+@if(isset($post->video))
+                        <video id="video" width="560" height="365" controls autoplay>
+                            <source src="{{asset('storage/upload/videos/' . $post->video)}}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    @else
+                    <div class="media-body">
+                        {!! Embed::make($post->link)->parseUrl()->getIframe() !!}
+                    </div>
+                    @endif
 
                     <div class="tag-widget post-tag-container mb-5 mt-5">
                         <div class="tagcloud">

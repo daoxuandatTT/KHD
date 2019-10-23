@@ -138,6 +138,9 @@
                                 </video>
                             </div>
                             <div class="form-group">
+                                Video :<input type="text" name="link">
+                            </div>
+                            <div class="form-group">
                                 <label for="exampleInputPassword4">Material</label>
                                 <textarea class="form-control" cols="98" rows="5" name="material"></textarea>
                             </div>
@@ -330,8 +333,9 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body mx-3">
-                    <form id="form2" class="forms-sample" method="POST" action="{{ route('post.store',Auth::user()->id) }}" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div id="endorsement-form-container" class="container">
+                    <form id="form2" class="form-horizontal" role="" method="POST" action="{{ route('post.store',Auth::user()->id) }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="exampleInputName1">Title</label>
@@ -352,12 +356,12 @@
                             <label for="exampleSelectGender">private</label>
                             <input type="radio" value="private" name="mode"/>
                         </div>
-                        <div class="form-group">
+                        <div class="form-">
                             <label for="exampleInputPassword4">Descriptions</label>
                             <textarea class="form-control" cols="98" rows="5" name="description"></textarea>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-">
                             <label>Upload image</label>
                             <input type="file"
                                    onchange="document.getElementById('image').src = window.URL.createObjectURL(this.files[0])"
@@ -379,6 +383,10 @@
                                 Your browser does not support the video tag.
                             </video>
                         </div>
+                        OR
+                        <div class="form-group">
+                           Video :<input type="text" name="link">
+                        </div>
 
 {{--                            <video id="video" width="320" height="240" controls>--}}
 {{--                                <source src="" type="video/mp4">--}}
@@ -397,7 +405,7 @@
                             <label for="exampleSelectGender">Mien Nam</label>
                             <input type="checkbox" value="Mien Nam" name="region"/>
                         </div>
-                        <div class="form-group">
+                        <div class=" form-group">
                             <label for="exampleInputPassword4">Recipe</label>
                             <textarea class="form-control" cols="98" rows="5" name="recipe"></textarea>
                         </div>
@@ -405,6 +413,7 @@
                         <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
                         <button class="btn btn-light">Cancel</button>
                     </form>
+                    </div>
 
                 </div>
             </div>
