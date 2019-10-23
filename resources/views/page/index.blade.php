@@ -78,6 +78,7 @@
                                     <div class="overlay"></div>
                                 </a>
                                 <div class="text pt-3">
+                                    <p class="meta d-flex"><span class="pr-3">{{$post->user->name}}</span><span class="ml-auto pl-3">{{$post->created_at}}</span></p>
                                     <h3><a href="data/single.html">{{ $post->title }}</a></h3>
                                     <p class="mb-0"><a href="{{route('page.showDetail',$post->id)}}" class="btn-custom">Read More <span
                                                 class="icon-arrow_forward ml-4"></span></a></p>
@@ -86,6 +87,7 @@
                         </div>
                             @endforeach
                     </div>
+                    {{$posts->links()}}
                 </div>
             </div>
         </div>

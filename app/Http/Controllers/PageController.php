@@ -44,7 +44,9 @@ class PageController extends Controller
         return view('page.users.myProfile');
     }
     public function showDetail($id){
+        $posts=Post::all();
         $post=Post::find($id);
-        return view('page.users.detailPost',compact('post'));
+        $categories=Category::all();
+        return view('page.users.detailPost',compact('post','posts','categories'));
     }
 }
