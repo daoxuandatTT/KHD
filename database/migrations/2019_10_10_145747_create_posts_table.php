@@ -21,6 +21,7 @@ class CreatePostsTable extends Migration
             $table->string('material');
             $table->string('region')->nullable();
             $table->string('video')->nullable();
+            $table->string('link')->nullable();
             $table->string('image')->nullable();
             $table->string('mode')->nullable();
             $table->integer('view_count')->default(0);

@@ -46,7 +46,6 @@
                         {!! Embed::make($post->link)->parseUrl()->getIframe() !!}
                     </div>
                     @endif
-{{--                 VIDEO--}}
 
                     <div class="tag-widget post-tag-container mb-5 mt-5">
                         <div class="tagcloud">

@@ -138,6 +138,9 @@
                                 </video>
                             </div>
                             <div class="form-group">
+                                Video :<input type="text" name="link">
+                            </div>
+                            <div class="form-group">
                                 <label for="exampleInputPassword4">Material</label>
                                 <textarea class="form-control" cols="98" rows="5" name="material"></textarea>
                             </div>
@@ -382,7 +385,7 @@
                         </div>
                         OR
                         <div class="form-group">
-                            <input type="text" name="link">
+                           Video :<input type="text" name="link">
                         </div>
 
 {{--                            <video id="video" width="320" height="240" controls>--}}
