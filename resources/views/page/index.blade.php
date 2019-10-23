@@ -103,7 +103,7 @@
                     <div class="row">
                         <div class="col-md-4 ftco-animate">
                             <div class="blog-entry">
-                                <a href="data/single.html" class="img-2"><img src="{{asset('data/images/blog-2.jpg')}}"
+                                <a href="data/single.html" class="img-2"><img src="{{asset('data/images/ha noi.jpg')}}"
                                                                               class="img-fluid" alt="Colorlib Template"></a>
                                 <div class="text pt-3">
                                     <p class="meta d-flex"><span class="pr-3">Dessert</span><span class="ml-auto pl-3">March 01, 2018</span>
@@ -116,7 +116,7 @@
                         </div>
                         <div class="col-md-4 ftco-animate">
                             <div class="blog-entry">
-                                <a href="data/single.html" class="img-2"><img src="{{asset('data/images/blog-2.jpg')}}"
+                                <a href="data/single.html" class="img-2"><img src="{{asset('data/images/da nang.jpg')}}"
                                                                               class="img-fluid" alt="Colorlib Template"></a>
                                 <div class="text pt-3">
                                     <p class="meta d-flex"><span class="pr-3">Dessert</span><span class="ml-auto pl-3">March 01, 2018</span>
@@ -129,7 +129,7 @@
                         </div>
                         <div class="col-md-4 ftco-animate">
                             <div class="blog-entry">
-                                <a href="data/single.html" class="img-2"><img src="{{asset('data/images/blog-3.jpg')}}"
+                                <a href="data/single.html" class="img-2"><img src="{{asset('data/images/sai gon.jpeg')}}"
                                                                               class="img-fluid" alt="Colorlib Template"></a>
                                 <div class="text pt-3">
                                     <p class="meta d-flex"><span class="pr-3">Dessert</span><span class="ml-auto pl-3">March 01, 2018</span>
