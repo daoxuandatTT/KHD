@@ -27,16 +27,6 @@ class PostService implements PostServiceInterface
 
     public function store($request)
     {
-        $request->validate([
-            $request->title = 'required|min:6',
-            $request->material = 'required',
-            $request->recipe = 'required',
-            $request->description = 'required',
-            $request->region = 'required',
-            $request->mode = 'required',
-            $request->link = 'required',
-            $request->image = 'required',
-        ]);
         $post = new Post();
         $imageFile = $request->file('image');
         $videoFile = $request->file('video');
