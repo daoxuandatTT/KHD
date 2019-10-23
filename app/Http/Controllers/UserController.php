@@ -6,6 +6,7 @@ use App\Http\Requests\StoreUser;
 use App\Http\Requests\UpdateUser;
 use App\Service\UserServiceInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -44,7 +45,7 @@ class UserController extends Controller
     {
         $this->userService->update($request, $id);
 
-        return redirect()->route('user.list');
+        return redirect()->route('page.myProfile',Auth::user()->name);
     }
 
     public function delete($id)

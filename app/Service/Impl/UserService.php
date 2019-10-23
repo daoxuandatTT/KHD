@@ -44,9 +44,11 @@ class UserService implements UserServiceInterface
 
     public function update($request, $id)
     {
+//        return $request->all();
         $user = $this->userRepository->findById($id);
         $user->name = $request->name;
         $imageFile = $request->file('image');
+        dd($imageFile);
         $user->email = $request->email;
         $user->image = $imageFile->getClientOriginalName();
         $imageFile->storeAs('public/upload/images', $imageFile->getClientOriginalName());
