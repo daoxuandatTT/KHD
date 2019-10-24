@@ -76,7 +76,7 @@ class AppServiceProvider extends ServiceProvider
     {
       view()->composer('page.index',function ($view){
 
-          $posts=Post::where('mode','public')->get()->sortByDesc('created_at');
+          $posts=Post::where('mode','public')->orderBy('created_at','desc')->paginate(4);
           $view->with('posts',$posts);
       });
         view()->composer('page.index',function ($view){

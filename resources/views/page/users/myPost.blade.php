@@ -174,7 +174,7 @@
             <div class="row no-gutters slider-text align-items-end justify-content-center">
                 <div class="col-md-9 ftco-animate pb-5 text-center">
                     <h1 class="mb-3 bread"> {{ Auth::user()->name }}'s BLOG</h1>
-                    <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Foods <i class="ion-ios-arrow-forward"></i></span></p>
+                    <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>My Post <i class="ion-ios-arrow-forward"></i></span></p>
                 </div>
             </div>
         </div>
@@ -359,7 +359,7 @@
                         </div>
                         <div class="form-">
                             <label for="exampleInputPassword4">Descriptions</label>
-                            <textarea class="form-control" cols="98" rows="5" name="description"></textarea>
+                            <textarea class="form-control" cols="98" rows="5" name="description">{{$post->description}}</textarea>
                         </div>
 
                         <div class="form-">
@@ -518,6 +518,4 @@
             });
         });
     </script>
-
-
     @endpush
