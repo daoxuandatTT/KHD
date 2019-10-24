@@ -45,7 +45,7 @@ class UserController extends Controller
     {
         $this->userService->update($request, $id);
 
-        return redirect()->route('page.myProfile',Auth::user()->name);
+        return redirect()->route('page.myProfile');
     }
 
     public function delete($id)
