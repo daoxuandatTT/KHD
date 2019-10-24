@@ -191,6 +191,7 @@
                         <div class="col-md-4 ftco-animate">
                             <div class="blog-entry">
                                 <a href="single.html" class="img-2"><img style="width:200px; height: 250px" src="{{asset('storage/upload/images/'.$post->image) }}"  class="img-fluid" alt="Colorlib Template"></a>
+
                                 <div class="text pt-3">
                                     <p class="meta d-flex"><span class="pr-3">Dessert</span><span class="ml-auto pl-3">March 01, 2018</span></p>
                                     <h3><a href="data/single.html">{{$post->title}}</a></h3>
