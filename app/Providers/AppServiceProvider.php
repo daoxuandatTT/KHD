@@ -20,6 +20,8 @@ use App\Service\Impl\UserService;
 use App\Service\PostServiceInterface;
 use App\Service\ServiceInterface;
 use App\Service\UserServiceInterface;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
@@ -85,3 +87,4 @@ class AppServiceProvider extends ServiceProvider
         });
     }
 }
+

@@ -4,14 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Post;
+use App\Service\UserServiceInterface;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
 {
-    public function __construct() {
+    protected $userService;
+
+    public function __construct(UserServiceInterface $userService)
+    {
         $this->middleware('auth');
+        $this->userService = $userService;
     }
 
     public function index()
@@ -36,17 +41,46 @@ class PageController extends Controller
 
     public function myPost($id)
     {
-        $posts=User::find($id)->posts;
-        $categories=Category::all();
-        return view('page.users.myPost',compact('posts','categories'));
+        $posts = User::find($id)->posts;
+        $categories = Category::all();
+        return view('page.users.myPost', compact('posts', 'categories'));
     }
-    public function myProfile(){
-        return view('page.users.myProfile');
+
+    public function myProfile($id)
+    {
+        $user = User::find($id);
+        return view('page.users.myProfile', compact('user'));
     }
-    public function showDetail($id){
-        $posts=Post::all();
-        $post=Post::find($id);
-        $categories=Category::all();
-        return view('page.users.detailPost',compact('post','posts','categories'));
+
+    public function showDetail($id)
+    {
+        $posts = Post::all();
+        $post = Post::find($id);
+        $categories = Category::all();
+        return view('page.users.detailPost', compact('post', 'posts', 'categories'));
+    }
+
+    public function editProfile($id)
+    {
+        $user = User::find($id);
+        return view('page.users.EditProfile', compact('user'));
+    }
+
+    public function updateProfile(Request $request, $id)
+    {
+        $this->userService->update($request, $id);
+        return redirect()->route('page.myProfile', Auth::user()->id);
+    }
+
+    public function editPassword($id)
+    {
+        $user = User::find($id);
+        return view('page.users.changePassword', compact('user'));
+    }
+
+    public function updatePassword(Request $request, $id)
+    {
+        $this->userService->changePassword($request, $id);
+        return redirect()->route('page.myProfile', Auth::user()->id);
     }
 }

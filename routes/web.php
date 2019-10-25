@@ -23,8 +23,12 @@ Route::prefix('page')->group(function () {
     Route::get('/cooking', 'PageController@cooking')->name('page.cooking');
     Route::get('/contact', 'PageController@contact')->name('page.contact');
     Route::get('{id}/myPost', 'PageController@myPost')->name('page.myPost');
-    Route::get('/myProfile', 'PageController@myProfile')->name('page.myProfile');
+    Route::get('{id}/myProfile', 'PageController@myProfile')->name('page.myProfile');
+    Route::get('{id}/editProfile', 'PageController@editProfile')->name('page.editProfile');
+    Route::post('{id}/updateProfile', 'PageController@updateProfile')->name('page.updateProfile');
     Route::get('{id}/detail', 'PageController@showDetail')->name('page.showDetail');
+    Route::get('{id}/editPassword', 'PageController@editPassword')->name('page.editPassword');
+    Route::post('{id}/updatePassword', 'PageController@updatePassword')->name('page.updatePassword');
 });
 
 Route::prefix('post')->group(function () {

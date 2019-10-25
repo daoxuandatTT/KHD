@@ -7,6 +7,7 @@ namespace App\Service\Impl;
 use App\Repositories\Contract\UserRepositoryInterface;
 use App\Service\UserServiceInterface;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserService implements UserServiceInterface
@@ -31,9 +32,11 @@ class UserService implements UserServiceInterface
         $user->email = $request->email;
         $user->image = $imageFile->getClientOriginalName();
         $imageFile->storeAs('public/upload/images', $imageFile->getClientOriginalName());
-        $user->password = Hash::make($request->password);
         $user->gender = $request->gender;
         $user->address = $request->address;
+        $user->phone = $request->phone;
+        $user->job = $request->job;
+        $user->dob = $request->dob;
         $this->userRepository->save($user);
     }
 
@@ -48,14 +51,25 @@ class UserService implements UserServiceInterface
         $user = $this->userRepository->findById($id);
         $user->name = $request->name;
         $imageFile = $request->file('image');
-        dd($imageFile);
         $user->email = $request->email;
         $user->image = $imageFile->getClientOriginalName();
         $imageFile->storeAs('public/upload/images', $imageFile->getClientOriginalName());
-        $user->password = Hash::make($request->password);
         $user->gender = $request->gender;
         $user->address = $request->address;
+        $user->phone = $request->phone;
+        $user->job = $request->job;
+        $user->dob = $request->dob;
         $this->userRepository->save($user);
+    }
+
+    public function changePassword($request, $id)
+    {
+
+        if (Hash::check($request->password ,Auth::user()->password )&& $request->newpassword1 == $request->newpassword2) {
+            $user = $this->userRepository->findById($id);
+            $user->password = Hash::make($request->newpassword2);
+            $this->userRepository->save($user);
+        }
     }
 
     public function delete($id)

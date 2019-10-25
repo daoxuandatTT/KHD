@@ -596,74 +596,43 @@
             <section class="module">
                 <div class="module-inner">
                     <div class="content-panel">
-                        <h2 class="title">Profile<span class="pro-label label label-warning">Update</span></h2>
-                        <form class="form-horizontal" method="post" action="{{route('page.updateProfile',Auth::user()->id)}}" enctype="multipart/form-data">
+                        <h2 class="title">Change Password<span class="pro-label label label-warning"></span></h2>
+                        <form class="form-horizontal" method="post" action="{{route('page.updatePassword',Auth::user()->id)}}">
                             @csrf
                             <fieldset class="fieldset">
-                                <h3 class="fieldset-title">Personal Info</h3>
-                                <div class="form-group avatar">
-                                    <figure class="figure col-md-2 col-sm-3 col-xs-12">
-                                        <img class="img-rounded img-responsive" src="{{asset('storage/upload/images/'.$user->image) }}" id="image">
-                                    </figure>
-                                    <div class="form-inline col-md-10 col-sm-9 col-xs-12">
-                                        <input type="file"
-                                               onchange="document.getElementById('image').src = window.URL.createObjectURL(this.files[0])"
-                                               class="form-control-file"
-                                               name="image">
-{{--                                        <img id="image" src=""--}}
-{{--                                             style="height: 70px"/>--}}
+
+                                <div class="form-group">
+                                    <div class="col-md-10 col-sm-9 col-xs-12">
+                                        <label class="col-md-2  col-sm-3 col-xs-12 control-label">User Name:</label>
+                                        <label class="label label-info">{{ Auth::user()->name }}</label>
+                                        <br>
+                                        <label class="col-md-2  col-sm-3 col-xs-12 control-label">Email:</label>
+                                        <label class="label label-info">{{ Auth::user()->email }}</label>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">User Name</label>
+                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">Old Password</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="text" name="name" class="form-control" value="{{Auth::user()->name}}">
+                                        <input type="password" name="password" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">Job</label>
+                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label"> New Password</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="text" name="job" class="form-control" value="{{Auth::user()->job}}">
+                                        <input type="password" name="newpassword1" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">Gender</label>
+                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">Confirm Password</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="text" name="gender" class="form-control" value="{{Auth::user()->gender}}">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">Date of bird</label>
-                                    <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="text" name="dob" class="form-control" value="{{Auth::user()->dob}}">
-                                    </div>
-                                </div>
-                            </fieldset>
-                            <fieldset class="fieldset">
-                                <h3 class="fieldset-title">Contact Info</h3>
-                                <div class="form-group">
-                                    <label class="col-md-2  col-sm-3 col-xs-12 control-label">Email</label>
-                                    <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="text" name="email" class="form-control" value="{{Auth::user()->email}}">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-2  col-sm-3 col-xs-12 control-label">Address</label>
-                                    <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="text" name="address" class="form-control" value="{{Auth::user()->address}}">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-2  col-sm-3 col-xs-12 control-label">Phone</label>
-                                    <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="text" name="phone" class="form-control" value="{{Auth::user()->phone}}">
+                                        <input type="password" name="newpassword2" class="form-control">
                                     </div>
                                 </div>
                             </fieldset>
                             <hr>
                             <div class="form-group">
                                 <div class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">
-                                    <input class="btn btn-primary" type="submit" value="Update Profile">
+                                    <input class="btn btn-primary" type="submit" value="Submit">
                                 </div>
                             </div>
                         </form>
