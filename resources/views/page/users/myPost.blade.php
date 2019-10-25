@@ -105,7 +105,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword4">Descriptions</label>
-                                <textarea class="form-control" cols="98" rows="5" name="description"></textarea>
+                                <textarea class="ckeditor" id="id" cols="98" rows="5" name="description"></textarea>
                             </div>
 
                             <div class="form-group">
@@ -142,7 +142,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword4">Material</label>
-                                <textarea class="form-control" cols="98" rows="5" name="material"></textarea>
+                                <textarea class="ckeditor" id="id" cols="98" rows="5" name="material"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="exampleSelectGender">bac</label>
@@ -154,7 +154,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword4">Recipe</label>
-                                <textarea class="form-control" cols="98" rows="5" name="recipe"></textarea>
+                                <textarea class="ckeditor" id="id" cols="98" rows="5" name="recipe"></textarea>
                             </div>
 
                             <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
@@ -358,7 +358,7 @@
                         </div>
                         <div class="form-">
                             <label for="exampleInputPassword4">Descriptions</label>
-                            <textarea class="form-control" cols="98" rows="5" name="description"></textarea>
+                            <textarea class="ckeditor" id="id" cols="98" rows="5" name="description"></textarea>
                         </div>
 
                         <div class="form-">
@@ -394,7 +394,7 @@
 {{--                            </video>--}}
                         <div class="form-group">
                             <label for="exampleInputPassword4">Material</label>
-                            <textarea class="form-control" cols="98" rows="5" name="material"></textarea>
+                            <textarea class="ckeditor" id="id" cols="98" rows="5" name="material"></textarea>
                         </div>
                         <div class="form-group">
                             <label>Region</label><br>
@@ -407,7 +407,7 @@
                         </div>
                         <div class=" form-group">
                             <label for="exampleInputPassword4">Recipe</label>
-                            <textarea class="form-control" cols="98" rows="5" name="recipe"></textarea>
+                            <textarea class="ckeditor" id="id" cols="98" rows="5" name="recipe"></textarea>
                         </div>
 
                         <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
@@ -452,7 +452,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword4">Descriptions</label>
-                            <textarea class="form-control" cols="98" rows="5" name="description">{{$post->description}}</textarea>
+                            <textarea class="ckeditor" id="id" cols="98" rows="5" name="description">{{$post->description}}</textarea>
                         </div>
 
                         <div class="form-group">
@@ -482,7 +482,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword4">Material</label>
-                            <textarea class="form-control" cols="98" rows="5" name="material">{{$post->material}}</textarea>
+                            <textarea class="ckeditor" id="id" cols="98" rows="5" name="material">{{$post->material}}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="exampleSelectGender">bac</label>
@@ -494,7 +494,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword4">Recipe</label>
-                            <textarea class="form-control" cols="98" rows="5" name="recipe">{{$post->recipe}}</textarea>
+                            <textarea class="ckeditor" id="id" cols="98" rows="5" name="recipe">{{$post->recipe}}</textarea>
                         </div>
                         <a href="">
                             <button class="btn btn-light">Cancel</button>
@@ -508,6 +508,17 @@
     </div>
 @endif
     {{--    end modal--}}
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    <script>
+        CKEDITOR.replace( 'id', {
+            filebrowserBrowseUrl: '{{ asset('ckfinder/ckfinder.html') }}',
+            filebrowserImageBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Images') }}',
+            filebrowserFlashBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Flash') }}',
+            filebrowserUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
+            filebrowserImageUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
+            filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
+        } );
+    </script>
 @endsection
 @push('js')
     <script>
@@ -517,6 +528,5 @@
             });
         });
     </script>
-
-
     @endpush
+
