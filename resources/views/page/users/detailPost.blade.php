@@ -1,7 +1,6 @@
 @extends('master')
 @push('css')
 
-
 @endpush
 @section('content')
 
@@ -11,8 +10,8 @@
             <div class="row no-gutters slider-text align-items-end justify-content-center">
                 <div class="col-md-9 ftco-animate pb-5 text-center">
                     <h1 class="mb-3 bread">{{$post->title}}</h1>
-                    <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i
-                                    class="ion-ios-arrow-forward"></i></a></span> <span>Article Single<i
+                    <p class="breadcrumbs"><span class="mr-2"><a href="{{route('page.index')}}">Home <i
+                                    class="ion-ios-arrow-forward"></i></a></span> <span>My Post<i
                                 class="ion-ios-arrow-forward"></i></span></p>
                 </div>
             </div>
@@ -212,12 +211,9 @@
                     <div class="sidebar-box ftco-animate">
                         <ul class="categories">
                             <h3 class="heading mb-4">Categories</h3>
-                            <li><a href="#">Travel <span>(12)</span></a></li>
-                            <li><a href="#">Tour <span>(22)</span></a></li>
-                            <li><a href="#">Destination <span>(37)</span></a></li>
-                            <li><a href="#">Drinks <span>(42)</span></a></li>
-                            <li><a href="#">Foods <span>(14)</span></a></li>
-                            <li><a href="#">Travel <span>(140)</span></a></li>
+                            @foreach($categories as $category)
+                                <li><a href="#">{{$category->name}} <span>{{ $category->posts->count()}}</span></a></li>
+                            @endforeach
                         </ul>
                     </div>
 

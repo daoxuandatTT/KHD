@@ -23,8 +23,12 @@ Route::prefix('page')->group(function () {
     Route::get('/cooking', 'PageController@cooking')->name('page.cooking');
     Route::get('/contact', 'PageController@contact')->name('page.contact');
     Route::get('{id}/myPost', 'PageController@myPost')->name('page.myPost');
-    Route::get('/myProfile', 'PageController@myProfile')->name('page.myProfile');
+    Route::get('{id}/myProfile', 'PageController@myProfile')->name('page.myProfile');
+    Route::get('{id}/editProfile', 'PageController@editProfile')->name('page.editProfile');
+    Route::post('{id}/updateProfile', 'PageController@updateProfile')->name('page.updateProfile');
     Route::get('{id}/detail', 'PageController@showDetail')->name('page.showDetail');
+    Route::get('{id}/editPassword', 'PageController@editPassword')->name('page.editPassword');
+    Route::post('{id}/updatePassword', 'PageController@updatePassword')->name('page.updatePassword');
 });
 
 Route::prefix('post')->group(function () {
@@ -34,6 +38,7 @@ Route::prefix('post')->group(function () {
     Route::get('{id}/edit', 'PostController@edit')->name('post.edit');
     Route::post('{id}/update', 'PostController@update')->name('post.update');
     Route::get('{id}/delete', 'PostController@delete')->name('post.delete');
+    Route::get('search', 'PostController@search')->name('post.search');
 });
 
 Route::prefix('category')->group(function () {
@@ -70,19 +75,18 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/users/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 
 
-
-Route::prefix('admin')->group(function(){
+Route::prefix('admin')->group(function () {
     Route::get('/', 'AdminController@index')->name('admin.dashboard');
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
-    Route::get('/logout','Auth\AdminLoginController@logout')->name('admin.logout');
+    Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 
-    Route::post('/password/email','Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
-    Route::get('/password/reset','Auth\AdminForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
-    Route::post('/password/reset','Auth\AdminForgotPasswordController@reset');
-    Route::get('/password/reset/{token}','Auth\AdminForgotPasswordController@showResetForm')->name('admin.password.reset');
+    Route::post('/password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
+    Route::get('/password/reset', 'Auth\AdminForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
+    Route::post('/password/reset', 'Auth\AdminForgotPasswordController@reset');
+    Route::get('/password/reset/{token}', 'Auth\AdminForgotPasswordController@showResetForm')->name('admin.password.reset');
 });
 
 Route::get('login/{provider}', 'SocialController@redirect');
-Route::get('login/{provider}/callback','SocialController@Callback');
+Route::get('login/{provider}/callback', 'SocialController@Callback');
 

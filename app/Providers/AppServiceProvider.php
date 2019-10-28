@@ -20,6 +20,8 @@ use App\Service\Impl\UserService;
 use App\Service\PostServiceInterface;
 use App\Service\ServiceInterface;
 use App\Service\UserServiceInterface;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
@@ -76,7 +78,7 @@ class AppServiceProvider extends ServiceProvider
     {
       view()->composer('page.index',function ($view){
 
-          $posts=Post::where('mode','public')->get()->sortByDesc('created_at');
+          $posts=Post::where('mode','public')->orderBy('created_at','desc')->paginate(4);
           $view->with('posts',$posts);
       });
         view()->composer('page.index',function ($view){
@@ -85,3 +87,4 @@ class AppServiceProvider extends ServiceProvider
         });
     }
 }
+
