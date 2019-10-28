@@ -10,9 +10,6 @@
             <div class="row no-gutters slider-text align-items-end justify-content-center">
                 <div class="col-md-9 ftco-animate pb-5 text-center">
                     <h1 class="mb-3 bread">{{$post->title}}</h1>
-                    <p class="breadcrumbs"><span class="mr-2"><a href="{{route('page.index')}}">Home <i
-                                    class="ion-ios-arrow-forward"></i></a></span> <span>My Post<i
-                                class="ion-ios-arrow-forward"></i></span></p>
                 </div>
             </div>
         </div>
@@ -309,6 +306,4 @@
     </section>
 @endsection
 @push('js')
-
-
 @endpush

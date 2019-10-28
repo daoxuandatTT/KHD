@@ -71,22 +71,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="row">
-                        @foreach($posts as $post)
-                            <div class="col-md-6 ftco-animate">
-                                <div class="blog-entry">
-                                    <a href="{{route('page.showDetail',$post->id)}}" class="img d-flex align-items-end"
-                                       style="background-image: url({{asset('storage/upload/images/'.$post->image)}});">
-                                        <div class="overlay"></div>
-                                    </a>
-                                    <div class="text pt-3">
-                                        <p class="meta d-flex"><span class="pr-3">{{$post->user->name}}</span><span
-                                                class="ml-auto pl-3">{{$post->created_at}}</span></p>
-                                        <h3><a href="data/single.html">{{ $post->title }}</a></h3>
-                                        <p class="mb-0"><a href="{{route('page.showDetail',$post->id)}}"
-                                                           class="btn-custom">Read More <span
-                                                    class="icon-arrow_forward ml-4"></span></a></p>
-                                    </div>
-                                </div>
+                        @foreach($posts as $post)                     </div>
                             </div>
                         @endforeach
                     </div>
@@ -257,6 +242,4 @@
             </div>
         </div>
     </section>
-
-
 @endsection
