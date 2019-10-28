@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Comment;
 use App\Post;
 use App\Service\UserServiceInterface;
 use App\User;
@@ -57,7 +58,8 @@ class PageController extends Controller
         $posts = Post::all();
         $post = Post::find($id);
         $categories = Category::all();
-        return view('page.users.detailPost', compact('post', 'posts', 'categories'));
+        $comments=Comment::all();
+        return view('page.users.detailPost', compact('post', 'posts', 'categories','comments'));
     }
 
     public function editProfile($id)

@@ -5,9 +5,7 @@
             <div class="container">
                 <div class="row d-flex slider-text justify-content-center align-items-center"
                      data-scrollax-parent="true">
-
                     <div class="img" style="background-image: url({{asset('data/images/bg_1.jpg')}});"></div>
-
                     <div class="text d-flex align-items-center ftco-animate">
                         <div class="text-2 pb-lg-5 mb-lg-4 px-4 px-md-5">
                             <h3 class="subheading mb-3">Featured Posts</h3>
@@ -18,18 +16,14 @@
                                         class="icon-arrow_forward ml-lg-4"></span></a></p>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-
         <div class="slider-item">
             <div class="container">
                 <div class="row d-flex slider-text justify-content-center align-items-center"
                      data-scrollax-parent="true">
-
                     <div class="img" style="background-image: url({{asset('data/images/bg_2.jpg')}});"></div>
-
                     <div class="text d-flex align-items-center ftco-animate">
                         <div class="text-2 pb-lg-5 mb-lg-4 px-4 px-md-5">
                             <h3 class="subheading mb-3">Featured Posts</h3>
@@ -40,17 +34,15 @@
                                         class="icon-arrow_forward ml-lg-4"></span></a></p>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </section>
-
     <section class="ftco-section">
         <div class="container">
             <div class="row">
                 <div class="col-md-7 heading-section ftco-animate">
-                    <h2 class="mb-4"><span>Bài viết gần đây </span></h2>
+                    <h2 class="mb-4"><span>Bài Viết gần đây </span></h2>
                 </div>
             </div>
             <div class="row">
@@ -62,8 +54,7 @@
                             <div class="text">
                                 <span class="subheading">Food</span>
                                 <h3><a href="data/single.html">{{$postNewest->title}}</a></h3>
-                                <p class="mb-0"><a href="{{route('page.showDetail',$postNewest->id)}}"
-                                                   class="btn-custom">Read More <span
+                                <p class="mb-0"><a href="{{route('page.showDetail',$postNewest->id)}}" class="btn-custom">Read More <span
                                             class="icon-arrow_forward ml-4"></span></a></p>
                             </div>
                         </div>
@@ -71,7 +62,20 @@
                 </div>
                 <div class="col-md-6">
                     <div class="row">
-                        @foreach($posts as $post)                     </div>
+                        @foreach($posts as $post)
+                            <div class="col-md-6 ftco-animate">
+                                <div class="blog-entry">
+                                    <a href="{{route('page.showDetail',$post->id)}}" class="img d-flex align-items-end"
+                                       style="background-image: url({{asset('storage/upload/images/'.$post->image)}});">
+                                        <div class="overlay"></div>
+                                    </a>
+                                    <div class="text pt-3">
+                                        <p class="meta d-flex"><span class="pr-3">{{$post->user->name}}</span><span class="ml-auto pl-3">{{$post->created_at}}</span></p>
+                                        <h3><a href="data/single.html">{{ $post->title }}</a></h3>
+                                        <p class="mb-0"><a href="{{route('page.showDetail',$post->id)}}" class="btn-custom">Read More <span
+                                                    class="icon-arrow_forward ml-4"></span></a></p>
+                                    </div>
+                                </div>
                             </div>
                         @endforeach
                     </div>
@@ -80,7 +84,6 @@
             </div>
         </div>
     </section>
-
     <section class="ftco-section ftco-no-pt">
         <div class="container">
             <div class="row">
@@ -136,7 +139,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-3">
                     <div class="sidebar-wrap">
                         <div class="sidebar-box p-4 about text-center ftco-animate">
@@ -149,7 +151,7 @@
                             </div>
                         </div>
                         <div class="sidebar-box p-4 ftco-animate">
-                            <form action="{{route('post.search')}}" class="search-form">
+                            <form action="{{route('post.search')}}" method="post" class="search-form">
                                 @csrf
                                 <div class="form-group">
                                     <span class="icon icon-search"></span>
@@ -162,8 +164,6 @@
             </div>
         </div>
     </section>
-
-
     <section class="ftco-section">
         <div class="container">
             <div class="row">

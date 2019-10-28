@@ -191,7 +191,11 @@
                     </div>
                 </div>
             </div>
-        </section>
+
+        </div>
+    </section>
+
+
 
 
         <section class="ftco-section">
@@ -247,6 +251,7 @@
                                         <li><a href="#">5</a></li>
                                         <li><a href="#">&gt;</a></li>
                                     </ul>
+
                                 </div>
                             </div>
                         </div>
@@ -286,10 +291,11 @@
                             {{--                        form--}}
 
                             <div class="sidebar-box p-4 ftco-animate">
-                                <form action="#" class="search-form">
+                                <form action="{{route('post.search')}}" method="post" class="search-form">
+                                    @csrf
                                     <div class="form-group">
                                         <span class="icon icon-search"></span>
-                                        <input type="text" class="form-control" placeholder="Search">
+                                        <input type="text" class="form-control" placeholder="Search" name="search">
                                     </div>
                                 </form>
                             </div>
@@ -628,6 +634,10 @@
     </script>
 
 @endpush
+
+
+
+
 
 
 

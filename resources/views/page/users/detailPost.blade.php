@@ -10,6 +10,10 @@
             <div class="row no-gutters slider-text align-items-end justify-content-center">
                 <div class="col-md-9 ftco-animate pb-5 text-center">
                     <h1 class="mb-3 bread">{{$post->title}}</h1>
+                    <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i
+                                    class="ion-ios-arrow-forward"></i></a></span> <span>Detail post<i
+                                class="ion-ios-arrow-forward"></i></span></p>
+
                 </div>
             </div>
         </div>
@@ -21,17 +25,18 @@
                 <div class="col-lg-8 order-lg-last ftco-animate">
                     <h2 class="mb-3">#1. Desription</h2>
                     <p>{!! $post->description !!}</p>
-
                     {{--                    <p>{{$post->recipe}}</p>--}}
                     <p>
                         <img src="{{asset('storage/upload/images/' . $post->image)}}" alt="" class="img-fluid">
                     </p>
                     <h2 class="mb-3 mt-5">#2. Material</h2>
                     {{--                        image--}}
+
                     <p>{!! $post->material !!}</p>
                     <h2 class="mb-3 mt-5">#3. Recipe</h2>
                     <p>
                         {!! $post->recipe !!}
+
                     </p>
 
                     @if(isset($post->video))
@@ -69,123 +74,33 @@
 
                     <div class="pt-5 mt-5">
                         <h3 class="mb-5">6 Comments</h3>
-                        <ul class="comment-list">
-                            <li class="comment">
-                                <div class="vcard bio">
-                                    <img src="images/person_1.jpg" alt="Image placeholder">
-                                </div>
-                                <div class="comment-body">
-                                    <h3>John Doe</h3>
-                                    <div class="meta">October 03, 2018 at 2:21pm</div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum
-                                        necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim
-                                        sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                    <p><a href="#" class="reply">Reply</a></p>
-                                </div>
-                            </li>
-
-                            <li class="comment">
-                                <div class="vcard bio">
-                                    <img src="images/person_1.jpg" alt="Image placeholder">
-                                </div>
-                                <div class="comment-body">
-                                    <h3>John Doe</h3>
-                                    <div class="meta">October 03, 2018 at 2:21pm</div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum
-                                        necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim
-                                        sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                    <p><a href="#" class="reply">Reply</a></p>
-                                </div>
-
-                                <ul class="children">
+                        @foreach($comments as $comment)
+                            @if($comment->post_id==$post->id)
+                                <ul class="comment-list">
                                     <li class="comment">
                                         <div class="vcard bio">
-                                            <img src="images/person_1.jpg" alt="Image placeholder">
+                                            <img src="{{asset('storage/upload/images/' . $comment->user->image)}}">
                                         </div>
                                         <div class="comment-body">
-                                            <h3>John Doe</h3>
-                                            <div class="meta">October 03, 2018 at 2:21pm</div>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem
-                                                laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat
-                                                saepe enim sapiente iste iure! Quam voluptas earum impedit
-                                                necessitatibus, nihil?</p>
+                                            <h3>{{$comment->user->name}}</h3>
+                                            <div class="meta">{{$comment->created_at}}</div>
+                                            <p>{{$comment->content}}</p>
                                             <p><a href="#" class="reply">Reply</a></p>
                                         </div>
-
-
-                                        <ul class="children">
-                                            <li class="comment">
-                                                <div class="vcard bio">
-                                                    <img src="images/person_1.jpg" alt="Image placeholder">
-                                                </div>
-                                                <div class="comment-body">
-                                                    <h3>John Doe</h3>
-                                                    <div class="meta">October 03, 2018 at 2:21pm</div>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                        Pariatur quidem laborum necessitatibus, ipsam impedit vitae
-                                                        autem, eum officia, fugiat saepe enim sapiente iste iure! Quam
-                                                        voluptas earum impedit necessitatibus, nihil?</p>
-                                                    <p><a href="#" class="reply">Reply</a></p>
-                                                </div>
-
-                                                <ul class="children">
-                                                    <li class="comment">
-                                                        <div class="vcard bio">
-                                                            <img src="images/person_1.jpg" alt="Image placeholder">
-                                                        </div>
-                                                        <div class="comment-body">
-                                                            <h3>John Doe</h3>
-                                                            <div class="meta">October 03, 2018 at 2:21pm</div>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                                Pariatur quidem laborum necessitatibus, ipsam impedit
-                                                                vitae autem, eum officia, fugiat saepe enim sapiente
-                                                                iste iure! Quam voluptas earum impedit necessitatibus,
-                                                                nihil?</p>
-                                                            <p><a href="#" class="reply">Reply</a></p>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
                                     </li>
                                 </ul>
-                            </li>
-
-                            <li class="comment">
-                                <div class="vcard bio">
-                                    <img src="images/person_1.jpg" alt="Image placeholder">
-                                </div>
-                                <div class="comment-body">
-                                    <h3>John Doe</h3>
-                                    <div class="meta">October 03, 2018 at 2:21pm</div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum
-                                        necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim
-                                        sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                    <p><a href="#" class="reply">Reply</a></p>
-                                </div>
-                            </li>
-                        </ul>
-                        <!-- END comment-list -->
+                        @endif
+                    @endforeach
 
                         <div class="comment-form-wrap pt-5">
-                            <h3 class="mb-5">Leave a comment</h3>
-                            <form action="#" class="p-5 bg-light">
-                                <div class="form-group">
-                                    <label for="title">Name *</label>
-                                    <input type="text" class="form-control" id="title">
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Email *</label>
-                                    <input type="email" class="form-control" id="email">
-                                </div>
-                                <div class="form-group">
-                                    <label for="website">Website</label>
-                                    <input type="url" class="form-control" id="website">
-                                </div>
+                            <h3 class="mb-5">Comment</h3>
+                            <form method="post" action="{{route('comment.store',$post->id)}}" class="p-5 bg-light">
+                                @csrf
 
                                 <div class="form-group">
                                     <label for="message">Message</label>
-                                    <textarea title="" id="message" cols="30" rows="10" class="form-control"></textarea>
+                                    <textarea title="" id="message" cols="30" rows="10" class="form-control"
+                                              name="content"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">

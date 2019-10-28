@@ -6,6 +6,7 @@ use App\Http\Requests\StoreComment;
 use App\Http\Requests\UpdateComment;
 use App\Service\CommentServiceInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class CommentController extends Controller
@@ -28,11 +29,12 @@ class CommentController extends Controller
         return view('comment.create');
     }
 
-    public function store(StoreComment $request)
+    public function store(Request $request,$postId)
     {
-        $this->commentService->store($request);
+        $userId=Auth::user()->id;
+        $this->commentService->store($request,$postId);
         Session::flash('message', 'Add successfully');
-        return redirect()->route('comment.list');
+        return redirect()->route('page.showDetail',$postId);
     }
 
     public function edit($id)
