@@ -38,11 +38,11 @@ class PostService implements PostServiceInterface
         $post->mode = $request->mode;
         $post->link = $request->link;
         $post->image = $imageFile->getClientOriginalName();
-        if($videoFile){
+        if ($videoFile) {
             $post->video = $videoFile->getClientOriginalName();
             $videoFile->storeAs('public/upload/videos', $videoFile->getClientOriginalName());
-        }else{
-            $post->video=null;
+        } else {
+            $post->video = null;
         }
         $imageFile->storeAs('public/upload/images', $imageFile->getClientOriginalName());
         $post->category_id = $request->category_id;
@@ -76,4 +76,5 @@ class PostService implements PostServiceInterface
         $post = $this->postRepository->findById($id);
         $this->postRepository->delete($post);
     }
+
 }
