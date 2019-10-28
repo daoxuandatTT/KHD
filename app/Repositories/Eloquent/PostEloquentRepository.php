@@ -15,4 +15,5 @@ class PostEloquentRepository extends EloquentRepository implements PostRepositor
         $model = Post::class;
         return $model;
     }
+
 }

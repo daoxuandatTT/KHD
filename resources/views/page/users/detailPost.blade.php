@@ -1,7 +1,6 @@
 @extends('master')
 @push('css')
 
-
 @endpush
 @section('content')
 
@@ -14,6 +13,7 @@
                     <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i
                                     class="ion-ios-arrow-forward"></i></a></span> <span>Detail post<i
                                 class="ion-ios-arrow-forward"></i></span></p>
+
                 </div>
             </div>
         </div>
@@ -24,18 +24,19 @@
             <div class="row">
                 <div class="col-lg-8 order-lg-last ftco-animate">
                     <h2 class="mb-3">#1. Desription</h2>
-                    <p>{{$post->description}}</p>
-
+                    <p>{!! $post->description !!}</p>
                     {{--                    <p>{{$post->recipe}}</p>--}}
                     <p>
                         <img src="{{asset('storage/upload/images/' . $post->image)}}" alt="" class="img-fluid">
                     </p>
                     <h2 class="mb-3 mt-5">#2. Material</h2>
                     {{--                        image--}}
-                    <p>{{$post->material}}</p>
+
+                    <p>{!! $post->material !!}</p>
                     <h2 class="mb-3 mt-5">#3. Recipe</h2>
                     <p>
-                        {{$post->recipe}}
+                        {!! $post->recipe !!}
+
                     </p>
 
                     @if(isset($post->video))
@@ -73,7 +74,6 @@
 
                     <div class="pt-5 mt-5">
                         <h3 class="mb-5">6 Comments</h3>
-
                         @foreach($comments as $comment)
                             @if($comment->post_id==$post->id)
                                 <ul class="comment-list">
@@ -88,12 +88,9 @@
                                             <p><a href="#" class="reply">Reply</a></p>
                                         </div>
                                     </li>
-
-
                                 </ul>
                         @endif
                     @endforeach
-                    <!-- END comment-list -->
 
                         <div class="comment-form-wrap pt-5">
                             <h3 class="mb-5">Comment</h3>
@@ -224,6 +221,4 @@
     </section>
 @endsection
 @push('js')
-
-
 @endpush

@@ -13,17 +13,17 @@ class CategoryTableSeeder extends Seeder
     public function run()
     {
         $category = new Category();
-        $category->name = "mon chay";
+        $category->name = "món chay";
         $category->image = "image1";
         $category->save();
 
         $category = new Category();
-        $category->name = "mon man";
+        $category->name = "món mặn";
         $category->image = "image2";
         $category->save();
 
         $category = new Category();
-        $category->name = "mon ngot";
+        $category->name = "món ngọt";
         $category->image = "image3";
         $category->save();
     }
