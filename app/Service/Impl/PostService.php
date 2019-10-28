@@ -48,6 +48,7 @@ class PostService implements PostServiceInterface
         $post->category_id = $request->category_id;
         $post->user_id = Auth::user()->id;
         $this->postRepository->save($post);
+        $post->tags()->attach($request->tags) ;
 
     }
 

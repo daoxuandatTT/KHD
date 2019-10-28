@@ -20,6 +20,7 @@ use App\Service\Impl\UserService;
 use App\Service\PostServiceInterface;
 use App\Service\ServiceInterface;
 use App\Service\UserServiceInterface;
+use App\Tag;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
@@ -84,6 +85,10 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('page.index',function ($view){
             $postNewest=Post::where('mode','public')->orderBy('updated_at','desc')->first();
             $view->with('postNewest',$postNewest);
+        });
+        view()->composer('page.users.myPost',function ($view){
+            $tags=Tag::all();
+            $view->with('tags',$tags);
         });
     }
 }

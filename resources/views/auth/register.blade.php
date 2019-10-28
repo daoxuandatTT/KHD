@@ -162,7 +162,7 @@
         </div>
         <p style="text-align:center"> OR </p>
         <label>Tên người dùng:</label>
-        <input type="text" class="form-control" name="name" @error('name') is-invalid @enderror placeholder="User name"
+        <input type="text" class="form-control  @error('name') is-invalid @enderror" name="name" placeholder="User name"
                value="{{ old('name') }}" required="">
         @error('name')
         <span class="invalid-feedback" role="alert">

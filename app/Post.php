@@ -25,5 +25,8 @@ class Post extends Model
     public function materials(){
         return $this->hasMany('App\Material');
     }
+    public function tags(){
+        return $this->belongsToMany('App\Tag')->withTimestamps();
+    }
 
 }

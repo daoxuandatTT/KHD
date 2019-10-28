@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "@ckeditor/ckeditor5-build-balloon": "^15.0.0",
         "tinymce": "^5.1.0"
     }
 }

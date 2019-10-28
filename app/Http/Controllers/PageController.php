@@ -39,9 +39,9 @@ class PageController extends Controller
         return view('page.contact');
     }
 
-    public function myPost($id)
+    public function myPost()
     {
-        $posts = User::find($id)->posts;
+        $posts = User::find(Auth::user()->id)->posts;
         $categories = Category::all();
         return view('page.users.myPost', compact('posts', 'categories'));
     }
