@@ -5,9 +5,7 @@
             <div class="container">
                 <div class="row d-flex slider-text justify-content-center align-items-center"
                      data-scrollax-parent="true">
-
                     <div class="img" style="background-image: url({{asset('data/images/bg_1.jpg')}});"></div>
-
                     <div class="text d-flex align-items-center ftco-animate">
                         <div class="text-2 pb-lg-5 mb-lg-4 px-4 px-md-5">
                             <h3 class="subheading mb-3">Featured Posts</h3>
@@ -18,18 +16,14 @@
                                         class="icon-arrow_forward ml-lg-4"></span></a></p>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-
         <div class="slider-item">
             <div class="container">
                 <div class="row d-flex slider-text justify-content-center align-items-center"
                      data-scrollax-parent="true">
-
                     <div class="img" style="background-image: url({{asset('data/images/bg_2.jpg')}});"></div>
-
                     <div class="text d-flex align-items-center ftco-animate">
                         <div class="text-2 pb-lg-5 mb-lg-4 px-4 px-md-5">
                             <h3 class="subheading mb-3">Featured Posts</h3>
@@ -40,12 +34,10 @@
                                         class="icon-arrow_forward ml-lg-4"></span></a></p>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </section>
-
     <section class="ftco-section">
         <div class="container">
             <div class="row">
@@ -92,7 +84,6 @@
             </div>
         </div>
     </section>
-
     <section class="ftco-section ftco-no-pt">
         <div class="container">
             <div class="row">
@@ -148,7 +139,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-3">
                     <div class="sidebar-wrap">
                         <div class="sidebar-box p-4 about text-center ftco-animate">
@@ -174,8 +164,6 @@
             </div>
         </div>
     </section>
-
-
     <section class="ftco-section">
         <div class="container">
             <div class="row">
