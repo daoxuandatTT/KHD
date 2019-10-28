@@ -61,7 +61,7 @@ Route::prefix('user')->group(function () {
 Route::prefix('comment')->group(function () {
     Route::get('/', 'CommentController@getAll')->name('comment.list');
     Route::get('/create', 'CommentController@create')->name('comment.create');
-    Route::post('/store', 'CommentController@store')->name('comment.store');
+    Route::post('{id}/store', 'CommentController@store')->name('comment.store');
     Route::get('{id}/edit', 'CommentController@edit')->name('comment.edit');
     Route::post('{id}/update', 'CommentController@update')->name('comment.update');
     Route::get('{id}/delete', 'CommentController@delete')->name('comment.delete');
