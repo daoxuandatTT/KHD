@@ -2,7 +2,7 @@
 <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
 @push('css')
     <link rel="stylesheet" href="{{asset('ViewAdmin/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
-    <link rel="stylesheet" href="{{asset('ViewAdmin/assets/vendors/mdi/css/vendor.bundle.base.css')}}">
+    {{--    <link rel="stylesheet" href="{{asset('ViewAdmin/assets/vendors/mdi/css/vendor.bundle.base.css')}}">--}}
     <style type="text/css">
         #form1 {
             padding: 15px;
@@ -17,9 +17,10 @@
     </style>
 @endpush
 @section('content')
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
     @if(count($posts)==0)
         <div class="text-center">
-            <p class="btn btn-danger">Khong co bai viet nao</p>
+            <p class="btn btn-danger">Không có bài viết nào</p>
         </div>
         <div class="col-lg-3">
             <div class="sidebar-wrap">
@@ -58,6 +59,7 @@
                         <li>
                             <a href="#" class="img d-flex align-items-center justify-content-center text-center"
                                style="background-image: url(images/category-1.jpg);">
+
                                 <div class="text">
                                     <h3>Foods</h3>
                                 </div>
@@ -66,7 +68,7 @@
                         <li>
                             <a href="#" class="img d-flex align-items-center justify-content-center text-center"
                                style="background-image: url(images/category-2.jpg);">
-                                <div class="text">
+                                    <div class="text">
                                     <h3>Lifestyle</h3>
                                 </div>
                             </a>
@@ -121,7 +123,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword4">Descriptions</label>
-                                <textarea class="form-control" cols="98" rows="5" name="description"></textarea>
+                                <textarea class="ckeditor" id="description" cols="98" rows="5" name="description"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="exampleSelectGender"> Mode: </label>
@@ -157,19 +159,22 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword4">Material</label>
-                                <textarea class="form-control" cols="98" rows="5" name="material"></textarea>
+                                <textarea class="ckeditor" id="material" cols="98" rows="5" name="material"></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="exampleSelectGender">bac</label>
+                                <label>Vùng miền</label><br>
+                                <label for="exampleSelectGender">
+                                    Miền Bắc </label>
                                 <input type="checkbox" value="bac" name="region"/>
-                                <label for="exampleSelectGender">trung</label>
+                                <label for="exampleSelectGender">Miền Trung</label>
                                 <input type="checkbox" value="trung" name="region"/>
-                                <label for="exampleSelectGender"> nam </label>
+                                <label for="exampleSelectGender">
+                                    Miền Nam</label>
                                 <input type="checkbox" value="nam" name="region"/>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword4">Recipe</label>
-                                <textarea class="form-control" cols="98" rows="5" name="recipe"></textarea>
+                                <textarea class="ckeditor" id="recipe" cols="98" rows="5" name="recipe"></textarea>
                             </div>
                             <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
                             <a href="{{route('page.myPost')}}">
@@ -248,7 +253,6 @@
                                 </div>
                             </div>
                         </div>
-                        {{--                    <button type="button" id="formButton">Toggle Form!</button>--}}
                         <div class="col-12 grid-margin stretch-card">
                             <div class="card">
                             </div>
@@ -259,6 +263,7 @@
                             <div class="sidebar-box p-4 about text-center ftco-animate">
                                 <h2 class="heading mb-4">About Me</h2>
                                 <img src="{{ Auth::user()->image }}" class="img-fluid" alt="Colorlib Template">
+
                                 <div class="text pt-4">
                                     <p>Hi! My name is <strong>Cathy Deon</strong>, behind the word mountains, far from
                                         the countries Vokalia and Consonantia, there live the blind texts. Separated
@@ -275,17 +280,20 @@
                                             data-toggle="modal" data-target="#ModalLoginForm">
                                         <i class="icon icon-add">New Post</i></button>
                                 </a>
+
                             </div>
+
                             {{--                        form--}}
+
                             <div class="sidebar-box p-4 ftco-animate">
-                                <form action="#" class="search-form">
+                                <form action="{{route('post.search')}}" method="post" class="search-form">
+                                    @csrf
                                     <div class="form-group">
                                         <span class="icon icon-search"></span>
-                                        <input type="text" class="form-control" placeholder="Search">
+                                        <input type="text" class="form-control" placeholder="Search" name="search">
                                     </div>
                                 </form>
                             </div>
-                            {{--                        category post food--}}
                             <div class="sidebar-box categories text-center ftco-animate">
                                 <h2 class="heading mb-4">Categories</h2>
                                 <ul class="category-image">
@@ -490,33 +498,32 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword4">Material</label>
-                                    <textarea class="form-control" cols="98" rows="5" name="material"></textarea>
+                                    <textarea class="ckeditor" id="material" cols="98" rows="5" name="material"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label>Region</label><br>
-                                    <label for="exampleSelectGender">Mien Bac</label>
-                                    <input type="checkbox" value="Mien Bac" name="region"/>
-                                    <label for="exampleSelectGender">Mien Trung</label>
-                                    <input type="checkbox" value="Mien Trung" name="region"/>
-                                    <label for="exampleSelectGender">Mien Nam</label>
-                                    <input type="checkbox" value="Mien Nam" name="region"/>
+                                    <label>Vùng miền</label><br>
+                                    <label for="exampleSelectGender">
+                                        Miền Bắc </label>
+                                    <input type="checkbox" value="bac" name="region"/>
+                                    <label for="exampleSelectGender">Miền Trung</label>
+                                    <input type="checkbox" value="trung" name="region"/>
+                                    <label for="exampleSelectGender">
+                                        Miền Nam</label>
+                                    <input type="checkbox" value="nam" name="region"/>
                                 </div>
                                 <div class=" form-group">
                                     <label for="exampleInputPassword4">Recipe</label>
-                                    <textarea class="form-control" cols="98" rows="5" name="recipe"></textarea>
+                                    <textarea class="ckeditor" id="recipe" cols="98" rows="5" name="recipe"></textarea>
                                 </div>
+
                                 <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
-                                <a href="{{ route('page.myPost',Auth::user()->id) }}">
-                                    <button type="button" class="btn btn-light">Cancel</button>
-                                </a>
+                                <button class="btn btn-light">Cancel</button>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        {{--    ENDMODAL CREATE  --}}
-        {{--    MODAL FORM UPDATE  --}}
         <div class="modal fade" id="modalRegisterForm1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
              aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -546,8 +553,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword4">Descriptions</label>
-                                <textarea class="form-control" cols="98" rows="5"
-                                          name="description">{!! $post->description !!}</textarea>
+                                <textarea class="ckeditor" id="updateDescription" cols="98" rows="5"
+                                          name="description">{{$post->description}}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="exampleSelectGender"> Mode: </label>
@@ -576,24 +583,27 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword4">Material</label>
-                                <textarea class="form-control" cols="98" rows="5"
+                                <textarea class="ckeditor" id="updateMaterial" cols="98" rows="5"
                                           name="material">{{$post->material}}</textarea>
                             </div>
                             <div class="form-group">
-                                <label for="exampleSelectGender">bac</label>
-                                <input type="checkbox" value="bac" name="region"/>
-                                <label for="exampleSelectGender">trung</label>
-                                <input type="checkbox" value="trung" name="region"/>
-                                <label for="exampleSelectGender"> nam </label>
-                                <input type="checkbox" value="nam" name="region"/>
+                                <label>Region</label><br>
+                                <label for="exampleSelectGender">
+                                    Northern</label>
+                                <input type="checkbox" value="Northern" name="region"/>
+                                <label for="exampleSelectGender">Central</label>
+                                <input type="checkbox" value="Central" name="region"/>
+                                <label for="exampleSelectGender">
+                                    South</label>
+                                <input type="checkbox" value="South" name="region"/>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword4">Recipe</label>
-                                <textarea class="form-control" cols="98" rows="5"
+                                <textarea class="ckeditor" id="updateRecipe" cols="98" rows="5"
                                           name="recipe">{{$post->recipe}}</textarea>
                             </div>
-                            <a href="">
-                                <button class="btn btn-light">Cancel</button>
+                            <a href="{{route('page.myPost',Auth::user()->id)}}">
+                                <button  type="button" class="btn btn-light">Cancel</button>
                             </a>
                             <button type="submit" class="btn btn-gradient-primary mr-2">Update</button>
                         </form>
@@ -602,7 +612,67 @@
             </div>
         </div>
     @endif
-    {{--    END MODAL --}}
+    {{--    end modal--}}
+    <script>
+        CKEDITOR.replace('description', {
+            filebrowserBrowseUrl: '{{ asset('ckfinder/ckfinder.html') }}',
+            filebrowserImageBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Images') }}',
+            filebrowserFlashBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Flash') }}',
+            filebrowserUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
+            filebrowserImageUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
+            filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
+        });
+    </script>
+    <script>
+        CKEDITOR.replace('material', {
+            filebrowserBrowseUrl: '{{ asset('ckfinder/ckfinder.html') }}',
+            filebrowserImageBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Images') }}',
+            filebrowserFlashBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Flash') }}',
+            filebrowserUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
+            filebrowserImageUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
+            filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
+        });
+    </script>
+    <script>
+        CKEDITOR.replace('recipe', {
+            filebrowserBrowseUrl: '{{ asset('ckfinder/ckfinder.html') }}',
+            filebrowserImageBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Images') }}',
+            filebrowserFlashBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Flash') }}',
+            filebrowserUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
+            filebrowserImageUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
+            filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
+        });
+    </script>
+    <script>
+        CKEDITOR.replace('updateDescription', {
+            filebrowserBrowseUrl: '{{ asset('ckfinder/ckfinder.html') }}',
+            filebrowserImageBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Images') }}',
+            filebrowserFlashBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Flash') }}',
+            filebrowserUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
+            filebrowserImageUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
+            filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
+        });
+    </script>
+    <script>
+        CKEDITOR.replace('updateMaterial', {
+            filebrowserBrowseUrl: '{{ asset('ckfinder/ckfinder.html') }}',
+            filebrowserImageBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Images') }}',
+            filebrowserFlashBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Flash') }}',
+            filebrowserUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
+            filebrowserImageUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
+            filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
+        });
+    </script>
+    <script>
+        CKEDITOR.replace('updateRecipe', {
+            filebrowserBrowseUrl: '{{ asset('ckfinder/ckfinder.html') }}',
+            filebrowserImageBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Images') }}',
+            filebrowserFlashBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Flash') }}',
+            filebrowserUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
+            filebrowserImageUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
+            filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
+        });
+    </script>
 @endsection
 @push('js')
     <script>
@@ -612,9 +682,5 @@
             });
         });
     </script>
-    <script>
-        CKEDITOR.replace('editor1');
-
-
-    </script>
 @endpush
+

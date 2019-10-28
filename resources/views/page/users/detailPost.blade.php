@@ -1,5 +1,6 @@
 @extends('master')
 @push('css')
+
 @endpush
 @section('content')
     <section class="hero-wrap hero-wrap-2" style="background-image: url('{{asset('data/images/bg_4.jpg')}}');">
@@ -25,8 +26,6 @@
                     <p>
                         <img src="{{asset('storage/upload/images/' . $post->image)}}" alt="" class="img-fluid">
                     </p>
-                    <h2 class="mb-3 mt-5">#2. Material</h2>
-                    {{--                        image--}}
                     <p>{!! $post->material !!}</p>
                     <h2 class="mb-3 mt-5">#3. Recipe</h2>
                     <p>

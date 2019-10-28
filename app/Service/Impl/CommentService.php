@@ -7,6 +7,7 @@ namespace App\Service\Impl;
 use App\Comment;
 use App\Repositories\Contract\CommentRepositoryInterface;
 use App\Service\CommentServiceInterface;
+use Illuminate\Support\Facades\Auth;
 
 class CommentService implements CommentServiceInterface
 {
@@ -22,12 +23,12 @@ class CommentService implements CommentServiceInterface
         return $this->commentRepository->getAll();
     }
 
-    public function store($request)
+    public function store($request, $postId)
     {
         $comment = new Comment();
         $comment->content = $request->content;
-        $comment->user_id = $request->user_id;
-        $comment->post_id = $request->post_id;
+        $comment->user_id = Auth::user()->id;
+        $comment->post_id = $postId;
         $this->commentRepository->save($comment);
     }
 

@@ -5,9 +5,7 @@
             <div class="container">
                 <div class="row d-flex slider-text justify-content-center align-items-center"
                      data-scrollax-parent="true">
-
                     <div class="img" style="background-image: url({{asset('data/images/bg_1.jpg')}});"></div>
-
                     <div class="text d-flex align-items-center ftco-animate">
                         <div class="text-2 pb-lg-5 mb-lg-4 px-4 px-md-5">
                             <h3 class="subheading mb-3">Featured Posts</h3>
@@ -18,18 +16,14 @@
                                         class="icon-arrow_forward ml-lg-4"></span></a></p>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-
         <div class="slider-item">
             <div class="container">
                 <div class="row d-flex slider-text justify-content-center align-items-center"
                      data-scrollax-parent="true">
-
                     <div class="img" style="background-image: url({{asset('data/images/bg_2.jpg')}});"></div>
-
                     <div class="text d-flex align-items-center ftco-animate">
                         <div class="text-2 pb-lg-5 mb-lg-4 px-4 px-md-5">
                             <h3 class="subheading mb-3">Featured Posts</h3>
@@ -40,12 +34,10 @@
                                         class="icon-arrow_forward ml-lg-4"></span></a></p>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </section>
-
     <section class="ftco-section">
         <div class="container">
             <div class="row">
@@ -71,35 +63,34 @@
                 <div class="col-md-6">
                     <div class="row">
                         @foreach($posts as $post)
-                        <div class="col-md-6 ftco-animate">
-                            <div class="blog-entry">
-                                <a href="{{route('page.showDetail',$post->id)}}" class="img d-flex align-items-end"
-                                   style="background-image: url({{asset('storage/upload/images/'.$post->image)}});">
-                                    <div class="overlay"></div>
-                                </a>
-                                <div class="text pt-3">
-                                    <p class="meta d-flex"><span class="pr-3">{{$post->user->name}}</span><span class="ml-auto pl-3">{{$post->created_at}}</span></p>
-                                    <h3><a href="data/single.html">{{ $post->title }}</a></h3>
-                                    <p class="mb-0"><a href="{{route('page.showDetail',$post->id)}}" class="btn-custom">Read More <span
-                                                class="icon-arrow_forward ml-4"></span></a></p>
+                            <div class="col-md-6 ftco-animate">
+                                <div class="blog-entry">
+                                    <a href="{{route('page.showDetail',$post->id)}}" class="img d-flex align-items-end"
+                                       style="background-image: url({{asset('storage/upload/images/'.$post->image)}});">
+                                        <div class="overlay"></div>
+                                    </a>
+                                    <div class="text pt-3">
+                                        <p class="meta d-flex"><span class="pr-3">{{$post->user->name}}</span><span class="ml-auto pl-3">{{$post->created_at}}</span></p>
+                                        <h3><a href="data/single.html">{{ $post->title }}</a></h3>
+                                        <p class="mb-0"><a href="{{route('page.showDetail',$post->id)}}" class="btn-custom">Read More <span
+                                                    class="icon-arrow_forward ml-4"></span></a></p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                            @endforeach
+                        @endforeach
                     </div>
                     {{$posts->links()}}
                 </div>
             </div>
         </div>
     </section>
-
     <section class="ftco-section ftco-no-pt">
         <div class="container">
             <div class="row">
                 <div class="col-lg-9">
                     <div class="row">
                         <div class="col-md-12 heading-section ftco-animate">
-                            <h2 class="mb-4"><span>Món ăn theo vùng   </span></h2>
+                            <h2 class="mb-4"><span>Món ăn theo miền</span></h2>
                         </div>
                     </div>
                     <div class="row">
@@ -108,9 +99,10 @@
                                 <a href="data/single.html" class="img-2"><img src="{{asset('data/images/ha noi.jpg')}}"
                                                                               class="img-fluid" alt="Colorlib Template"></a>
                                 <div class="text pt-3">
-                                    <p class="meta d-flex"><span class="pr-3">Dessert</span><span class="ml-auto pl-3">March 01, 2018</span>
+                                    <p class="meta d-flex"><span class="pr-3">Dessert</span><span
+                                            class="ml-auto pl-3">{{$post->created_at}}</span>
                                     </p>
-                                    <h3><a href="#">Mien Bac</a></h3>
+                                    <h3><a href="#">Miền Bắc</a></h3>
                                     <p class="mb-0"><a href="data/single.html" class="btn btn-black py-2">Read More
                                             <span class="icon-arrow_forward ml-4"></span></a></p>
                                 </div>
@@ -121,9 +113,10 @@
                                 <a href="data/single.html" class="img-2"><img src="{{asset('data/images/da nang.jpg')}}"
                                                                               class="img-fluid" alt="Colorlib Template"></a>
                                 <div class="text pt-3">
-                                    <p class="meta d-flex"><span class="pr-3">Dessert</span><span class="ml-auto pl-3">March 01, 2018</span>
+                                    <p class="meta d-flex"><span class="pr-3">Dessert</span><span
+                                            class="ml-auto pl-3">{{$post->created_at}}</span>
                                     </p>
-                                    <h3><a href="#">Mien Trung</a></h3>
+                                    <h3><a href="#">Miền Trung</a></h3>
                                     <p class="mb-0"><a href="data/single.html" class="btn btn-black py-2">Read More
                                             <span class="icon-arrow_forward ml-4"></span></a></p>
                                 </div>
@@ -131,12 +124,14 @@
                         </div>
                         <div class="col-md-4 ftco-animate">
                             <div class="blog-entry">
-                                <a href="data/single.html" class="img-2"><img src="{{asset('data/images/sai gon.jpeg')}}"
-                                                                              class="img-fluid" alt="Colorlib Template"></a>
+                                <a href="data/single.html" class="img-2"><img
+                                        src="{{asset('data/images/sai gon.jpeg')}}"
+                                        class="img-fluid" alt="Colorlib Template"></a>
                                 <div class="text pt-3">
-                                    <p class="meta d-flex"><span class="pr-3">Dessert</span><span class="ml-auto pl-3">March 01, 2018</span>
+                                    <p class="meta d-flex"><span class="pr-3">Dessert</span><span
+                                            class="ml-auto pl-3">{{$post->created_at}}</span>
                                     </p>
-                                    <h3><a href="#">Mien Nam</a></h3>
+                                    <h3><a href="#">Miền Nam</a></h3>
                                     <p class="mb-0"><a href="data/single.html" class="btn btn-black py-2">Read More
                                             <span class="icon-arrow_forward ml-4"></span></a></p>
                                 </div>
@@ -144,7 +139,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-3">
                     <div class="sidebar-wrap">
                         <div class="sidebar-box p-4 about text-center ftco-animate">
@@ -162,10 +156,11 @@
                             </div>
                         </div>
                         <div class="sidebar-box p-4 ftco-animate">
-                            <form action="#" class="search-form">
+                            <form action="{{route('post.search')}}" method="post" class="search-form">
+                                @csrf
                                 <div class="form-group">
                                     <span class="icon icon-search"></span>
-                                    <input type="text" class="form-control" placeholder="Search">
+                                    <input type="text" class="form-control" placeholder="Search" name="search">
                                 </div>
                             </form>
                         </div>
@@ -174,15 +169,13 @@
             </div>
         </div>
     </section>
-
-
     <section class="ftco-section">
         <div class="container">
             <div class="row">
                 <div class="col-md-9">
                     <div class="row">
                         <div class="col-md-12 heading-section ftco-animate">
-                            <h2 class="mb-4"><span>Nhung mon an ua chuong nhat</span></h2>
+                            <h2 class="mb-4"><span>Những món ăn ưa chuộng</span></h2>
                         </div>
                     </div>
                     <div class="row">
@@ -254,6 +247,4 @@
             </div>
         </div>
     </section>
-
-
 @endsection
