@@ -8,7 +8,7 @@ interface CommentServiceInterface
 {
     public function getAll();
 
-    public function store($request,$postId);
+    public function store($request,$id);
 
     public function edit($id);
 

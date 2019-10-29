@@ -467,7 +467,6 @@
                                     <label for="editor1"></label>
                                     <textarea id="editor1" name="description" cols="80"
                                               rows="10">
-                                            <p>Hello <strong>CKEditor</strong></p>
                                        </textarea>
                                 </div>
                                 <div class="form-">
