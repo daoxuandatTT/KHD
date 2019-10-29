@@ -12,4 +12,9 @@ class Reply extends Model
         'reply',
         'user_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\Auth;
 
 class  ReplyService implements CommentServiceInterface
 {
-    protected $creplyRepository;
+    protected $replyRepository;
 
     public function __construct(ReplyRepositoryInterface $replyRepository)
     {
-        $this->replyRepository = $replyRepository;
+      $this-> replyRepository=$replyRepository;
     }
 
     public function getAll()
