@@ -23,12 +23,12 @@ class CommentService implements CommentServiceInterface
         return $this->commentRepository->getAll();
     }
 
-    public function store($request, $postId)
+    public function store($request, $id)
     {
         $comment = new Comment();
         $comment->content = $request->content;
         $comment->user_id = Auth::user()->id;
-        $comment->post_id = $postId;
+        $comment->post_id = $id;
         $this->commentRepository->save($comment);
     }
 

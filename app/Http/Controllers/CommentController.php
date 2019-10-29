@@ -34,7 +34,8 @@ class CommentController extends Controller
         $userId=Auth::user()->id;
         $this->commentService->store($request,$postId);
         Session::flash('message', 'Add successfully');
-        return redirect()->route('page.showDetail',$postId);
+//        return redirect()->route('page.showDetail',$postId);
+        return redirect()->back();
     }
 
     public function edit($id)

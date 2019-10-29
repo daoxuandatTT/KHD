@@ -57,9 +57,10 @@ class PageController extends Controller
     {
         $posts = Post::all();
         $post = Post::find($id);
+        $randomposts= Post::all()->random(3);
         $categories = Category::all();
         $comments=Comment::all();
-        return view('page.users.detailPost', compact('post', 'posts', 'categories','comments'));
+        return view('page.users.detailPost', compact('post', 'posts', 'categories','comments','randomposts'));
     }
 
     public function editProfile($id)
@@ -85,4 +86,5 @@ class PageController extends Controller
         $this->userService->changePassword($request, $id);
         return redirect()->route('page.myProfile', Auth::user()->id);
     }
+
 }
