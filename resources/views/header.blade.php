@@ -23,7 +23,7 @@
                         </li>
                     @endif
                 @else
-                    <li class="nav-item"><a href="{{route('page.myPost',Auth::user()->id)}}" class="nav-link">MyPost</a></li>
+                    <li class="nav-item"><a href="{{route('page.myPost')}}" class="nav-link">MyPost</a></li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>
@@ -46,29 +46,6 @@
                 @endguest
             </ul>
 
-{{--            <ul class="navbar-nav ml-auto">--}}
-{{--                @if (Route::has('login'))--}}
-{{--                    @auth--}}
-{{--                        --}}{{--                            <a href="{{ url('/home') }}">Home</a>--}}
-{{--                      --}}
-{{--                            <li class="nav-item"><a href="{{route('user.logout')}}" class="nav-link"> {{ Auth::user()->name }}Logout</a></li>--}}
-{{--                    @else--}}
-{{--                        <li class="nav-item active"><a href="{{route('page.index')}}" class="nav-link">Home</a></li>--}}
-{{--                        <li class="nav-item"><a href="{{route('page.about')}}" class="nav-link">About</a></li>--}}
-{{--                        <li class="nav-item"><a href="{{route('page.cooking')}}" class="nav-link">Cooking recipe</a></li>--}}
-{{--                        <li class="nav-item"><a href="{{route('page.contact')}}" class="nav-link">Contact</a></li>--}}
-{{--                        --}}{{--                            <a href="{{ route('login') }}">Login</a>--}}
-{{--                        <li class="nav-item"><a href="{{route('login')}}" class="nav-link">Login</a></li>--}}
-
-
-{{--                        @if (Route::has('register'))--}}
-{{--                            --}}{{--                                <a href="{{ route('register') }}">Register</a>--}}
-{{--                            <li class="nav-item"><a href="{{route('register')}}" class="nav-link">Register</a></li>--}}
-
-{{--                        @endif--}}
-{{--                    @endauth--}}
-{{--                @endif--}}
-{{--            </ul>--}}
 
         </div>
     </div>

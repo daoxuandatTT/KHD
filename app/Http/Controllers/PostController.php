@@ -7,6 +7,7 @@ use App\Http\Requests\StorePost;
 use App\Http\Requests\UpdatePost;
 use App\Post;
 use App\Service\PostServiceInterface;
+use App\Tag;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -62,6 +63,13 @@ class PostController extends Controller
         Session::flash('message', 'Delete successful');
         return redirect()->route('page.myPost', $userId);
     }
+
+    public function postByTag($id){
+       $tag=Tag::find($id);
+
+        return view('page.tag',compact('tag'));
+    }
+
 
     public function search(Request $request)
     {

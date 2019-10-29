@@ -17,40 +17,43 @@
     <section class="ftco-subscribe ftco-section bg-light">
         <div class="overlay">
             <div class="container">
-                @foreach($posts as $post)
-                    <div class="col-md-4 ftco-animate">
-                        <div class="blog-entry">
-                            <a href="single.html" class="img-2"><img style="width:200px; height: 250px"
-                                                                     src="{{asset('storage/upload/images/'.$post->image) }}"
-                                                                     class="img-fluid"
-                                                                     alt="Colorlib Template"></a>
+                <div class="row">
+                    @foreach($posts as $post)
+                        <div class="col-md-3 ftco-animate">
+                            <div class="blog-entry">
+                                <a href="single.html" class="img-2"><img style="width:200px; height: 250px"
+                                                                         src="{{asset('storage/upload/images/'.$post->image) }}"
+                                                                         class="img-fluid"
+                                                                         alt="Colorlib Template"></a>
 
-                            <div class="text pt-3">
-                                <p class="meta d-flex"><span class="pr-3">Dessert</span><span
-                                        class="ml-auto pl-3">March 01, 2018</span></p>
-                                <h3><a href="data/single.html">{{$post->title}}</a></h3>
-                                {{--                                    <a href=""><i class="fa fa-edit">delete</i></a>--}}
-                                {{--                                    <a href=""><i class="fa fa-edit">update</i></a>--}}
-                                <a href="{{route('post.delete',$post->id)}}"
-                                   class="btn btn-default btn-rounded mb-4">
-                                    <i class="icon icon-delete">
-                                        <button type="button" onclick="return confirm('delete')">Delete
-                                        </button>
-                                    </i>
-                                </a>
-                                <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal"
-                                   data-target="#modalRegisterForm1">
-                                    <i class="icon icon-add">
-                                        <button type="button">Update</button>
-                                    </i>
-                                </a>
-                                <p class="mb-0"><a href="{{ route('page.showDetail',$post->id) }}"
-                                                   class="btn btn-black py-2">Read More <span
-                                            class="icon-arrow_forward ml-4"></span></a></p>
+                                <div class="text pt-3">
+                                    <p class="meta d-flex"><span class="pr-3">Dessert</span><span
+                                            class="ml-auto pl-3">March 01, 2018</span></p>
+                                    <h3><a href="data/single.html">{{$post->title}}</a></h3>
+                                    {{--                                    <a href=""><i class="fa fa-edit">delete</i></a>--}}
+                                    {{--                                    <a href=""><i class="fa fa-edit">update</i></a>--}}
+                                    <a href="{{route('post.delete',$post->id)}}"
+                                       class="btn btn-default btn-rounded mb-4">
+                                        <i class="icon icon-delete">
+                                            <button type="button" onclick="return confirm('delete')">Delete
+                                            </button>
+                                        </i>
+                                    </a>
+                                    <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal"
+                                       data-target="#modalRegisterForm1">
+                                        <i class="icon icon-add">
+                                            <button type="button">Update</button>
+                                        </i>
+                                    </a>
+                                    <p class="mb-0"><a href="{{ route('page.showDetail',$post->id) }}"
+                                                       class="btn btn-black py-2">Read More <span
+                                                class="icon-arrow_forward ml-4"></span></a></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+
+                </div>
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-8 text-wrap text-center heading-section ftco-animate">
                         <h2 class="mb-4"><span>Subcribe to our Newsletter</span></h2>

@@ -18,7 +18,7 @@ Route::prefix('page')->group(function () {
     Route::get('/about', 'PageController@about')->name('page.about');
     Route::get('/cooking', 'PageController@cooking')->name('page.cooking');
     Route::get('/contact', 'PageController@contact')->name('page.contact');
-    Route::get('{id}/myPost', 'PageController@myPost')->name('page.myPost');
+    Route::get('/myPost', 'PageController@myPost')->name('page.myPost');
     Route::get('{id}/myProfile', 'PageController@myProfile')->name('page.myProfile');
     Route::get('{id}/editProfile', 'PageController@editProfile')->name('page.editProfile');
     Route::post('{id}/updateProfile', 'PageController@updateProfile')->name('page.updateProfile');
@@ -59,8 +59,10 @@ Route::prefix('comment')->group(function () {
     Route::post('{id}/update', 'CommentController@update')->name('comment.update');
     Route::get('{id}/delete', 'CommentController@delete')->name('comment.delete');
 });
-Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes(['verify' =>true]);
+
+Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 Route::get('/users/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 Route::prefix('admin')->group(function () {
     Route::get('/', 'AdminController@index')->name('admin.dashboard');
@@ -76,3 +78,5 @@ Route::get('login/{provider}', 'SocialController@redirect');
 Route::get('login/{provider}/callback', 'SocialController@Callback');
 
 
+Route::resource('tag','TagController');
+Route::get('{id}/tag','PostController@postByTag')->name('tag.posts');

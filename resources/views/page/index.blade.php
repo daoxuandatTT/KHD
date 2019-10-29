@@ -143,7 +143,12 @@
                     <div class="sidebar-wrap">
                         <div class="sidebar-box p-4 about text-center ftco-animate">
                             <h2 class="heading mb-4">About Me</h2>
-                            <img src="{{asset('data/images/author.jpg')}}" class="img-fluid" alt="Colorlib Template">
+                            @if(Auth::user())
+                                <img src="{{Auth::user()->image}}" alt="">
+                                @else
+                                <img src="{{asset('data/images/author.jpg')}}" class="img-fluid" alt="Colorlib Template">
+                            @endif
+
                             <div class="text pt-4">
                                 <p>Hi! My name is <strong>Cathy Deon</strong>, behind the word mountains, far from the
                                     countries Vokalia and Consonantia, there live the blind texts. Separated they live
