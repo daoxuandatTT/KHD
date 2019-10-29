@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Comment;
 use App\Post;
+use App\Reply;
 use App\Service\UserServiceInterface;
 use App\User;
 use Illuminate\Http\Request;
@@ -60,7 +61,8 @@ class PageController extends Controller
         $randomposts= Post::all()->random(3);
         $categories = Category::all();
         $comments=Comment::all();
-        return view('page.users.detailPost', compact('post', 'posts', 'categories','comments','randomposts'));
+        $replies=Reply::all();
+        return view('page.users.detailPost', compact('post', 'posts', 'categories','comments','randomposts','replies'));
     }
 
     public function editProfile($id)

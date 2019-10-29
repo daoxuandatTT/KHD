@@ -58,7 +58,13 @@ Route::prefix('comment')->group(function () {
     Route::get('{id}/edit', 'CommentController@edit')->name('comment.edit');
     Route::post('{id}/update', 'CommentController@update')->name('comment.update');
     Route::get('{id}/delete', 'CommentController@delete')->name('comment.delete');
+
 });
+Route::prefix('reply')->group(function () {
+    Route::get('{{id}/store', 'ReplyController@store')->name('reply.store');
+
+});
+
 
 Auth::routes(['verify' =>true]);
 
@@ -80,3 +86,4 @@ Route::get('login/{provider}/callback', 'SocialController@Callback');
 
 Route::resource('tag','TagController');
 Route::get('{id}/tag','PostController@postByTag')->name('tag.posts');
+Route::resource('/replies','RepliesController');

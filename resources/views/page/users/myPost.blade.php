@@ -26,7 +26,8 @@
             <div class="sidebar-wrap">
                 <div class="sidebar-box p-4 about text-center ftco-animate">
                     <h2 class="heading mb-4">About Me</h2>
-                    <img src="{{ Auth::user()->image  }}" class="img-fluid" alt="Colorlib Template">
+                    <img src="{{asset('storage/upload/images/' . Auth::
+                    user()->image)}}">
 
                     <div class="text pt-4">
                         <p>Hi! My name is <strong>Cathy Deon</strong>, behind the word mountains, far from the countries
@@ -262,7 +263,7 @@
                         <div class="sidebar-wrap">
                             <div class="sidebar-box p-4 about text-center ftco-animate">
                                 <h2 class="heading mb-4">About Me</h2>
-                                <img src="{{ Auth::user()->image }}" class="img-fluid" alt="Colorlib Template">
+                                <img src="{{asset('storage/upload/images/' . $post->user->image)}}">
 
                                 <div class="text pt-4">
                                     <p>Hi! My name is <strong>Cathy Deon</strong>, behind the word mountains, far from
@@ -467,7 +468,6 @@
                                     <label for="editor1"></label>
                                     <textarea id="editor1" name="description" cols="80"
                                               rows="10">
-                                            <p>Hello <strong>CKEditor</strong></p>
                                        </textarea>
                                 </div>
                                 <div class="form-">

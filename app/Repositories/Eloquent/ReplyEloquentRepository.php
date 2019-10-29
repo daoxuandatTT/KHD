@@ -4,15 +4,17 @@
 namespace App\Repositories\Eloquent;
 
 
-use App\Comment;
-use App\Repositories\Contract\CommentRepositoryInterface;
 
-class ReplyEloquentRepository extends EloquentRepository implements RreplyRepositoryInterface
+use App\Reply;
+use App\Repositories\Contract\ReplyRepositoryInterface;
+
+
+class ReplyEloquentRepository extends EloquentRepository implements ReplyRepositoryInterface
 {
 
     public function getModel()
     {
-        $model = Comment::class;
+        $model = Reply::class;
         return $model;
     }
 }
