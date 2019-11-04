@@ -42,7 +42,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-7 heading-section ftco-animate">
-                    <h2 class="mb-4"><span>Bài Viết gần đây </span></h2>
+                    <h2 class="mb-4"><span>Bài viết gần đây </span></h2>
                 </div>
             </div>
             <div class="row">
@@ -52,9 +52,9 @@
                              style="background-image: url({{asset('storage/upload/images/'.$postNewest->image)}});">
                             <div class="overlay"></div>
                             <div class="text">
-                                <span class="subheading">Food</span>
+                                <span class="subheading"></span>
                                 <h3><a href="data/single.html">{{$postNewest->title}}</a></h3>
-                                <p class="mb-0"><a href="{{route('page.showDetail',$postNewest->id)}}" class="btn-custom">Read More <span
+                                <p class="mb-0"><a href="{{route('page.showDetail',$postNewest->id)}}" class="btn-custom">Đọc thêm <span
                                             class="icon-arrow_forward ml-4"></span></a></p>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
                                     <div class="text pt-3">
                                         <p class="meta d-flex"><span class="pr-3">{{$post->user->name}}</span><span class="ml-auto pl-3">{{$post->created_at}}</span></p>
                                         <h3><a href="data/single.html">{{ $post->title }}</a></h3>
-                                        <p class="mb-0"><a href="{{route('page.showDetail',$post->id)}}" class="btn-custom">Read More <span
+                                        <p class="mb-0"><a href="{{route('page.showDetail',$post->id)}}" class="btn-custom">Đọc thêm <span
                                                     class="icon-arrow_forward ml-4"></span></a></p>
                                     </div>
                                 </div>
@@ -103,7 +103,7 @@
                                             class="ml-auto pl-3">{{$post->created_at}}</span>
                                     </p>
                                     <h3><a href="#">Miền Bắc</a></h3>
-                                    <p class="mb-0"><a href="data/single.html" class="btn btn-black py-2">Read More
+                                    <p class="mb-0"><a href="data/single.html" class="btn btn-black py-2">Đọc thêm
                                             <span class="icon-arrow_forward ml-4"></span></a></p>
                                 </div>
                             </div>
@@ -117,7 +117,7 @@
                                             class="ml-auto pl-3">{{$post->created_at}}</span>
                                     </p>
                                     <h3><a href="#">Miền Trung</a></h3>
-                                    <p class="mb-0"><a href="data/single.html" class="btn btn-black py-2">Read More
+                                    <p class="mb-0"><a href="data/single.html" class="btn btn-black py-2">Đọc thêm
                                             <span class="icon-arrow_forward ml-4"></span></a></p>
                                 </div>
                             </div>
@@ -132,7 +132,7 @@
                                             class="ml-auto pl-3">{{$post->created_at}}</span>
                                     </p>
                                     <h3><a href="#">Miền Nam</a></h3>
-                                    <p class="mb-0"><a href="data/single.html" class="btn btn-black py-2">Read More
+                                    <p class="mb-0"><a href="data/single.html" class="btn btn-black py-2">Đọc thêm
                                             <span class="icon-arrow_forward ml-4"></span></a></p>
                                 </div>
                             </div>

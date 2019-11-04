@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Comment;
+use App\Http\Requests\PasswordRequest;
+use App\Http\Requests\ProfileRequest;
 use App\Post;
 use App\Reply;
+use App\Rules\MatchOldPassword;
 use App\Service\UserServiceInterface;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class PageController extends Controller
 {
@@ -17,7 +21,7 @@ class PageController extends Controller
 
     public function __construct(UserServiceInterface $userService)
     {
-        $this->middleware('auth');
+//        $this->middleware('auth');
         $this->userService = $userService;
     }
 
@@ -71,10 +75,11 @@ class PageController extends Controller
         return view('page.users.EditProfile', compact('user'));
     }
 
-    public function updateProfile(Request $request, $id)
+    public function updateProfile(ProfileRequest $request, $id)
     {
+
         $this->userService->update($request, $id);
-        return redirect()->route('page.myProfile', Auth::user()->id);
+        return redirect()->route('page.myProfile', Auth::user()->id)->with('notif','Cập nhật thông tin thành công');
     }
 
     public function editPassword($id)
@@ -85,6 +90,13 @@ class PageController extends Controller
 
     public function updatePassword(Request $request, $id)
     {
+        $request->validate([
+            'password' => ['required', new MatchOldPassword],
+            'newpassword1' => ['required','min:8'],
+            'newpassword2' => ['required','same:newpassword1'],
+        ]);
+        User::find(\auth()->user()->id)->update(['password' => Hash::make($request->password1)]);
+        Session()->flash('message','Thay đổi mật khẩu thành công');
         $this->userService->changePassword($request, $id);
         return redirect()->route('page.myProfile', Auth::user()->id);
     }
