@@ -150,7 +150,7 @@
     </style>
 </head>
 <body>
-<div id="logreg-forms">
+<div id="logreg-forms" style="margin: 5px auto;height: 600px" >
     <form class="form-signin" method="post" action="{{route('register')}}">
         @csrf
         <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Đăng kí </h1>
@@ -187,7 +187,7 @@
                                     </span>
         @enderror
         <br>
-        <label>Nhap lai Mật khẩu: </label>
+        <label>Nhập lại mật khẩu: </label>
         <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password"
                required="">
         <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Đăng kí</button>
