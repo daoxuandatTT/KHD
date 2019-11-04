@@ -779,36 +779,6 @@
                 $("#form1").toggle();
             });
         });
-    </script>
-    {{--    <script>--}}
-    {{--        $(function () {--}}
-    {{--            $("form2").validate({--}}
-    {{--                rules: {--}}
-    {{--                    title:--}}
-    {{--                        {--}}
-    {{--                            required,--}}
-    {{--                        },--}}
-    {{--                    description: "required",--}}
-    {{--                    mode: "required",--}}
-    {{--                    image: "required",--}}
-    {{--                    link: "required",--}}
-    {{--                    material: "required",--}}
-    {{--                    region: "required",--}}
-    {{--                    recipe: "required"--}}
-    {{--                },--}}
-    {{--                message: {--}}
-    {{--                    title: {--}}
-    {{--                        required: "Không được để trống",--}}
-    {{--                    },--}}
-    {{--                    description: "Không được để trống",--}}
-    {{--                    mode: "Không được để trống",--}}
-    {{--                    image: "Không được để trống",--}}
-    {{--                    link: "Không được để trống",--}}
-    {{--                    material: "Không được để trống",--}}
-    {{--                    region: ''--}}
-    {{--                }--}}
-    {{--            })--}}
-    {{--        })--}}
-    {{--    </script>--}}
+
 @endpush
 

@@ -627,17 +627,16 @@
             <section class="module">
                 <div class="module-inner">
                     <div class="content-panel">
-                        <h2 class="title">Change Password<span class="pro-label label label-warning"></span></h2>
-                        <form class="form-horizontal" method="post"
-                              action="{{route('page.updatePassword',Auth::user()->id)}}">
+                        <h2 class="title">Đổi mật khẩu<span class="pro-label label label-warning"></span></h2>
+                        <form class="form-horizontal" method="post" action="{{route('page.updatePassword',Auth::user()->id)}}">
                             @csrf
 {{--                            @error('title')--}}
 {{--                            <div class="alert alert-danger">{{ $message }}</div>--}}
-{{--                            @enderror--}}
+{{--       =                     @enderror--}}
                             <fieldset class="fieldset">
                                 <div class="form-group">
                                     <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <label class="col-md-2  col-sm-3 col-xs-12 control-label">User Name:</label>
+                                        <label class="col-md-2  col-sm-3 col-xs-12 control-label">Họ tên:</label>
                                         <label class="label label-info">{{ Auth::user()->name }}</label>
                                         <br>
                                         <label class="col-md-2  col-sm-3 col-xs-12 control-label">Email:</label>
@@ -645,9 +644,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">Old Password</label>
+                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">Mật khẩu cũ:</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
                                         <input type="password" name="password" class="form-control">
+                                        @if($errors->has('password'))
+                                            <p class="alert-danger">{{$errors->first('password')}}</p>
+                                            @endif
                                     </div>
                                 </div>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
@@ -658,9 +660,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label"> New Password</label>
+                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label"> Mật khẩu mới</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
                                         <input type="password" name="newpassword1" class="form-control">
+                                        @if($errors->has('newpassword1'))
+                                            <p class="alert-danger">{{$errors->first('newpassword1')}}</p>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
@@ -671,9 +676,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">Confirm Password</label>
+                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">Nhập lại mật khẩu</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
                                         <input type="password" name="newpassword2" class="form-control">
+                                        @if($errors->has('newpassword2'))
+                                            <p class="alert-danger">{{$errors->first('newpassword2')}}</p>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-10 col-sm-9 col-xs-12">

@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Comment;
+use App\Http\Requests\PasswordRequest;
+use App\Http\Requests\ProfileRequest;
 use App\Post;
+use App\Reply;
 use App\Rules\MatchOldPassword;
 use App\Service\UserServiceInterface;
 use App\User;
@@ -12,14 +15,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
-
 class PageController extends Controller
 {
     protected $userService;
 
     public function __construct(UserServiceInterface $userService)
     {
-        $this->middleware('auth');
+//        $this->middleware('auth');
         $this->userService = $userService;
     }
 
@@ -63,8 +65,9 @@ class PageController extends Controller
         $post = Post::find($id);
         $randomposts = Post::all()->random(3);
         $categories = Category::all();
-        $comments = Comment::all();
-        return view('page.users.detailPost', compact('post', 'posts', 'categories', 'comments', 'randomposts'));
+        $comments=Comment::all();
+        $replies=Reply::all();
+        return view('page.users.detailPost', compact('post', 'posts', 'categories','comments','randomposts','replies'));
     }
 
     public function editProfile($id)
@@ -73,10 +76,11 @@ class PageController extends Controller
         return view('page.users.EditProfile', compact('user'));
     }
 
-    public function updateProfile(Request $request, $id)
+    public function updateProfile(ProfileRequest $request, $id)
     {
+
         $this->userService->update($request, $id);
-        return redirect()->route('page.myProfile', Auth::user()->id);
+        return redirect()->route('page.myProfile', Auth::user()->id)->with('notif','Cập nhật thông tin thành công');
     }
 
     public function editPassword($id)

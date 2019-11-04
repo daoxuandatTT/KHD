@@ -14,14 +14,12 @@ class MatchOldPassword implements Rule
      */
     public function __construct()
     {
-
     }
 
     /**
      * Determine if the validation rule passes.
      *
-     * @param string $attribute
-     * @param mixed $value
+
      * @return bool
      */
     public function passes($attribute, $value)
@@ -36,6 +34,8 @@ class MatchOldPassword implements Rule
      */
     public function message()
     {
-        return 'Mật khẩu không đúng';
+
+        return 'Mật khẩu không đúng !
+        Vui lòng kiểm tra lại.';
     }
 }

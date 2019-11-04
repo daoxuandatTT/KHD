@@ -4,20 +4,24 @@ use App\Post;
 use App\Repositories\Contract\CategoryRepositoryInterface;
 use App\Repositories\Contract\CommentRepositoryInterface;
 use App\Repositories\Contract\PostRepositoryInterface;
+use App\Repositories\Contract\ReplyRepositoryInterface;
 use App\Repositories\Contract\RepositoryInterface;
 use App\Repositories\Contract\UserRepositoryInterface;
 use App\Repositories\Eloquent\CategoryEloquentRepository;
 use App\Repositories\Eloquent\CommentEloquentRepository;
 use App\Repositories\Eloquent\EloquentRepository;
 use App\Repositories\Eloquent\PostEloquentRepository;
+use App\Repositories\Eloquent\ReplyEloquentRepository;
 use App\Repositories\Eloquent\UserEloquentRepository;
 use App\Service\CategoryServiceInterface;
 use App\Service\CommentServiceInterface;
 use App\Service\Impl\CategoryService;
 use App\Service\Impl\CommentService;
 use App\Service\Impl\PostService;
+use App\Service\Impl\ReplyService;
 use App\Service\Impl\UserService;
 use App\Service\PostServiceInterface;
+use App\Service\ReplyServiceInterface;
 use App\Service\ServiceInterface;
 use App\Service\UserServiceInterface;
 use App\Tag;
@@ -69,6 +73,15 @@ class AppServiceProvider extends ServiceProvider
             CommentServiceInterface::class,
             CommentService::class
         );
+        $this->app->singleton(
+            ReplyRepositoryInterface::class,
+            ReplyEloquentRepository::class
+        );
+        $this->app->singleton(
+            ReplyServiceInterface::class,
+            ReplyService::class
+        );
+
     }
     /**
      * Bootstrap any application services.

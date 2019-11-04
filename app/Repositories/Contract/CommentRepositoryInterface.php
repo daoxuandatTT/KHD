@@ -4,7 +4,8 @@
 namespace App\Repositories\Contract;
 
 
-interface CommentRepositoryInterface
+
+interface CommentRepositoryInterface extends RepositoryInterface
 {
 
 }

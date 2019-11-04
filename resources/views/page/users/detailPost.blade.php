@@ -3,6 +3,9 @@
 
 @endpush
 @section('content')
+
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v5.0&appId=2474525532872947&autoLogAppEvents=1"></script>
     <section class="hero-wrap hero-wrap-2" style="background-image: url('{{asset('data/images/bg_4.jpg')}}');">
         <div class="overlay"></div>
         <div class="container">
@@ -15,6 +18,7 @@
             </div>
         </div>
     </section>
+
     <section class="ftco-section">
         <div class="container">
             <div class="row">
@@ -22,6 +26,7 @@
                     <h3 class="mb-3 text-center" style="color: blueviolet">{{ $post->title }}</h3>
                     <h2 class="mb-3 mt-5">#1. Description</h2>
                     <p>{!! $post->description !!}</p>
+                    {{--                    <p>{{$post->recipe}}</p>--}}
                     <p>
                         <img src="{{asset('storage/upload/images/' . $post->image)}}" alt="" class="img-fluid">
                     </p>
@@ -30,6 +35,7 @@
                     <h2 class="mb-3 mt-5">#3. Recipe</h2>
                     <p>
                         {!! $post->recipe !!}
+
                     </p>
                     @if(isset($post->video))
                         <video id="video" width="560" height="365" controls autoplay>
@@ -41,6 +47,7 @@
                             {!! Embed::make($post->link)->parseUrl()->getIframe() !!}
                         </div>
                     @endif
+
                     <div class="tag-widget post-tag-container mb-5 mt-5">
                         <div class="tagcloud">
                             @foreach($post->tags as $tag)
@@ -94,6 +101,7 @@
                             @endguest
                         </div>
                     </div>
+                    <div class="fb-comments" data-href="http://blogmonngon.tk/{{$post->id}}" data-width="" data-numposts="5"></div>
                 </div> <!-- .col-md-8 -->
                 <div class="col-lg-3 sidebar pr-lg-5 ftco-animate">
                     <div class="about-author d-flex p-4 bg-light">
@@ -182,6 +190,7 @@
             </div>
         </div>
     </section>
+
 @endsection
 @push('js')
 @endpush
