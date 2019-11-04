@@ -683,8 +683,18 @@
                                 <div class="form-group">
                                     <label class="col-md-2 col-sm-3 col-xs-12 control-label">Gender</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="text" name="gender" class="form-control"
-                                               value="{{Auth::user()->gender}}">
+                                        Male: <input
+                                        @if($user->gender=='male')
+                                            {{'checked'}}
+                                            @endif
+                                        type="radio" name="gender" value="male"
+                                        >
+                                        Female: <input
+                                            @if($user->gender=='female')
+                                            {{'checked'}}
+                                            @endif
+                                            type="radio" name="gender" value="male"
+                                        >
                                     </div>
                                 </div>
                                 <div class="col-md-10 col-sm-9 col-xs-12">
@@ -697,7 +707,7 @@
                                 <div class="form-group">
                                     <label class="col-md-2 col-sm-3 col-xs-12 control-label">Date of bird</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="text" name="dob" class="form-control"
+                                        <input placeholder="yyyy-mm-dd" type="text" name="dob" class="form-control"
                                                value="{{Auth::user()->dob}}">
                                     </div>
                                 </div>

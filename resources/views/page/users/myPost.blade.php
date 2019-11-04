@@ -22,7 +22,6 @@
     </style>
 @endpush
 @section('content')
-    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
     <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true" style="overflow: scroll">
         <div class="modal-dialog" role="document">
@@ -119,27 +118,10 @@
     </div>
 
     @if(count($posts)==0)
-        <div class="text-center">
-            <p class="btn btn-danger">Không có bài viết nào</p>
-        </div>
-        <div class="col-lg-3">
-            <div class="sidebar-wrap">
-                <div class="sidebar-box p-4 about text-center ftco-animate">
-                    <h2 class="heading mb-4">About Me</h2>
-                    @if($user->image)
-                        <img src="{{asset('storage/upload/images/' . Auth::user()->image)}}">
-                    @else
-                        <img src="{{asset('storage/upload/images/default.jpg')}}" alt="">
-                    @endif
-                    <div class="text pt-4">
-                        <p>Hi! My name is <strong>Cathy Deon</strong>, behind the word mountains, far from the countries
-                            Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove
-                            right at the coast of the Semantics, a large language ocean.
-                        </p>
-                    </div>
-                </div>
-                <div class="sidebar-box p-4 ftco-animate text-center">
-                    {{--                           <button><a class="icon icon-add" href="#">New Post</a></button>--}}
+            <div style="margin-bottom: 200px;
+margin-top: 50px">
+                <div class="text-center">
+                    <h1 style="color: red">Không có bài viết nào</h1>
                     <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal"
                        data-target="#modalRegisterForm">
                         <button id="formButton" type="button" class="btn btn-primary btn-lg" data-toggle="modal"
@@ -148,43 +130,7 @@
                     </a>
                 </div>
                 {{--                        form--}}
-                <div class="sidebar-box p-4 ftco-animate">
-                    <form action="#" class="search-form">
-                        <div class="form-group">
-                            <span class="icon icon-search"></span>
-                            <input type="text" class="form-control" placeholder="Search">
-                        </div>
-                    </form>
-                </div>
-                <div class="sidebar-box categories text-center ftco-animate">
-                    <h2 class="heading mb-4">Categories</h2>
-                    <ul class="category-image">
-                        <li>
-                            <a href="#" class="img d-flex align-items-center justify-content-center text-center">
-
-                                <div class="text">
-                                    <h3>Foods</h3>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="img d-flex align-items-center justify-content-center text-center">
-                                <div class="text">
-                                    <h3>Lifestyle</h3>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="img d-flex align-items-center justify-content-center text-center">
-                                <div class="text">
-                                    <h3>Others</h3>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
             </div>
-        </div>
     @else
         <section class="hero-wrap hero-wrap-2" style="background-image: url('{{asset('data/images/bg_4.jpg')}}');">
             <div class="overlay"></div>
@@ -512,6 +458,7 @@
 
 @endsection
 @push('js')
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
     <script>
         CKEDITOR.replace('description', {
