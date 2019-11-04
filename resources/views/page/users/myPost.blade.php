@@ -9,6 +9,7 @@
             background: #fff;
             display: none;
         }
+
         #formButton {
             display: block;
             margin-right: auto;
@@ -33,6 +34,11 @@
                     </button>
                 </div>
                 <div class="modal-body mx-3">
+                    <div class="content-panel">
+                        @if(Session::has('message'))
+                            <h5 class="alert-success">{{Session::get('message')}}</h5>
+                        @endif
+                    </div>
                     <form id="form2" class="forms-sample" method="POST"
                           action="{{ route('post.store',Auth::user()->id) }}" enctype="multipart/form-data">
                         @csrf
@@ -120,9 +126,11 @@
             <div class="sidebar-wrap">
                 <div class="sidebar-box p-4 about text-center ftco-animate">
                     <h2 class="heading mb-4">About Me</h2>
-                    <img src="{{asset('storage/upload/images/' . Auth::
-                    user()->image)}}">
-
+                    @if($user->image)
+                        <img src="{{asset('storage/upload/images/' . Auth::user()->image)}}">
+                    @else
+                        <img src="{{asset('storage/upload/images/default.jpg')}}" alt="">
+                    @endif
                     <div class="text pt-4">
                         <p>Hi! My name is <strong>Cathy Deon</strong>, behind the word mountains, far from the countries
                             Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove
@@ -152,8 +160,7 @@
                     <h2 class="heading mb-4">Categories</h2>
                     <ul class="category-image">
                         <li>
-                            <a href="#" class="img d-flex align-items-center justify-content-center text-center"
-                               style="background-image: url(images/category-1.jpg);">
+                            <a href="#" class="img d-flex align-items-center justify-content-center text-center">
 
                                 <div class="text">
                                     <h3>Foods</h3>
@@ -161,16 +168,14 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="img d-flex align-items-center justify-content-center text-center"
-                               style="background-image: url(images/category-2.jpg);">
-                                    <div class="text">
+                            <a href="#" class="img d-flex align-items-center justify-content-center text-center">
+                                <div class="text">
                                     <h3>Lifestyle</h3>
                                 </div>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="img d-flex align-items-center justify-content-center text-center"
-                               style="background-image: url(images/category-2.jpg);">
+                            <a href="#" class="img d-flex align-items-center justify-content-center text-center">
                                 <div class="text">
                                     <h3>Others</h3>
                                 </div>
@@ -180,7 +185,6 @@
                 </div>
             </div>
         </div>
-        {{--         modal form when no post in database of user --}}
     @else
         <section class="hero-wrap hero-wrap-2" style="background-image: url('{{asset('data/images/bg_4.jpg')}}');">
             <div class="overlay"></div>
@@ -188,7 +192,7 @@
                 <div class="row no-gutters slider-text align-items-end justify-content-center">
                     <div class="col-md-9 ftco-animate pb-5 text-center">
                         <h1 class="mb-3 bread"> {{ Auth::user()->name }}'s BLOG</h1>
-                        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i
+                        <p class="breadcrumbs"><span class="mr-2"><a href="{{route('page.index')}}">Home <i
                                         class="ion-ios-arrow-forward"></i></a></span> <span>My Post <i
                                     class="ion-ios-arrow-forward"></i></span></p>
                     </div>
@@ -203,13 +207,13 @@
                             @foreach($posts as $post)
                                 <div class="col-md-4 ftco-animate">
                                     <div class="blog-entry">
-                                        <a href="single.html" class="img-2"><img style="width:200px; height: 250px"
+                                        <a href="#" class="img-2"><img style="width:200px; height: 250px"
                                                                                  src="{{asset('storage/upload/images/'.$post->image) }}"
                                                                                  class="img-fluid"
                                                                                  alt="Colorlib Template"></a>
                                         <div class="text pt-3">
                                             <p class="meta d-flex"><span class="pr-3">Dessert</span><span
-                                                    class="ml-auto pl-3">March 01, 2018</span></p>
+                                                    class="ml-auto pl-3">{{$post->created_at}}</span></p>
                                             <h3><a href="data/single.html">{{$post->title}}</a></h3>
                                             <a href="{{route('post.delete',$post->id)}}"
                                                class="btn btn-default btn-rounded mb-4">
@@ -247,6 +251,51 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="sidebar-box ftco-animate">
+                            <h3 class="heading mb-4">Recent Blog</h3>
+                            <div class="block-21 mb-4 d-flex">
+                                <a class="blog-img mr-4"></a>
+                                <div class="text">
+                                    <h3><a href="#">Even the all-powerful Pointing has no control about the blind
+                                            texts</a>
+                                    </h3>
+                                    <div class="meta">
+                                        <div><a href="#"><span class="icon-calendar"></span> February 12, 2019</a>
+                                        </div>
+                                        <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                        <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="block-21 mb-4 d-flex">
+                                <a class="blog-img mr-4"></a>
+                                <div class="text">
+                                    <h3><a href="#">Even the all-powerful Pointing has no control about the blind
+                                            texts</a>
+                                    </h3>
+                                    <div class="meta">
+                                        <div><a href="#"><span class="icon-calendar"></span> February 12, 2019</a>
+                                        </div>
+                                        <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                        <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="block-21 mb-4 d-flex">
+                                <a class="blog-img mr-4"></a>
+                                <div class="text">
+                                    <h3><a href="#">Even the all-powerful Pointing has no control about the blind
+                                            texts</a>
+                                    </h3>
+                                    <div class="meta">
+                                        <div><a href="#"><span class="icon-calendar"></span> February 12, 2019</a>
+                                        </div>
+                                        <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                        <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-12 grid-margin stretch-card">
                             <div class="card">
                             </div>
@@ -256,8 +305,11 @@
                         <div class="sidebar-wrap">
                             <div class="sidebar-box p-4 about text-center ftco-animate">
                                 <h2 class="heading mb-4">About Me</h2>
-                                <img src="{{ Auth::user()->image }}">
-
+                                @if($user->image)
+                                    <img src="{{asset('storage/upload/images/' . Auth::user()->image)}}">
+                                @else
+                                    <img src="{{asset('storage/upload/images/default.png')}}" alt="">
+                                @endif
                                 <div class="text pt-4">
                                     <p>Hi! My name is <strong>Cathy Deon</strong>, behind the word mountains, far from
                                         the countries Vokalia and Consonantia, there live the blind texts. Separated
@@ -293,8 +345,7 @@
                                 <ul class="category-image">
                                     <li>
                                         <a href="#"
-                                           class="img d-flex align-items-center justify-content-center text-center"
-                                           style="background-image: url(images/category-1.jpg);">
+                                           class="img d-flex align-items-center justify-content-center text-center">
                                             <div class="text">
                                                 <h3>Foods</h3>
                                             </div>
@@ -302,8 +353,7 @@
                                     </li>
                                     <li>
                                         <a href="#"
-                                           class="img d-flex align-items-center justify-content-center text-center"
-                                           style="background-image: url(images/category-2.jpg);">
+                                           class="img d-flex align-items-center justify-content-center text-center">
                                             <div class="text">
                                                 <h3>Lifestyle</h3>
                                             </div>
@@ -311,59 +361,13 @@
                                     </li>
                                     <li>
                                         <a href="#"
-                                           class="img d-flex align-items-center justify-content-center text-center"
-                                           style="background-image: url(images/category-2.jpg);">
+                                           class="img d-flex align-items-center justify-content-center text-center">
                                             <div class="text">
                                                 <h3>Others</h3>
                                             </div>
                                         </a>
                                     </li>
                                 </ul>
-                            </div>
-                            <div class="sidebar-box ftco-animate">
-                                <h3 class="heading mb-4">Recent Blog</h3>
-                                <div class="block-21 mb-4 d-flex">
-                                    <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
-                                    <div class="text">
-                                        <h3><a href="#">Even the all-powerful Pointing has no control about the blind
-                                                texts</a>
-                                        </h3>
-                                        <div class="meta">
-                                            <div><a href="#"><span class="icon-calendar"></span> February 12, 2019</a>
-                                            </div>
-                                            <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                            <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="block-21 mb-4 d-flex">
-                                    <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-                                    <div class="text">
-                                        <h3><a href="#">Even the all-powerful Pointing has no control about the blind
-                                                texts</a>
-                                        </h3>
-                                        <div class="meta">
-                                            <div><a href="#"><span class="icon-calendar"></span> February 12, 2019</a>
-                                            </div>
-                                            <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                            <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="block-21 mb-4 d-flex">
-                                    <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
-                                    <div class="text">
-                                        <h3><a href="#">Even the all-powerful Pointing has no control about the blind
-                                                texts</a>
-                                        </h3>
-                                        <div class="meta">
-                                            <div><a href="#"><span class="icon-calendar"></span> February 12, 2019</a>
-                                            </div>
-                                            <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                            <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             {{--Tag CLoud--}}
                             <div class="sidebar-box ftco-animate">
@@ -423,6 +427,11 @@
                         </button>
                     </div>
                     <div class="modal-body mx-3">
+                        <div class="content-panel">
+                            @if(Session::has('message'))
+                                <h5 class="alert-success">{{Session::get('message')}}</h5>
+                            @endif
+                        </div>
                         <form id="form2" class="forms-sample" method="POST"
                               action="{{ route('post.update',$post->id) }}" enctype="multipart/form-data">
                             @csrf
@@ -491,7 +500,7 @@
                                           name="recipe">{{$post->recipe}}</textarea>
                             </div>
                             <a href="{{route('page.myPost',Auth::user()->id)}}">
-                                <button  type="button" class="btn btn-light">Cancel</button>
+                                <button type="button" class="btn btn-light">Cancel</button>
                             </a>
                             <button type="submit" class="btn btn-gradient-primary mr-2">Update</button>
                         </form>

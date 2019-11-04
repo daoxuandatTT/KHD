@@ -70,6 +70,8 @@
 <script src="{{asset('data/js/aos.js')}}"></script>
 <script src="{{asset('data/js/jquery.animateNumber.min.js')}}"></script>
 <script src="{{asset('data/js/scrollax.min.js')}}"></script>
+{{--<script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js')}}"></script>--}}
+{{--<script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js')}}"></script>--}}
 {{--<script src="{{URL::asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false')}}"></script>--}}
 {{--<script src="{{asset('data/js/google-map.js')}}"></script>--}}
 <script src="{{asset('data/js/main.js')}}"></script>
