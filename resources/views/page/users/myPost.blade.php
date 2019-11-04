@@ -61,9 +61,6 @@
                             </select>
                         </div>
                         <div class="form-group">
-
-                        </div>
-                        <div class="form-group">
                             <label for="exampleInputPassword4">Descriptions</label>
                             <textarea class="ckeditor" id="description" cols="98" rows="5" name="description"></textarea>
                         </div>

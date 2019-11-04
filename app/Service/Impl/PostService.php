@@ -27,7 +27,6 @@ class PostService implements PostServiceInterface
 
     public function store($request)
     {
-
         $post = new Post();
         $imageFile = $request->file('image');
         $videoFile = $request->file('video');

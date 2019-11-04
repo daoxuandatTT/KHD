@@ -37,6 +37,7 @@ class PostController extends Controller
 
     public function store(CreateMyPost $request, $id)
     {
+        return $request->all();
         $this->postService->store($request);
         Session::flash('message', 'Thêm mới thành công');
         return redirect()->route('page.myPost', $id);
