@@ -8,7 +8,9 @@
         <div class="container">
             <div class="row no-gutters slider-text align-items-end justify-content-center">
                 <div class="col-md-9 ftco-animate pb-5 text-center">
-
+                    <p class="breadcrumbs"><span class="mr-2"><a href="{{route('page.index')}}">Home <i
+                                    class="ion-ios-arrow-forward"></i></a></span> <span>Detail post<i
+                                class="ion-ios-arrow-forward"></i></span></p>
                 </div>
             </div>
         </div>
@@ -17,15 +19,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-9 order-lg-last ftco-animate">
-                    <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i
-                                    class="ion-ios-arrow-forward"></i></a></span> <span>Detail post<i
-                                class="ion-ios-arrow-forward"></i></span></p>
                     <h3 class="mb-3 text-center" style="color: blueviolet">{{ $post->title }}</h3>
-                    <p>Created by author on {{ $post->created_at->diffForHumans() }}</p>
+                    <h2 class="mb-3 mt-5">#1. Description</h2>
                     <p>{!! $post->description !!}</p>
                     <p>
                         <img src="{{asset('storage/upload/images/' . $post->image)}}" alt="" class="img-fluid">
                     </p>
+                    <h2 class="mb-3 mt-5">#2. Material</h2>
                     <p>{!! $post->material !!}</p>
                     <h2 class="mb-3 mt-5">#3. Recipe</h2>
                     <p>
@@ -48,11 +48,11 @@
                             @endforeach
                         </div>
                     </div>
-
+                    <p>Create {{ $post->created_at->diffForHumans() }}</p>
                     <div class="pt-5 mt-5">
                         @if(count($post->comments)>0)
-                        <h3 class="mb-5">{{count($post->comments)}}</h3>
-                        @foreach($comments as $comment)
+                            <h3 class="mb-5">{{count($post->comments)}}</h3>
+                            @foreach($comments as $comment)
                                 <ul class="comment-list">
                                     <li class="comment">
                                         <div class="vcard bio">
@@ -66,7 +66,7 @@
                                         </div>
                                     </li>
                                 </ul>
-                        @endforeach
+                            @endforeach
                         @else
                             <div>Nothing comment at here.try again</div>
                         @endif
@@ -75,17 +75,22 @@
                             @guest
                                 <p>Please Login before comment this Post<a href="{{ route('login') }}">Login</a></p>
                             @else
-                            <form method="post" action="{{route('comment.store',$post->id)}}" class="p-5 bg-light">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="message">Message</label>
-                                    <textarea title="" id="message" cols="30" rows="10" class="form-control"
-                                              name="content"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
-                                </div>
-                            </form>
+                                <form method="post" action="{{route('comment.store',$post->id)}}" class="p-5 bg-light">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="message">Message</label>
+                                        <textarea id="message" cols="30" rows="10" class="form-control"
+                                                  name="content"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
+                                    </div>
+                                    <div class="error-message">
+                                        @if($errors->has('content'))
+                                            <p class="alert-danger">{{$errors->first('content')}}</p>
+                                        @endif
+                                    </div>
+                                </form>
                             @endguest
                         </div>
                     </div>
@@ -119,25 +124,29 @@
                     <div class="sidebar-box ftco-animate">
                         <h3 class="heading mb-4">Recent Blog</h3>
                         @foreach($randomposts as $randompost)
-                        <div class="block-21 mb-4 d-flex">
-                            <a class="blog-img mr-4" style="background-image: url({{asset('Storage/upload/images/'.$randompost->image)}});"></a>
-                            <div class="text">
-                                <h3><a href="#">{{$randompost->title}}</a>
-                                </h3>
-                                <div class="meta">
-                                    <div><a href="#"><span class="icon-calendar"></span> {{$randompost->created_at->diffForHumans()}}</a></div>
-                                    <div><a href="#"><span class="icon-person"></span>  @if(Auth::guard('admin')->check())
-                                            Admin
-                                            @elseif(Auth::guard('web')->check())
-                                            User
-                                            @elseif(Auth::guard('client')->check())
-                                            Client</a>
-                                    @endif</div>
-                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                            <div class="block-21 mb-4 d-flex">
+                                <a class="blog-img mr-4"
+                                   style="background-image: url({{asset('Storage/upload/images/'.$randompost->image)}});"></a>
+                                <div class="text">
+                                    <h3><a href="#">{{$randompost->title}}</a>
+                                    </h3>
+                                    <div class="meta">
+                                        <div><a href="#"><span
+                                                    class="icon-calendar"></span> {{$randompost->created_at->diffForHumans()}}
+                                            </a></div>
+                                        <div><a href="#"><span
+                                                    class="icon-person"></span> @if(Auth::guard('admin')->check())
+                                                    Admin
+                                                @elseif(Auth::guard('web')->check())
+                                                    User
+                                                @elseif(Auth::guard('client')->check())
+                                                    Client</a>
+                                            @endif</div>
+                                        <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                            @endforeach
+                        @endforeach
                     </div>
                     <div class="sidebar-box ftco-animate">
                         <h3 class="heading mb-4">Paragraph</h3>

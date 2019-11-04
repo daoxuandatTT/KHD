@@ -9,6 +9,7 @@
             background: #fff;
             display: none;
         }
+
         #formButton {
             display: block;
             margin-right: auto;
@@ -26,8 +27,11 @@
             <div class="sidebar-wrap">
                 <div class="sidebar-box p-4 about text-center ftco-animate">
                     <h2 class="heading mb-4">About Me</h2>
-                    <img src="{{ Auth::user()->image  }}" class="img-fluid" alt="Colorlib Template">
-
+                    @if($user->image)
+                        <img src="{{asset('storage/upload/images/' . Auth::user()->image)}}">
+                    @else
+                        <img src="{{asset('storage/upload/images/default.jpg')}}" alt="">
+                    @endif
                     <div class="text pt-4">
                         <p>Hi! My name is <strong>Cathy Deon</strong>, behind the word mountains, far from the countries
                             Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove
@@ -68,7 +72,7 @@
                         <li>
                             <a href="#" class="img d-flex align-items-center justify-content-center text-center"
                                style="background-image: url(images/category-2.jpg);">
-                                    <div class="text">
+                                <div class="text">
                                     <h3>Lifestyle</h3>
                                 </div>
                             </a>
@@ -86,6 +90,7 @@
             </div>
         </div>
         {{--         modal form when no post in database of user --}}
+
         <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
              aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -97,13 +102,23 @@
                         </button>
                     </div>
                     <div class="modal-body mx-3">
+                        <div class="content-panel">
+                            @if(Session::has('message'))
+                                <h5 class="alert-success">{{Session::get('message')}}</h5>
+                            @endif
+                        </div>
                         <form id="form2" class="forms-sample" method="POST"
                               action="{{ route('post.store',Auth::user()->id) }}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="exampleInputName1">Title</label>
-                                <input type="text" name="title" class="form-control" id="exampleInputName1"
+                                <input type="text" name="title" class="form-control" id="title"
                                        placeholder="enter title...">
+                                <div class="error-message">
+                                    @if($errors->has('title'))
+                                        <p class="alert-danger">{{$errors->first('title')}}</p>
+                                    @endif
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail3">Category</label>
@@ -123,14 +138,25 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword4">Descriptions</label>
-                                <textarea class="ckeditor" id="description" cols="98" rows="5" name="description"></textarea>
+                                <textarea class="ckeditor" id="description" cols="98" rows="5"
+                                          name="description"></textarea>
+                                <div class="error-message">
+                                    @if($errors->has('description'))
+                                        <p class="alert-danger">{{$errors->first('description')}}</p>
+                                    @endif
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label for="exampleSelectGender"> Mode: </label>
-                                <label for="exampleSelectGender"> public </label>
+                                <label> Mode: </label>
+                                <label> public </label>
                                 <input type="radio" value="public" name="mode"/>
-                                <label for="exampleSelectGender">private</label>
+                                <label>private</label>
                                 <input type="radio" value="private" name="mode"/>
+                                <div class="error-message">
+                                    @if($errors->has('mode'))
+                                        <p class="alert-danger">{{$errors->first('mode')}}</p>
+                                    @endif
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Upload image</label>
@@ -141,6 +167,11 @@
                                 ><br>
                                 <img id="image" src=""
                                      style="height: 70px"/>
+                                <div class="error-message">
+                                    @if($errors->has('image'))
+                                        <p class="alert-danger">{{$errors->first('image')}}</p>
+                                    @endif
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Upload video</label>
@@ -156,10 +187,21 @@
                             </div>
                             <div class="form-group">
                                 Video :<input type="text" name="link">
+                                <div class="error-message">
+                                    @if($errors->has('link'))
+                                        <p class="alert-danger">{{$errors->first('link')}}</p>
+                                    @endif
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword4">Material</label>
-                                <textarea class="ckeditor" id="material" cols="98" rows="5" name="material"></textarea>
+                                <textarea class="ckeditor" id="material" cols="98" rows="5" name="material"
+                                ></textarea>
+                                <div class="error-message">
+                                    @if($errors->has('material'))
+                                        <p class="alert-danger">{{$errors->first('material')}}</p>
+                                    @endif
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Vùng miền</label><br>
@@ -171,14 +213,25 @@
                                 <label for="exampleSelectGender">
                                     Miền Nam</label>
                                 <input type="checkbox" value="nam" name="region"/>
+                                <div class="error-message">
+                                    @if($errors->has('region'))
+                                        <p class="alert-danger">{{$errors->first('region')}}</p>
+                                    @endif
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword4">Recipe</label>
-                                <textarea class="ckeditor" id="recipe" cols="98" rows="5" name="recipe"></textarea>
+                                <textarea class="ckeditor" id="recipe" cols="98" rows="5" name="recipe"
+                                ></textarea>
+                                <div class="error-message">
+                                    @if($errors->has('recipe'))
+                                        <p class="alert-danger">{{$errors->first('recipe')}}</p>
+                                    @endif
+                                </div>
                             </div>
-                            <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
                             <a href="{{route('page.myPost')}}">
-                                <button type="" class="btn btn-light">Cancel</button>
+                                <button type="button" class="btn btn-light">Cancel</button>
                             </a>
                         </form>
                     </div>
@@ -192,7 +245,7 @@
                 <div class="row no-gutters slider-text align-items-end justify-content-center">
                     <div class="col-md-9 ftco-animate pb-5 text-center">
                         <h1 class="mb-3 bread"> {{ Auth::user()->name }}'s BLOG</h1>
-                        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i
+                        <p class="breadcrumbs"><span class="mr-2"><a href="{{route('page.index')}}">Home <i
                                         class="ion-ios-arrow-forward"></i></a></span> <span>My Post <i
                                     class="ion-ios-arrow-forward"></i></span></p>
                     </div>
@@ -213,7 +266,7 @@
                                                                                  alt="Colorlib Template"></a>
                                         <div class="text pt-3">
                                             <p class="meta d-flex"><span class="pr-3">Dessert</span><span
-                                                    class="ml-auto pl-3">March 01, 2018</span></p>
+                                                    class="ml-auto pl-3">{{$post->created_at}}</span></p>
                                             <h3><a href="data/single.html">{{$post->title}}</a></h3>
                                             {{--                                    <a href=""><i class="fa fa-edit">delete</i></a>--}}
                                             {{--                                    <a href=""><i class="fa fa-edit">update</i></a>--}}
@@ -253,6 +306,51 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="sidebar-box ftco-animate">
+                            <h3 class="heading mb-4">Recent Blog</h3>
+                            <div class="block-21 mb-4 d-flex">
+                                <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+                                <div class="text">
+                                    <h3><a href="#">Even the all-powerful Pointing has no control about the blind
+                                            texts</a>
+                                    </h3>
+                                    <div class="meta">
+                                        <div><a href="#"><span class="icon-calendar"></span> February 12, 2019</a>
+                                        </div>
+                                        <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                        <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="block-21 mb-4 d-flex">
+                                <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
+                                <div class="text">
+                                    <h3><a href="#">Even the all-powerful Pointing has no control about the blind
+                                            texts</a>
+                                    </h3>
+                                    <div class="meta">
+                                        <div><a href="#"><span class="icon-calendar"></span> February 12, 2019</a>
+                                        </div>
+                                        <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                        <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="block-21 mb-4 d-flex">
+                                <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
+                                <div class="text">
+                                    <h3><a href="#">Even the all-powerful Pointing has no control about the blind
+                                            texts</a>
+                                    </h3>
+                                    <div class="meta">
+                                        <div><a href="#"><span class="icon-calendar"></span> February 12, 2019</a>
+                                        </div>
+                                        <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                        <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-12 grid-margin stretch-card">
                             <div class="card">
                             </div>
@@ -262,8 +360,11 @@
                         <div class="sidebar-wrap">
                             <div class="sidebar-box p-4 about text-center ftco-animate">
                                 <h2 class="heading mb-4">About Me</h2>
-                                <img src="{{ Auth::user()->image }}" class="img-fluid" alt="Colorlib Template">
-
+                                @if($user->image)
+                                    <img src="{{asset('storage/upload/images/' . Auth::user()->image)}}">
+                                @else
+                                    <img src="{{asset('storage/upload/images/default.jpg')}}" alt="">
+                                @endif
                                 <div class="text pt-4">
                                     <p>Hi! My name is <strong>Cathy Deon</strong>, behind the word mountains, far from
                                         the countries Vokalia and Consonantia, there live the blind texts. Separated
@@ -326,51 +427,6 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="sidebar-box ftco-animate">
-                                <h3 class="heading mb-4">Recent Blog</h3>
-                                <div class="block-21 mb-4 d-flex">
-                                    <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
-                                    <div class="text">
-                                        <h3><a href="#">Even the all-powerful Pointing has no control about the blind
-                                                texts</a>
-                                        </h3>
-                                        <div class="meta">
-                                            <div><a href="#"><span class="icon-calendar"></span> February 12, 2019</a>
-                                            </div>
-                                            <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                            <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="block-21 mb-4 d-flex">
-                                    <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-                                    <div class="text">
-                                        <h3><a href="#">Even the all-powerful Pointing has no control about the blind
-                                                texts</a>
-                                        </h3>
-                                        <div class="meta">
-                                            <div><a href="#"><span class="icon-calendar"></span> February 12, 2019</a>
-                                            </div>
-                                            <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                            <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="block-21 mb-4 d-flex">
-                                    <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
-                                    <div class="text">
-                                        <h3><a href="#">Even the all-powerful Pointing has no control about the blind
-                                                texts</a>
-                                        </h3>
-                                        <div class="meta">
-                                            <div><a href="#"><span class="icon-calendar"></span> February 12, 2019</a>
-                                            </div>
-                                            <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                            <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             {{--Tag CLoud--}}
                             <div class="sidebar-box ftco-animate">
                                 <h3 class="heading mb-4">Tag Cloud</h3>
@@ -429,96 +485,139 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <div id="endorsement-form-container" class="container">
-                            <form id="form2" class="form-horizontal" role="" method="POST"
-                                  action="{{ route('post.store',Auth::user()->id) }}" enctype="multipart/form-data">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="exampleInputName1">Title</label>
-                                    <input type="text" name="title" class="form-control" id="exampleInputName1"
-                                           placeholder="enter title...">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail3">Category</label>
-                                    <select name="category_id" id="">
-                                        @foreach($categories as $category)
-                                            <option value="{{ $category->id }}">{{$category->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail3">Tag</label>
-                                    <select name="tags[]" id="">
-                                        @foreach($tags as $tag)
-                                            <option value="{{ $tag->id }}">{{$tag->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleSelectGender"> Mode: </label>
-                                    <label for="exampleSelectGender"> public </label>
-                                    <input type="radio" value="public" name="mode"/>
-                                    <label for="exampleSelectGender">private</label>
-                                    <input type="radio" value="private" name="mode"/>
-                                </div>
-                                <div class="form-">
-                                    <label for="exampleInputPassword4">Descriptions</label>
-                                    <label for="editor1"></label>
-                                    <textarea id="editor1" name="description" cols="80"
-                                              rows="10">
-                                       </textarea>
-                                </div>
-                                <div class="form-">
-                                    <label>Upload image</label>
-                                    <input type="file"
-                                           onchange="document.getElementById('image').src = window.URL.createObjectURL(this.files[0])"
-                                           class="form-control-file"
-                                           name="image"
-                                    ><br>
-                                    <img id="image" src=""
-                                         style="height: 70px"/>
-                                </div>
-                                <div class="form-group">
-                                    <label>Upload video</label>
-                                    <input type="file"
-                                           onchange="document.getElementById('video').src = window.URL.createObjectURL(this.files[0])"
-                                           class="form-control-file"
-                                           name="video"
-                                    ><br>
-                                    <video id="video" width="320" height="240" controls>
-                                        <source src="" type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                </div>
-                                OR
-                                <div class="form-group">
-                                    Video :<input type="text" name="link">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword4">Material</label>
-                                    <textarea class="ckeditor" id="material" cols="98" rows="5" name="material"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>Vùng miền</label><br>
-                                    <label for="exampleSelectGender">
-                                        Miền Bắc </label>
-                                    <input type="checkbox" value="bac" name="region"/>
-                                    <label for="exampleSelectGender">Miền Trung</label>
-                                    <input type="checkbox" value="trung" name="region"/>
-                                    <label for="exampleSelectGender">
-                                        Miền Nam</label>
-                                    <input type="checkbox" value="nam" name="region"/>
-                                </div>
-                                <div class=" form-group">
-                                    <label for="exampleInputPassword4">Recipe</label>
-                                    <textarea class="ckeditor" id="recipe" cols="98" rows="5" name="recipe"></textarea>
-                                </div>
-
-                                <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
-                                <button class="btn btn-light">Cancel</button>
-                            </form>
+                    <div class="modal-body mx-3">
+                        <div class="content-panel">
+                            @if(Session::has('message'))
+                                <h5 class="alert-success">{{Session::get('message')}}</h5>
+                            @endif
                         </div>
+                        <form id="form2" class="forms-sample" method="POST"
+                              action="{{ route('post.store',Auth::user()->id) }}" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="exampleInputName1">Title</label>
+                                <input type="text" name="title" class="form-control" id="title"
+                                       placeholder="enter title...">
+                                <div class="error-message">
+                                    @if($errors->has('title'))
+                                        <p class="alert-danger">{{$errors->first('title')}}</p>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail3">Category</label>
+                                <select name="category_id" id="">
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}">{{$category->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail3">Tag</label>
+                                <select name="tags[]" id="">
+                                    @foreach($tags as $tag)
+                                        <option value="{{ $tag->id }}">{{$tag->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword4">Descriptions</label>
+                                <textarea class="ckeditor" id="description" cols="98" rows="5"
+                                          name="description"></textarea>
+                                <div class="error-message">
+                                    @if($errors->has('description'))
+                                        <p class="alert-danger">{{$errors->first('description')}}</p>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label> Mode: </label>
+                                <label> public </label>
+                                <input type="radio" value="public" name="mode"/>
+                                <label>private</label>
+                                <input type="radio" value="private" name="mode"/>
+                                <div class="error-message">
+                                    @if($errors->has('mode'))
+                                        <p class="alert-danger">{{$errors->first('mode')}}</p>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Upload image</label>
+                                <input type="file"
+                                       onchange="document.getElementById('image').src = window.URL.createObjectURL(this.files[0])"
+                                       class="form-control-file"
+                                       name="image"
+                                ><br>
+                                <img id="image" src=""
+                                     style="height: 70px"/>
+                                <div class="error-message">
+                                    @if($errors->has('image'))
+                                        <p class="alert-danger">{{$errors->first('image')}}</p>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Upload video</label>
+                                <input type="file"
+                                       onchange="document.getElementById('video').src = window.URL.createObjectURL(this.files[0])"
+                                       class="form-control-file"
+                                       name="video"
+                                ><br>
+                                <video id="video" width="320" height="240" controls>
+                                    <source src="" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <div class="form-group">
+                                Video :<input type="text" name="link">
+                                <div class="error-message">
+                                    @if($errors->has('link'))
+                                        <p class="alert-danger">{{$errors->first('link')}}</p>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword4">Material</label>
+                                <textarea class="ckeditor" id="material" cols="98" rows="5" name="material"
+                                ></textarea>
+                                <div class="error-message">
+                                    @if($errors->has('material'))
+                                        <p class="alert-danger">{{$errors->first('material')}}</p>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Vùng miền</label><br>
+                                <label for="exampleSelectGender">
+                                    Miền Bắc </label>
+                                <input type="checkbox" value="bac" name="region"/>
+                                <label for="exampleSelectGender">Miền Trung</label>
+                                <input type="checkbox" value="trung" name="region"/>
+                                <label for="exampleSelectGender">
+                                    Miền Nam</label>
+                                <input type="checkbox" value="nam" name="region"/>
+                                <div class="error-message">
+                                    @if($errors->has('region'))
+                                        <p class="alert-danger">{{$errors->first('region')}}</p>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword4">Recipe</label>
+                                <textarea class="ckeditor" id="recipe" cols="98" rows="5" name="recipe"
+                                ></textarea>
+                                <div class="error-message">
+                                    @if($errors->has('recipe'))
+                                        <p class="alert-danger">{{$errors->first('recipe')}}</p>
+                                    @endif
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                            <a href="{{route('page.myPost')}}">
+                                <button type="button" class="btn btn-light">Cancel</button>
+                            </a>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -602,7 +701,7 @@
                                           name="recipe">{{$post->recipe}}</textarea>
                             </div>
                             <a href="{{route('page.myPost',Auth::user()->id)}}">
-                                <button  type="button" class="btn btn-light">Cancel</button>
+                                <button type="button" class="btn btn-light">Cancel</button>
                             </a>
                             <button type="submit" class="btn btn-gradient-primary mr-2">Update</button>
                         </form>
@@ -681,5 +780,35 @@
             });
         });
     </script>
+    {{--    <script>--}}
+    {{--        $(function () {--}}
+    {{--            $("form2").validate({--}}
+    {{--                rules: {--}}
+    {{--                    title:--}}
+    {{--                        {--}}
+    {{--                            required,--}}
+    {{--                        },--}}
+    {{--                    description: "required",--}}
+    {{--                    mode: "required",--}}
+    {{--                    image: "required",--}}
+    {{--                    link: "required",--}}
+    {{--                    material: "required",--}}
+    {{--                    region: "required",--}}
+    {{--                    recipe: "required"--}}
+    {{--                },--}}
+    {{--                message: {--}}
+    {{--                    title: {--}}
+    {{--                        required: "Không được để trống",--}}
+    {{--                    },--}}
+    {{--                    description: "Không được để trống",--}}
+    {{--                    mode: "Không được để trống",--}}
+    {{--                    image: "Không được để trống",--}}
+    {{--                    link: "Không được để trống",--}}
+    {{--                    material: "Không được để trống",--}}
+    {{--                    region: ''--}}
+    {{--                }--}}
+    {{--            })--}}
+    {{--        })--}}
+    {{--    </script>--}}
 @endpush
 

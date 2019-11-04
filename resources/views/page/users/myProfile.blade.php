@@ -524,6 +524,9 @@
                         </nav>
                     </div>
                     <div class="content-panel">
+                        @if(Session::has('message'))
+                            <h5 class="alert-success">{{Session::get('message')}}</h5>
+                            @endif
                         <form class="form-horizontal">
                             <fieldset class="fieldset">
                                 <h3 class="fieldset-title">Personal Info</h3>
