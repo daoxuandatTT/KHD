@@ -99,10 +99,8 @@
                                     <div><a href="#"><span class="icon-calendar"></span> {{$randompost->created_at->diffForHumans()}}</a></div>
                                     <div><a href="#"><span class="icon-person"></span>  @if(Auth::guard('admin')->check())
                                             Admin
-                                            @elseif(Auth::guard('web')->check())
-                                            User
-                                            @elseif(Auth::guard('client')->check())
-                                            Client</a>
+                                            @else(Auth::guard('web')->check())
+                                                User</a>
                                     @endif</div>
                                     <div><a href="#"><span class="icon-chat"></span> 19</a></div>
                                 </div>

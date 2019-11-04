@@ -56,7 +56,7 @@
             @foreach($posts as $key=> $post)
                 <tr>
                     <td>{{++$key}}</td>
-                    <td>{{$post->name}}</td>
+                    <td>{{$post->title}}</td>
                     <td>{{$post->material}}</td>
                     <td>{{$post->recipe}}</td>
                     <td>{{$post->description}}</td>
