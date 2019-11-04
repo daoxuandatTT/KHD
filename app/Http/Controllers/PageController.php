@@ -14,7 +14,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Session;
 class PageController extends Controller
 {
     protected $userService;
@@ -49,7 +49,8 @@ class PageController extends Controller
     {
         $posts = User::find(Auth::user()->id)->posts;
         $categories = Category::all();
-        return view('page.users.myPost', compact('posts', 'categories'));
+        $user = User::find(Auth::user()->id);
+        return view('page.users.myPost', compact('posts', 'categories','user'));
     }
 
     public function myProfile($id)
@@ -62,7 +63,7 @@ class PageController extends Controller
     {
         $posts = Post::all();
         $post = Post::find($id);
-        $randomposts= Post::all()->random(3);
+        $randomposts = Post::all()->random(3);
         $categories = Category::all();
         $comments=Comment::all();
         $replies=Reply::all();

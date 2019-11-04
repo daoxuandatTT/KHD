@@ -5,7 +5,6 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Create New User</h4>
-
                 <form class="forms-sample" method="post" action="{{route('user.store')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">

@@ -1,13 +1,15 @@
 @extends('master')
 @push('css')
     <style type="text/css">
-        body{
-            background:#f9f9fb;
+        body {
+            background: #f9f9fb;
         }
-        .view-account{
-            background:#FFFFFF;
-            margin-top:20px;
+
+        .view-account {
+            background: #FFFFFF;
+            margin-top: 20px;
         }
+
         .view-account .pro-label {
             font-size: 13px;
             padding: 4px 5px;
@@ -63,7 +65,7 @@
             margin: 0 auto
         }
 
-        .view-account .side-bar .side-menu .nav>li {
+        .view-account .side-bar .side-menu .nav > li {
             font-size: 14px;
             margin-bottom: 0;
             border-bottom: none;
@@ -73,45 +75,45 @@
             margin-bottom: 15px
         }
 
-        .view-account .side-bar .side-menu .nav>li:last-child {
+        .view-account .side-bar .side-menu .nav > li:last-child {
             margin-right: 0
         }
 
-        .view-account .side-bar .side-menu .nav>li>a {
+        .view-account .side-bar .side-menu .nav > li > a {
             display: inline-block;
             color: #9499a3;
             padding: 5px;
             border-bottom: 2px solid transparent
         }
 
-        .view-account .side-bar .side-menu .nav>li>a:hover {
+        .view-account .side-bar .side-menu .nav > li > a:hover {
             color: #616670;
             background: none
         }
 
-        .view-account .side-bar .side-menu .nav>li.active a {
+        .view-account .side-bar .side-menu .nav > li.active a {
             color: #40babd;
             border-bottom: 2px solid #40babd;
             background: none;
             border-right: none
         }
 
-        .theme-2 .view-account .side-bar .side-menu .nav>li.active a {
+        .theme-2 .view-account .side-bar .side-menu .nav > li.active a {
             color: #6dbd63;
             border-bottom-color: #6dbd63
         }
 
-        .theme-3 .view-account .side-bar .side-menu .nav>li.active a {
+        .theme-3 .view-account .side-bar .side-menu .nav > li.active a {
             color: #497cb1;
             border-bottom-color: #497cb1
         }
 
-        .theme-4 .view-account .side-bar .side-menu .nav>li.active a {
+        .theme-4 .view-account .side-bar .side-menu .nav > li.active a {
             color: #ec6952;
             border-bottom-color: #ec6952
         }
 
-        .view-account .side-bar .side-menu .nav>li .icon {
+        .view-account .side-bar .side-menu .nav > li .icon {
             display: block;
             font-size: 24px;
             margin-bottom: 5px
@@ -190,7 +192,7 @@
             overflow: hidden
         }
 
-        .view-account .content-panel .mails-wrapper .mail-item>div {
+        .view-account .content-panel .mails-wrapper .mail-item > div {
             float: left
         }
 
@@ -440,71 +442,86 @@
             color: #a2a6af
         }
 
-        @media (max-width:767px) {
+        @media (max-width: 767px) {
             .view-account .content-panel .title {
                 text-align: center
             }
+
             .view-account .side-bar .user-info {
                 padding: 0
             }
+
             .view-account .side-bar .user-info .img-profile {
                 width: 60px;
                 height: 60px
             }
+
             .view-account .side-bar .user-info .meta li {
                 margin-bottom: 5px
             }
+
             .view-account .content-panel .content-header-wrapper .actions {
                 position: static;
                 margin-bottom: 30px
             }
+
             .view-account .content-panel {
                 padding: 0
             }
+
             .view-account .content-panel .content-utilities .page-nav {
                 position: static;
                 margin-bottom: 15px
             }
+
             .drive-wrapper .drive-item {
                 width: 100px;
                 margin-right: 5px;
                 float: none
             }
+
             .drive-wrapper .drive-item-thumb {
                 width: auto;
                 height: 54px
             }
+
             .drive-wrapper .drive-item-thumb .fa {
                 font-size: 24px;
                 padding-top: 0
             }
+
             .view-account .content-panel .avatar .figure img {
                 float: none;
                 margin-bottom: 15px
             }
+
             .view-account .file-uploader {
                 margin-bottom: 15px
             }
+
             .view-account .mail-subject {
                 max-width: 100px;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis
             }
+
             .view-account .content-panel .mails-wrapper .mail-item .time-container {
                 position: static
             }
+
             .view-account .content-panel .mails-wrapper .mail-item .time-container .time {
                 width: auto;
                 text-align: left
             }
         }
 
-        @media (min-width:768px) {
+        @media (min-width: 768px) {
             .view-account .side-bar .user-info {
                 padding: 0;
                 padding-bottom: 15px
             }
+
             .view-account .mail-subject .subject {
                 max-width: 200px;
                 white-space: nowrap;
@@ -513,40 +530,47 @@
             }
         }
 
-        @media (min-width:992px) {
+        @media (min-width: 992px) {
             .view-account .content-panel {
                 min-height: 800px;
                 border-left: 0px solid #f3f3f7;
-                margin:25px;
+                margin: 25px;
 
             }
+
             .view-account .mail-subject .subject {
                 max-width: 280px;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis
             }
+
             .view-account .side-bar {
                 position: absolute;
                 width: 200px;
                 min-height: 600px
             }
+
             .view-account .side-bar .user-info {
                 margin-bottom: 0;
                 border-bottom: none;
                 padding: 30px
             }
+
             .view-account .side-bar .user-info .img-profile {
                 width: 120px;
                 height: 120px
             }
+
             .view-account .side-bar .side-menu {
                 text-align: left
             }
+
             .view-account .side-bar .side-menu .nav {
                 display: block
             }
-            .view-account .side-bar .side-menu .nav>li {
+
+            .view-account .side-bar .side-menu .nav > li {
                 display: block;
                 float: none;
                 font-size: 14px;
@@ -554,30 +578,37 @@
                 margin-right: 0;
                 margin-bottom: 0
             }
-            .view-account .side-bar .side-menu .nav>li>a {
+
+            .view-account .side-bar .side-menu .nav > li > a {
                 display: block;
                 color: #9499a3;
                 padding: 10px 15px;
                 padding-left: 30px
             }
-            .view-account .side-bar .side-menu .nav>li>a:hover {
+
+            .view-account .side-bar .side-menu .nav > li > a:hover {
                 background: #f9f9fb
             }
-            .view-account .side-bar .side-menu .nav>li.active a {
+
+            .view-account .side-bar .side-menu .nav > li.active a {
                 background: #f9f9fb;
                 border-right: 4px solid #40babd;
                 border-bottom: none
             }
-            .theme-2 .view-account .side-bar .side-menu .nav>li.active a {
+
+            .theme-2 .view-account .side-bar .side-menu .nav > li.active a {
                 border-right-color: #6dbd63
             }
-            .theme-3 .view-account .side-bar .side-menu .nav>li.active a {
+
+            .theme-3 .view-account .side-bar .side-menu .nav > li.active a {
                 border-right-color: #497cb1
             }
-            .theme-4 .view-account .side-bar .side-menu .nav>li.active a {
+
+            .theme-4 .view-account .side-bar .side-menu .nav > li.active a {
                 border-right-color: #ec6952
             }
-            .view-account .side-bar .side-menu .nav>li .icon {
+
+            .view-account .side-bar .side-menu .nav > li .icon {
                 font-size: 24px;
                 vertical-align: middle;
                 text-align: center;
@@ -599,8 +630,10 @@
                         <h2 class="title">Đổi mật khẩu<span class="pro-label label label-warning"></span></h2>
                         <form class="form-horizontal" method="post" action="{{route('page.updatePassword',Auth::user()->id)}}">
                             @csrf
+{{--                            @error('title')--}}
+{{--                            <div class="alert alert-danger">{{ $message }}</div>--}}
+{{--       =                     @enderror--}}
                             <fieldset class="fieldset">
-
                                 <div class="form-group">
                                     <div class="col-md-10 col-sm-9 col-xs-12">
                                         <label class="col-md-2  col-sm-3 col-xs-12 control-label">Họ tên:</label>
@@ -619,10 +652,24 @@
                                             @endif
                                     </div>
                                 </div>
+                                <div class="col-md-10 col-sm-9 col-xs-12">
+                                    <div class="error-message">
+                                        @if($errors->has('password'))
+                                            <p class="alert-danger">{{$errors->first('password')}}</p>
+                                        @endif
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label class="col-md-2 col-sm-3 col-xs-12 control-label"> Mật khẩu mới</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
                                         <input type="password" name="newpassword1" class="form-control">
+                                        @if($errors->has('newpassword1'))
+                                            <p class="alert-danger">{{$errors->first('newpassword1')}}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-10 col-sm-9 col-xs-12">
+                                    <div class="error-message">
                                         @if($errors->has('newpassword1'))
                                             <p class="alert-danger">{{$errors->first('newpassword1')}}</p>
                                         @endif
@@ -637,11 +684,21 @@
                                         @endif
                                     </div>
                                 </div>
+                                <div class="col-md-10 col-sm-9 col-xs-12">
+                                    <div class="error-message">
+                                        @if($errors->has('newpassword2'))
+                                            <p class="alert-danger">{{$errors->first('newpassword2')}}</p>
+                                        @endif
+                                    </div>
+                                </div>
                             </fieldset>
                             <hr>
                             <div class="form-group">
                                 <div class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">
                                     <input class="btn btn-primary" type="submit" value="Submit">
+                                    <a href="">
+                                        <button type="button" class="btn btn-secondary">Cancle</button>
+                                    </a>
                                 </div>
                             </div>
                         </form>
@@ -653,8 +710,8 @@
 @endsection
 @push('js')
     <script>
-        $(document).ready(function() {
-            $("#formButton").click(function() {
+        $(document).ready(function () {
+            $("#formButton").click(function () {
                 $("#form3").toggle();
             });
         });

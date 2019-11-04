@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommentRequest;
 use App\Http\Requests\StoreComment;
 use App\Http\Requests\UpdateComment;
 use App\Service\CommentServiceInterface;
@@ -29,7 +30,7 @@ class CommentController extends Controller
         return view('comment.create');
     }
 
-    public function store(Request $request,$postId)
+    public function store(CommentRequest $request,$postId)
     {
         $userId=Auth::user()->id;
         $this->commentService->store($request,$postId);
