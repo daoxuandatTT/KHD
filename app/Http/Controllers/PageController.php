@@ -7,9 +7,12 @@ use App\Comment;
 use App\Post;
 use App\Reply;
 use App\Service\UserServiceInterface;
+use App\Tag;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\View;
 
 class PageController extends Controller
 {
@@ -46,6 +49,12 @@ class PageController extends Controller
         $posts = User::find(Auth::user()->id)->posts;
         $categories = Category::all();
         return view('page.users.myPost', compact('posts', 'categories'));
+    }
+    public function showPostShare(){
+        $tag= Tag::where('name','share')->first();
+        $posts=$tag->posts;
+        $postsShare = $posts->paginate(2);
+        return \view('page.share',compact('postsShare'));
     }
 
     public function myProfile($id)

@@ -19,6 +19,8 @@ Route::prefix('page')->group(function () {
     Route::get('/cooking', 'PageController@cooking')->name('page.cooking');
     Route::get('/contact', 'PageController@contact')->name('page.contact');
     Route::get('/myPost', 'PageController@myPost')->name('page.myPost');
+    Route::get('/share', 'PageController@showPostShare')->name('page.showPostShare');
+    Route::post('/share', 'PageController@myPostShare')->name('page.myPostShare');
     Route::get('{id}/myProfile', 'PageController@myProfile')->name('page.myProfile');
     Route::get('{id}/editProfile', 'PageController@editProfile')->name('page.editProfile');
     Route::post('{id}/updateProfile', 'PageController@updateProfile')->name('page.updateProfile');
@@ -61,7 +63,7 @@ Route::prefix('comment')->group(function () {
 
 });
 Route::prefix('reply')->group(function () {
-    Route::get('{{id}/store', 'ReplyController@store')->name('reply.store');
+    Route::get('{{id}/store', 'RepliesController@store')->name('reply.store');
 
 });
 
@@ -85,5 +87,8 @@ Route::get('login/{provider}/callback', 'SocialController@Callback');
 
 
 Route::resource('tag','TagController');
+Route::get('{id}/delete','TagController@delete')->name('tag.delete');
 Route::get('{id}/tag','PostController@postByTag')->name('tag.posts');
 Route::resource('/replies','RepliesController');
+Route::get('page/loadmore', 'LoadMoreController@index');
+Route::post('page/loadmore/load_data', 'LoadMoreController@load_data')->name('loadmore.load_data');

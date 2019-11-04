@@ -10,7 +10,7 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active"><a href="{{route('page.index')}}" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="{{route('page.about')}}" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="{{route('page.cooking')}}" class="nav-link">Cooking recipe</a></li>
+                <li class="nav-item"><a href="{{route('page.showPostShare')}}" class="nav-link">Tam Su</a></li>
                 <li class="nav-item"><a href="{{route('page.contact')}}" class="nav-link">Contact</a></li>
                 <!-- Authentication Links -->
                 @guest

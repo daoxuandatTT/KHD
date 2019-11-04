@@ -26,6 +26,9 @@ use App\Service\ServiceInterface;
 use App\Service\UserServiceInterface;
 use App\Tag;
 use App\User;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
@@ -103,6 +106,16 @@ class AppServiceProvider extends ServiceProvider
             $tags=Tag::all();
             $view->with('tags',$tags);
         });
+        if (!Collection::hasMacro('paginate')) {
+
+            Collection::macro('paginate',
+                function ($perPage = 2, $page = null, $options = []) {
+                    $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+                    return (new LengthAwarePaginator(
+                        $this->forPage($page, $perPage), $this->count(), $perPage, $page, $options))
+                        ->withPath('');
+                });
+        }
     }
 }
 

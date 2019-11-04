@@ -1,6 +1,6 @@
 @extends('admin.home.masterdb')
 @section('adminContent')
-    <body>
+
     <div class="container">
         @if(Session::has('message'))
             <p class="alert-success">{{Session::get('message')}}</p>
@@ -23,16 +23,6 @@
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>Stt</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Image</th>
-                    <th>Actions</th>
-=======
         </div>
         <table class="table table-bordered">
             <thead>
@@ -44,25 +34,6 @@
                 <th>Actions</th>
             </tr>
             </thead>
-            <tbody>
-
-            @foreach($users as $key=> $user)
-                <tr>
-                    <td>{{++$key}}</td>
-                    <td>{{$user->name}}</td>
-                    <td>{{$user->email}}</td>
-                    <td><img src="{{asset('storage/upload/images/' . $user->image)}}"></td>
-                    <td>
-                        <a href="#" class="view" title="View" data-toggle="tooltip"><i
-                                class="material-icons">&#xE417;</i></a>
-                        <a href="{{route('user.edit',$user->id)}}" class="edit" title="Edit" data-toggle="tooltip"><i
-                                class="material-icons">&#xE254;</i></a>
-                        <a href="{{route('user.delete',$user->id)}}" class="delete" title="Delete"
-                           data-toggle="tooltip" onclick="return confirm('Delete user')"><i class="material-icons">&#xE872;</i></a>
-                    </td>
->>>>>>> 53a268adaf8ff68145724f4a7fe7123294005106
-                </tr>
-                </thead>
                 <tbody>
 
                 @foreach($users as $key=> $user)
@@ -98,8 +69,5 @@
                 </ul>
             </div>
         </div>
-    </div>
-    </body>
-    </html>
 
 @endsection

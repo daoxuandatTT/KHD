@@ -22,7 +22,6 @@ class UserTableSeeder extends Seeder
         $user->address="Hai Phong";
         $user->gender="Male";
         $user->description="Com chao gi tam nay";
-        $user->image="dog.jpg";
         $user->password=Hash::make('password');
         $user->save();
 
@@ -35,7 +34,6 @@ class UserTableSeeder extends Seeder
         $user->address="Hai Phong";
         $user->gender="Male";
         $user->description="Com chao gi tam nay";
-        $user->image="dog.jpg";
         $user->password=Hash::make('password');
         $user->save();
 
@@ -48,7 +46,6 @@ class UserTableSeeder extends Seeder
         $user->address="Hai Phong";
         $user->gender="Name";
         $user->description="Com chao gi tam nay";
-        $user->image="dog.jpg";
         $user->password=Hash::make('password');
         $user->save();
     }

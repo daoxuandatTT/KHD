@@ -1,6 +1,6 @@
 @extends('master')
-<script src="{{asset('ckeditor/ckeditor.js')}}"></script>
 @push('css')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="{{asset('ViewAdmin/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
     {{--    <link rel="stylesheet" href="{{asset('ViewAdmin/assets/vendors/mdi/css/vendor.bundle.base.css')}}">--}}
     <style type="text/css">
@@ -14,10 +14,104 @@
             margin-right: auto;
             margin-left: auto;
         }
+        .modal-body{
+            max-height: calc(100vh - 200px);
+            overflow-y: auto;
+        }
     </style>
 @endpush
 @section('content')
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true" style="overflow: scroll">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Create New Post</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times</span>
+                    </button>
+                </div>
+                <div class="modal-body mx-3">
+                    <form id="form2" class="forms-sample" method="POST"
+                          action="{{ route('post.store',Auth::user()->id) }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <label for="exampleInputName1">Title</label>
+                            <input type="text" name="title" class="form-control" id="exampleInputName1"
+                                   placeholder="enter title...">
+                        </div>
+                        <div class="form-group" >
+                            <label for="exampleInputEmail3">Category</label>
+                            <select name="category_id" id="" class="show-tick selectpicker">
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{$category->name}}</option>
+                                @endforeach
+                            </select>
+                            <label for="exampleInputEmail3">Select Tag</label>
+                            <select style="float: right" name="tags[]" id="tag" class="show-tick selectpicker" data-live-search="false" multiple>
+                                @foreach($tags as $tag)
+                                    <option value="{{ $tag->id }}">{{$tag->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword4">Descriptions</label>
+                            <textarea class="ckeditor" id="description" cols="98" rows="5" name="description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleSelectGender"> Mode: </label>
+                            <label for="exampleSelectGender"> public </label>
+                            <input type="radio" value="public" name="mode"/>
+                            <label for="exampleSelectGender">private</label>
+                            <input type="radio" value="private" name="mode"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Upload image</label>
+                            <input type="file"
+                                   onchange="document.getElementById('image').src = window.URL.createObjectURL(this.files[0])"
+                                   class="form-control-file"
+                                   name="image"
+                            ><br>
+                            <img id="image" src=""
+                                 style="height: 70px"/>
+                        </div>
+{{--                        <div class="form-group">--}}
+{{--                            <label>Upload video</label>--}}
+{{--                            <input type="file"--}}
+{{--                                   onchange="document.getElementById('video').src = window.URL.createObjectURL(this.files[0])"--}}
+{{--                                   class="form-control-file"--}}
+{{--                                   name="video"--}}
+{{--                            ><br>--}}
+{{--                            <video id="video" width="320" height="240" controls>--}}
+{{--                                <source src="" type="video/mp4">--}}
+{{--                                Your browser does not support the video tag.--}}
+{{--                            </video>--}}
+{{--                        </div>--}}
+                        <div class="form-group">
+                            Video :<input  class="form-control-file" type="text" name="link">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword4">Material</label>
+                            <textarea class="ckeditor" id="material" cols="98" rows="5" name="material"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword4">Recipe</label>
+                            <textarea class="ckeditor" id="recipe" cols="98" rows="5" name="recipe"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                        <a href="{{route('page.myPost')}}">
+                            <button type="" class="btn btn-light">Cancel</button>
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @if(count($posts)==0)
         <div class="text-center">
             <p class="btn btn-danger">Không có bài viết nào</p>
@@ -87,105 +181,6 @@
             </div>
         </div>
         {{--         modal form when no post in database of user --}}
-        <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header text-center">
-                        <h4 class="modal-title w-100 font-weight-bold">Create New Post</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body mx-3">
-                        <form id="form2" class="forms-sample" method="POST"
-                              action="{{ route('post.store',Auth::user()->id) }}" enctype="multipart/form-data">
-                            @csrf
-                            <div class="form-group">
-                                <label for="exampleInputName1">Title</label>
-                                <input type="text" name="title" class="form-control" id="exampleInputName1"
-                                       placeholder="enter title...">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail3">Category</label>
-                                <select name="category_id" id="">
-                                    @foreach($categories as $category)
-                                        <option value="{{ $category->id }}">{{$category->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail3">Tag</label>
-                                <select name="tags[]" id="">
-                                    @foreach($tags as $tag)
-                                        <option value="{{ $tag->id }}">{{$tag->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword4">Descriptions</label>
-                                <textarea class="ckeditor" id="description" cols="98" rows="5" name="description"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleSelectGender"> Mode: </label>
-                                <label for="exampleSelectGender"> public </label>
-                                <input type="radio" value="public" name="mode"/>
-                                <label for="exampleSelectGender">private</label>
-                                <input type="radio" value="private" name="mode"/>
-                            </div>
-                            <div class="form-group">
-                                <label>Upload image</label>
-                                <input type="file"
-                                       onchange="document.getElementById('image').src = window.URL.createObjectURL(this.files[0])"
-                                       class="form-control-file"
-                                       name="image"
-                                ><br>
-                                <img id="image" src=""
-                                     style="height: 70px"/>
-                            </div>
-                            <div class="form-group">
-                                <label>Upload video</label>
-                                <input type="file"
-                                       onchange="document.getElementById('video').src = window.URL.createObjectURL(this.files[0])"
-                                       class="form-control-file"
-                                       name="video"
-                                ><br>
-                                <video id="video" width="320" height="240" controls>
-                                    <source src="" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                            <div class="form-group">
-                                Video :<input type="text" name="link">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword4">Material</label>
-                                <textarea class="ckeditor" id="material" cols="98" rows="5" name="material"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Vùng miền</label><br>
-                                <label for="exampleSelectGender">
-                                    Miền Bắc </label>
-                                <input type="checkbox" value="bac" name="region"/>
-                                <label for="exampleSelectGender">Miền Trung</label>
-                                <input type="checkbox" value="trung" name="region"/>
-                                <label for="exampleSelectGender">
-                                    Miền Nam</label>
-                                <input type="checkbox" value="nam" name="region"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword4">Recipe</label>
-                                <textarea class="ckeditor" id="recipe" cols="98" rows="5" name="recipe"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
-                            <a href="{{route('page.myPost')}}">
-                                <button type="" class="btn btn-light">Cancel</button>
-                            </a>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
     @else
         <section class="hero-wrap hero-wrap-2" style="background-image: url('{{asset('data/images/bg_4.jpg')}}');">
             <div class="overlay"></div>
@@ -216,8 +211,6 @@
                                             <p class="meta d-flex"><span class="pr-3">Dessert</span><span
                                                     class="ml-auto pl-3">March 01, 2018</span></p>
                                             <h3><a href="data/single.html">{{$post->title}}</a></h3>
-                                            {{--                                    <a href=""><i class="fa fa-edit">delete</i></a>--}}
-                                            {{--                                    <a href=""><i class="fa fa-edit">update</i></a>--}}
                                             <a href="{{route('post.delete',$post->id)}}"
                                                class="btn btn-default btn-rounded mb-4">
                                                 <i class="icon icon-delete">
@@ -263,7 +256,7 @@
                         <div class="sidebar-wrap">
                             <div class="sidebar-box p-4 about text-center ftco-animate">
                                 <h2 class="heading mb-4">About Me</h2>
-                                <img src="{{asset('storage/upload/images/' . $post->user->image)}}">
+                                <img src="{{ Auth::user()->image }}">
 
                                 <div class="text pt-4">
                                     <p>Hi! My name is <strong>Cathy Deon</strong>, behind the word mountains, far from
@@ -277,7 +270,7 @@
                                 {{--                           <button><a class="icon icon-add" href="#">New Post</a></button>--}}
                                 <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal"
                                    data-target="#modalRegisterForm">
-                                    <button id="formButton" type="button" class="btn btn-primary btn-lg"
+                                    <button id="formButton" type="button" class="buttonModal btn btn-primary btn-lg"
                                             data-toggle="modal" data-target="#ModalLoginForm">
                                         <i class="icon icon-add">New Post</i></button>
                                 </a>
@@ -419,111 +412,6 @@
                 </div>
             </div>
         </section>
-        {{--    MODAL CREATE --}}
-        <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header text-center">
-                        <h4 class="modal-title w-100 font-weight-bold">Create New Post</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div id="endorsement-form-container" class="container">
-                            <form id="form2" class="form-horizontal" role="" method="POST"
-                                  action="{{ route('post.store',Auth::user()->id) }}" enctype="multipart/form-data">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="exampleInputName1">Title</label>
-                                    <input type="text" name="title" class="form-control" id="exampleInputName1"
-                                           placeholder="enter title...">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail3">Category</label>
-                                    <select name="category_id" id="">
-                                        @foreach($categories as $category)
-                                            <option value="{{ $category->id }}">{{$category->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail3">Tag</label>
-                                    <select name="tags[]" id="">
-                                        @foreach($tags as $tag)
-                                            <option value="{{ $tag->id }}">{{$tag->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleSelectGender"> Mode: </label>
-                                    <label for="exampleSelectGender"> public </label>
-                                    <input type="radio" value="public" name="mode"/>
-                                    <label for="exampleSelectGender">private</label>
-                                    <input type="radio" value="private" name="mode"/>
-                                </div>
-                                <div class="form-">
-                                    <label for="exampleInputPassword4">Descriptions</label>
-                                    <label for="editor1"></label>
-                                    <textarea id="editor1" name="description" cols="80"
-                                              rows="10">
-                                       </textarea>
-                                </div>
-                                <div class="form-">
-                                    <label>Upload image</label>
-                                    <input type="file"
-                                           onchange="document.getElementById('image').src = window.URL.createObjectURL(this.files[0])"
-                                           class="form-control-file"
-                                           name="image"
-                                    ><br>
-                                    <img id="image" src=""
-                                         style="height: 70px"/>
-                                </div>
-                                <div class="form-group">
-                                    <label>Upload video</label>
-                                    <input type="file"
-                                           onchange="document.getElementById('video').src = window.URL.createObjectURL(this.files[0])"
-                                           class="form-control-file"
-                                           name="video"
-                                    ><br>
-                                    <video id="video" width="320" height="240" controls>
-                                        <source src="" type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                </div>
-                                OR
-                                <div class="form-group">
-                                    Video :<input type="text" name="link">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword4">Material</label>
-                                    <textarea class="ckeditor" id="material" cols="98" rows="5" name="material"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>Vùng miền</label><br>
-                                    <label for="exampleSelectGender">
-                                        Miền Bắc </label>
-                                    <input type="checkbox" value="bac" name="region"/>
-                                    <label for="exampleSelectGender">Miền Trung</label>
-                                    <input type="checkbox" value="trung" name="region"/>
-                                    <label for="exampleSelectGender">
-                                        Miền Nam</label>
-                                    <input type="checkbox" value="nam" name="region"/>
-                                </div>
-                                <div class=" form-group">
-                                    <label for="exampleInputPassword4">Recipe</label>
-                                    <textarea class="ckeditor" id="recipe" cols="98" rows="5" name="recipe"></textarea>
-                                </div>
-
-                                <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
-                                <button class="btn btn-light">Cancel</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="modal fade" id="modalRegisterForm1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
              aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -612,7 +500,10 @@
             </div>
         </div>
     @endif
-    {{--    end modal--}}
+
+@endsection
+@push('js')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
     <script>
         CKEDITOR.replace('description', {
             filebrowserBrowseUrl: '{{ asset('ckfinder/ckfinder.html') }}',
@@ -673,14 +564,27 @@
             filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
         });
     </script>
-@endsection
-@push('js')
+    <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
+
     <script>
         $(document).ready(function () {
             $("#formButton").click(function () {
                 $("#form1").toggle();
             });
         });
+    </script>
+    <script>
+        $('.modalRegisterForm').click(function(){
+            var buttonId = $(this).attr('id');
+            $('#modalRegisterForm').removeAttr('class').addClass(buttonId).find('.modal').height($(window).outerHeight(true));
+            $('body').addClass('modal-active');
+        })
+
+        $('#modalRegisterForm').click(function(){
+            $(this).addClass('out');
+            $('body').removeClass('modal-active');
+        });
+
     </script>
 @endpush
 
