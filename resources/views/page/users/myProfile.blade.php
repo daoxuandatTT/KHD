@@ -518,44 +518,50 @@
                         </div>
                         <nav class="side-menu">
                             <ul class="nav">
-                                <li class="active"><a href="#"><span class="fa fa-table"></span>Management Post</a></li>
-                                <li class="active"><a href="{{route('page.editProfile',Auth::user()->id)}}" ><span class="fa fa-refresh"></span>Update Profile</a></li>
+                                <li class="active"><a href="#"><span class="fa fa-table" style="width: 2px"></span>Bài đã đăng</a></li>
+                                <li class="active"><a href="{{route('page.editProfile',Auth::user()->id)}}" ><span class="fa fa-refresh" style="width: 2px"></span>Sửa thông t</a></li>
                             </ul>
                         </nav>
                     </div>
                     <div class="content-panel">
                         <form class="form-horizontal">
                             <fieldset class="fieldset">
-                                <h3 class="fieldset-title">Personal Info</h3>
+                                <h3 class="fieldset-title">Thông tin cá nhân</h3>
+                                @if(Session::has('message'))
+                                    <h5 class="alert-success">{{Session::get('message')}}</h5>
+                                @endif
+                                @if(Session::has('notif'))
+                                 <h5 class="alert-success">{{Session::get('notif')}}</h5>
+                                    @endif
                                 <div class="form-group">
-                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">User Name:</label>
+                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">Họ tên:</label>
                                     <label class="label label-info">{{ Auth::user()->name }}</label>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">Job:</label>
+                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">Nghề nghiệp:</label>
                                     <label class="label label-info">{{ Auth::user()->job }}</label>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">Gender:</label>
+                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">Giới tính:</label>
                                     <label class="label label-info">{{ Auth::user()->gender }}</label>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">Date of bird:</label>
+                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">Ngày sinh:</label>
                                     <label class="label label-info">{{ Auth::user()->dob }}</label>
                                 </div>
                             </fieldset>
                             <fieldset class="fieldset">
-                                <h3 class="fieldset-title">Contact Info</h3>
+                                <h3 class="fieldset-title">Liên hệ:</h3>
                                 <div class="form-group">
                                     <label class="col-md-2  col-sm-3 col-xs-12 control-label">Email:</label>
                                     <label class="label label-info">{{ Auth::user()->email }}</label>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-2  col-sm-3 col-xs-12 control-label">Address:</label>
+                                    <label class="col-md-2  col-sm-3 col-xs-12 control-label">Địa chỉ:</label>
                                     <label class="label label-info">{{ Auth::user()->address }}</label>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-2  col-sm-3 col-xs-12 control-label">Phone:</label>
+                                    <label class="col-md-2  col-sm-3 col-xs-12 control-label">Số điện thoại:</label>
                                     <label class="label label-info">{{ Auth::user()->phone }}</label>
                                 </div>
                             </fieldset>
