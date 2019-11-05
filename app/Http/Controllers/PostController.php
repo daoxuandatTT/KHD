@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use App\Http\Requests\CreateMyPost;
-use App\Http\Requests\StorePost;
-use App\Http\Requests\UpdatePost;
+use App\Http\Requests\StoreMyPost;
 use App\Post;
 use App\Service\PostServiceInterface;
 use App\Tag;
@@ -35,9 +33,8 @@ class PostController extends Controller
         return view('post.create', compact('categories'));
     }
 
-    public function store(CreateMyPost $request, $id)
+    public function store(StoreMyPost $request, $id)
     {
-        return $request->all();
         $this->postService->store($request);
         Session::flash('message', 'Thêm mới thành công');
         return redirect()->route('page.myPost', $id);

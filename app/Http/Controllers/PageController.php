@@ -29,7 +29,9 @@ class PageController extends Controller
 
     public function index()
     {
-        return view('page.index');
+        $tags = Tag::all()->random(3);
+        $randomposts = Post::all()->random(2);
+        return view('page.index',compact('randomposts','tags'));
     }
 
     public function about()
@@ -49,7 +51,7 @@ class PageController extends Controller
 
     public function myPost()
     {
-        $posts = User::find(Auth::user()->id)->posts;
+        $posts = User::find(Auth::user()->id)->posts->paginate(6);
         $categories = Category::all();
         $user = User::find(Auth::user()->id);
         return view('page.users.myPost', compact('posts', 'categories','user'));
@@ -71,11 +73,13 @@ class PageController extends Controller
     {
         $posts = Post::all();
         $post = Post::find($id);
+        $postTags=Post::where('category_id',$post->category_id)->get();
         $randomposts = Post::all()->random(3);
+        $postRecents=Post::where('mode','public')->orderBy('created_at','desc')->paginate(4);
         $categories = Category::all();
         $comments=Comment::all();
         $replies=Reply::all();
-        return view('page.users.detailPost', compact('post', 'posts', 'categories','comments','randomposts','replies'));
+        return view('page.users.detailPost', compact('post','postRecents','postTags', 'posts', 'categories','comments','randomposts','replies'));
     }
 
     public function editProfile($id)

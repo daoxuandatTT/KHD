@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateMyPost extends FormRequest
+class StoreMyPost extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,11 +30,9 @@ class CreateMyPost extends FormRequest
             'image' => 'required',
             'link' => 'required',
             'material' => 'required',
-            'region' => 'required',
             'recipe' => 'required',
         ];
     }
-
     public function messages()
     {
         $message = [
@@ -44,10 +42,8 @@ class CreateMyPost extends FormRequest
             'image.required' => 'Ảnh không được để trống',
             'link.required' => 'Video không được để trống',
             'material.required' => 'Nguyên liệu không được để trống',
-            'region.required' => 'Vùng miền không được để trống',
             'recipe.required' => 'Công thức không được để trống'
         ];
         return $message;
     }
-
 }

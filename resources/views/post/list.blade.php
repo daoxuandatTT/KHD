@@ -30,11 +30,11 @@
                 <tr>
                     <th>Stt</th>
                     <th>Name</th>
-                    <th>Material</th>
-                    <th>Recipe</th>
-                    <th>Description</th>
+{{--                    <th>Material</th>--}}
+{{--                    <th>Recipe</th>--}}
+{{--                    <th>Description</th>--}}
                     <th>Image</th>
-                    <th>category_id</th>
+                    <th>Category Name</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -43,11 +43,11 @@
             <tr>
                 <th>Stt</th>
                 <th>Name</th>
-                <th>Material</th>
-                <th>Recipe</th>
-                <th>Description</th>
+{{--                <th>Material</th>--}}
+{{--                <th>Recipe</th>--}}
+{{--                <th>Description</th>--}}
                 <th>Image</th>
-                <th>category_id</th>
+                <th>Category Name</th>
                 <th>Actions</th>
             </tr>
             </tfoot>
@@ -57,9 +57,9 @@
                 <tr>
                     <td>{{++$key}}</td>
                     <td>{{$post->title}}</td>
-                    <td>{{$post->material}}</td>
-                    <td>{{$post->recipe}}</td>
-                    <td>{{$post->description}}</td>
+{{--                    <td>{{$post->material}}</td>--}}
+{{--                    <td>{{$post->recipe}}</td>--}}
+{{--                    <td>{{$post->description}}</td>--}}
                     <td><img src="{{asset('storage/upload/images/' . $post->image)}}" alt=""></td>
 
                     <td>{{$post->category->name}}</td>

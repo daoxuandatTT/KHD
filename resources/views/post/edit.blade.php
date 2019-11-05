@@ -1,19 +1,9 @@
 @extends('admin.home.masterdb')
 @section('adminContent')
-<<<<<<< HEAD
     <div class="col-10 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Create New Post</h4>
-
-=======
-
-    <div class="col-10 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Create New Post</h4>
-
->>>>>>> 53a268adaf8ff68145724f4a7fe7123294005106
                 <form class="forms-sample" method="post" action="{{route('post.update',$post->id)}}"
                       enctype="multipart/form-data">
                     @csrf
@@ -21,11 +11,6 @@
                         <label for="exampleInputName1">Name</label>
                         <input type="text" class="form-control" name="name" placeholder="Name" value="{{$post->name}}">
                     </div>
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 53a268adaf8ff68145724f4a7fe7123294005106
                     <div class="form-group">
                         <label for="exampleSelectGender">Mode</label>
                         <select class="form-control" name="mode" >
@@ -61,10 +46,6 @@
                             @foreach($categories as $category)
                                 <option value="{{$category->id}}">{{$category->name}}</option>
                             @endforeach
-<<<<<<< HEAD
-=======
-
->>>>>>> 53a268adaf8ff68145724f4a7fe7123294005106
                         </select>
                     </div>
                     <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>

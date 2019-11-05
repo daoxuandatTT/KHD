@@ -509,7 +509,7 @@
                 <div class="module-inner">
                     <div class="side-bar">
                         <div class="user-info">
-                            <img class="img-profile img-circle img-responsive center-block" src="{{asset('storage/upload/images/'.$user->image) }}" alt="">
+                            <img class="img-profile img-circle img-responsive center-block" src="{{asset('/storage/upload/images/'.$user->image) }}" alt="">
                             <ul class="meta list list-unstyled">
                                 <li class="name" style="color: navy">{{ Auth::user()->name }}
                                     <label class="label label-info">{{ Auth::user()->job }}</label>

@@ -418,7 +418,7 @@
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"><a class="nav-link" href="{{route('user.list')}}">Users</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{route('post.list')}}">Posts</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{route('comment.list')}}">Comments</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('category.index')}}">Categories</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{route('tag.index')}}">Tags</a></li>
                         </ul>
                     </div>

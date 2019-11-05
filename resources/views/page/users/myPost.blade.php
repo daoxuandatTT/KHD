@@ -9,7 +9,6 @@
             background: #fff;
             display: none;
         }
-
         #formButton {
             display: block;
             margin-right: auto;
@@ -22,6 +21,7 @@
     </style>
 @endpush
 @section('content')
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
     <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true" style="overflow: scroll">
         <div class="modal-dialog" role="document">
@@ -33,11 +33,6 @@
                     </button>
                 </div>
                 <div class="modal-body mx-3">
-                    <div class="content-panel">
-                        @if(Session::has('message'))
-                            <h5 class="alert-success">{{Session::get('message')}}</h5>
-                        @endif
-                    </div>
                     <form id="form2" class="forms-sample" method="POST"
                           action="{{ route('post.store',Auth::user()->id) }}" enctype="multipart/form-data">
                         @csrf
@@ -45,6 +40,11 @@
                             <label for="exampleInputName1">Title</label>
                             <input type="text" name="title" class="form-control" id="exampleInputName1"
                                    placeholder="enter title...">
+                            <div class="error-message">
+                                @if($errors->has('title'))
+                                    <p class="alert-danger">{{$errors->first('title')}}</p>
+                                @endif
+                            </div>
                         </div>
                         <div class="form-group" >
                             <label for="exampleInputEmail3">Category</label>
@@ -61,18 +61,29 @@
                             </select>
                         </div>
                         <div class="form-group">
+
+                        </div>
+                        <div class="form-group">
                             <label for="exampleInputPassword4">Descriptions</label>
                             <textarea class="ckeditor" id="description" cols="98" rows="5" name="description"></textarea>
+                            <div class="error-message">
+                                @if($errors->has('description'))
+                                    <p class="alert-danger">{{$errors->first('description')}}</p>
+                                @endif
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="exampleSelectGender"> Mode: </label>
-                            <label for="exampleSelectGender"> public </label>
+                            <label for="exampleSelectGender">Cong khai</label>
                             <input type="radio" value="public" name="mode"/>
-                            <label for="exampleSelectGender">private</label>
+                            <label for="exampleSelectGender">Chi minh toi</label>
                             <input type="radio" value="private" name="mode"/>
+                            <div class="error-message">
+                                @if($errors->has('mode'))
+                                    <p class="alert-danger">{{$errors->first('mode')}}</p>
+                                @endif
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label>Upload image</label>
                             <input type="file"
                                    onchange="document.getElementById('image').src = window.URL.createObjectURL(this.files[0])"
                                    class="form-control-file"
@@ -80,6 +91,11 @@
                             ><br>
                             <img id="image" src=""
                                  style="height: 70px"/>
+                            <div class="error-message">
+                                @if($errors->has('image'))
+                                    <p class="alert-danger">{{$errors->first('image')}}</p>
+                                @endif
+                            </div>
                         </div>
 {{--                        <div class="form-group">--}}
 {{--                            <label>Upload video</label>--}}
@@ -95,14 +111,29 @@
 {{--                        </div>--}}
                         <div class="form-group">
                             Video :<input  class="form-control-file" type="text" name="link">
+                            <div class="error-message">
+                                @if($errors->has('link'))
+                                    <p class="alert-danger">{{$errors->first('link')}}</p>
+                                @endif
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword4">Material</label>
                             <textarea class="ckeditor" id="material" cols="98" rows="5" name="material"></textarea>
+                            <div class="error-message">
+                                @if($errors->has('material'))
+                                    <p class="alert-danger">{{$errors->first('material')}}</p>
+                                @endif
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword4">Recipe</label>
                             <textarea class="ckeditor" id="recipe" cols="98" rows="5" name="recipe"></textarea>
+                            <div class="error-message">
+                                @if($errors->has('recipe'))
+                                    <p class="alert-danger">{{$errors->first('recipe')}}</p>
+                                @endif
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary mr-2">Submit</button>
                         <a href="{{route('page.myPost')}}">
@@ -115,10 +146,23 @@
     </div>
 
     @if(count($posts)==0)
-            <div style="margin-bottom: 200px;
-margin-top: 50px">
-                <div class="text-center">
-                    <h1 style="color: red">Không có bài viết nào</h1>
+        <div class="text-center">
+            <p class="btn btn-danger">Không có bài viết nào</p>
+        </div>
+        <div class="col-lg-3">
+            <div class="sidebar-wrap">
+                <div class="sidebar-box p-4 about text-center ftco-animate">
+                    <h2 class="heading mb-4">About Me</h2>
+                    <img class="img-profile img-circle img-responsive center-block" src="{{asset('storage/upload/images/'.$user->image) }}" alt="">
+
+                    <div class="text pt-4">
+                        <p>Hi! My name is <strong>Cathy Deon</strong>, behind the word mountains, far from the countries
+                            Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove
+                            right at the coast of the Semantics, a large language ocean.
+                        </p>
+                    </div>
+                </div>
+                <div class="sidebar-box p-4 ftco-animate text-center">
                     <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal"
                        data-target="#modalRegisterForm">
                         <button id="formButton" type="button" class="btn btn-primary btn-lg" data-toggle="modal"
@@ -126,22 +170,44 @@ margin-top: 50px">
                             <i class="icon icon-add">New Post</i></button>
                     </a>
                 </div>
-                {{--                        form--}}
-            </div>
-    @else
-        <section class="hero-wrap hero-wrap-2" style="background-image: url('{{asset('data/images/bg_4.jpg')}}');">
-            <div class="overlay"></div>
-            <div class="container">
-                <div class="row no-gutters slider-text align-items-end justify-content-center">
-                    <div class="col-md-9 ftco-animate pb-5 text-center">
-                        <h1 class="mb-3 bread"> {{ Auth::user()->name }}'s BLOG</h1>
-                        <p class="breadcrumbs"><span class="mr-2"><a href="{{route('page.index')}}">Home <i
-                                        class="ion-ios-arrow-forward"></i></a></span> <span>My Post <i
-                                    class="ion-ios-arrow-forward"></i></span></p>
-                    </div>
+                <div class="sidebar-box p-4 ftco-animate">
+                    <form action="#" class="search-form">
+                        <div class="form-group">
+                            <span class="icon icon-search"></span>
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                    </form>
+                </div>
+                <div class="sidebar-box categories text-center ftco-animate">
+                    <h2 class="heading mb-4">Categories</h2>
+                    <ul class="category-image">
+                        <li>
+                            <a href="#" class="img d-flex align-items-center justify-content-center text-center">
+                                <div class="text">
+                                    <h3>Foods</h3>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="img d-flex align-items-center justify-content-center text-center">
+                                    <div class="text">
+                                    <h3>Lifestyle</h3>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="img d-flex align-items-center justify-content-center text-center">
+                                <div class="text">
+                                    <h3>Others</h3>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </section>
+        </div>
+        {{--         modal form when no post in database of user --}}
+    @else
         <section class="ftco-section">
             <div class="container">
                 <div class="row">
@@ -150,14 +216,14 @@ margin-top: 50px">
                             @foreach($posts as $post)
                                 <div class="col-md-4 ftco-animate">
                                     <div class="blog-entry">
-                                        <a href="#" class="img-2"><img style="width:200px; height: 250px"
+                                        <a href="{{'page.showDetail',$post->id}}" class="img-2"><img style="width:200px; height: 250px"
                                                                                  src="{{asset('storage/upload/images/'.$post->image) }}"
                                                                                  class="img-fluid"
                                                                                  alt="Colorlib Template"></a>
                                         <div class="text pt-3">
                                             <p class="meta d-flex"><span class="pr-3">Dessert</span><span
-                                                    class="ml-auto pl-3">{{$post->created_at}}</span></p>
-                                            <h3><a href="data/single.html">{{$post->title}}</a></h3>
+                                                    class="ml-auto pl-3">{{ $post->created_at }}</span></p>
+                                            <h3><a href="{{'page.showDetail',$post->id}}">{{$post->title}}</a></h3>
                                             <a href="{{route('post.delete',$post->id)}}"
                                                class="btn btn-default btn-rounded mb-4">
                                                 <i class="icon icon-delete">
@@ -178,83 +244,80 @@ margin-top: 50px">
                                     </div>
                                 </div>
                             @endforeach
-                        </div>
-                        <div class="row mt-5">
-                            <div class="col text-center">
-                                <div class="block-27">
-                                    <ul>
-                                        <li><a href="#">&lt;</a></li>
-                                        <li class="active"><span>1</span></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#">&gt;</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="sidebar-box ftco-animate">
-                            <h3 class="heading mb-4">Recent Blog</h3>
-                            <div class="block-21 mb-4 d-flex">
-                                <a class="blog-img mr-4"></a>
-                                <div class="text">
-                                    <h3><a href="#">Even the all-powerful Pointing has no control about the blind
-                                            texts</a>
-                                    </h3>
-                                    <div class="meta">
-                                        <div><a href="#"><span class="icon-calendar"></span> February 12, 2019</a>
-                                        </div>
-                                        <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                        <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="block-21 mb-4 d-flex">
-                                <a class="blog-img mr-4"></a>
-                                <div class="text">
-                                    <h3><a href="#">Even the all-powerful Pointing has no control about the blind
-                                            texts</a>
-                                    </h3>
-                                    <div class="meta">
-                                        <div><a href="#"><span class="icon-calendar"></span> February 12, 2019</a>
-                                        </div>
-                                        <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                        <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="block-21 mb-4 d-flex">
-                                <a class="blog-img mr-4"></a>
-                                <div class="text">
-                                    <h3><a href="#">Even the all-powerful Pointing has no control about the blind
-                                            texts</a>
-                                    </h3>
-                                    <div class="meta">
-                                        <div><a href="#"><span class="icon-calendar"></span> February 12, 2019</a>
-                                        </div>
-                                        <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                        <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                    </div>
-                                </div>
-                            </div>
+                                {{$posts->links()}}
                         </div>
                         <div class="col-12 grid-margin stretch-card">
                             <div class="card">
                             </div>
                         </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class=" ftco-animate">
+                                    <h3 class="heading mb-4">Recent Blog</h3>
+                                    <div class="block-21 mb-4 d-flex">
+                                        <a class="blog-img mr-4"></a>
+                                        <div class="text">
+                                            <h3><a href="#">Even the all-powerful Pointing has no control about the blind
+                                                    texts</a>
+                                            </h3>
+                                            <div class="meta">
+                                                <div><a href="#"><span class="icon-calendar"></span> February 12, 2019</a>
+                                                </div>
+                                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="block-21 mb-4 d-flex">
+                                        <a class="blog-img mr-4"></a>
+                                        <div class="text">
+                                            <h3><a href="#">Even the all-powerful Pointing has no control about the blind
+                                                    texts</a>
+                                            </h3>
+                                            <div class="meta">
+                                                <div><a href="#"><span class="icon-calendar"></span> February 12, 2019</a>
+                                                </div>
+                                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="block-21 mb-4 d-flex">
+                                        <a class="blog-img mr-4"></a>
+                                        <div class="text">
+                                            <h3><a href="#">Even the all-powerful Pointing has no control about the blind
+                                                    texts</a>
+                                            </h3>
+                                            <div class="meta">
+                                                <div><a href="#"><span class="icon-calendar"></span> February 12, 2019</a>
+                                                </div>
+                                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{--Tag CLoud--}}
+                                <div class=" ftco-animate">
+                                    <h3 class="heading mb-4">Tag Cloud</h3>
+                                    <div class="tagcloud">
+                                        @foreach($tags  as $tag)
+                                            <a href="{{route('tag.posts',$tag->id)}}">{{$tag->name}}</a>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="col-lg-3">
                         <div class="sidebar-wrap">
                             <div class="sidebar-box p-4 about text-center ftco-animate">
                                 <h2 class="heading mb-4">About Me</h2>
-                                @if($user->image)
-                                    <img src="{{asset('storage/upload/images/' . Auth::user()->image)}}">
-                                @else
-                                    <img src="{{asset('storage/upload/images/default.png')}}" alt="">
-                                @endif
+                                <img class="img-profile img-circle img-responsive center-block" src="{{asset('/storage/upload/images/'.$user->image) }}" alt="">
+
                                 <div class="text pt-4">
-                                    <p>Hi! My name is <strong>Cathy Deon</strong>, behind the word mountains, far from
+                                    <p>Hi! My name is <strong>{{Auth::user()->name}}</strong>, behind the word mountains, far from
                                         the countries Vokalia and Consonantia, there live the blind texts. Separated
                                         they live in Bookmarksgrove right at the coast of the Semantics, a large
                                         language ocean.
@@ -282,44 +345,6 @@ margin-top: 50px">
                                         <input type="text" class="form-control" placeholder="Search" name="search">
                                     </div>
                                 </form>
-                            </div>
-                            <div class="sidebar-box categories text-center ftco-animate">
-                                <h2 class="heading mb-4">Categories</h2>
-                                <ul class="category-image">
-                                    <li>
-                                        <a href="#"
-                                           class="img d-flex align-items-center justify-content-center text-center">
-                                            <div class="text">
-                                                <h3>Foods</h3>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#"
-                                           class="img d-flex align-items-center justify-content-center text-center">
-                                            <div class="text">
-                                                <h3>Lifestyle</h3>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#"
-                                           class="img d-flex align-items-center justify-content-center text-center">
-                                            <div class="text">
-                                                <h3>Others</h3>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            {{--Tag CLoud--}}
-                            <div class="sidebar-box ftco-animate">
-                                <h3 class="heading mb-4">Tag Cloud</h3>
-                                <div class="tagcloud">
-                                    @foreach($tags  as $tag)
-                                        <a href="{{route('tag.posts',$tag->id)}}">{{$tag->name}}</a>
-                                    @endforeach
-                                </div>
                             </div>
                             {{--paragraph--}}
                             <div class="sidebar-box ftco-animate">
@@ -370,11 +395,6 @@ margin-top: 50px">
                         </button>
                     </div>
                     <div class="modal-body mx-3">
-                        <div class="content-panel">
-                            @if(Session::has('message'))
-                                <h5 class="alert-success">{{Session::get('message')}}</h5>
-                            @endif
-                        </div>
                         <form id="form2" class="forms-sample" method="POST"
                               action="{{ route('post.update',$post->id) }}" enctype="multipart/form-data">
                             @csrf
@@ -382,6 +402,16 @@ margin-top: 50px">
                                 <label for="exampleInputName1">Title</label>
                                 <input type="text" name="title" class="form-control" id="exampleInputName1"
                                        value="{{ $post->title }}">
+                                <div class="error-message">
+                                    @if($errors->has('title'))
+                                        <p class="alert-danger">{{$errors->first('title')}}</p>
+                                    @endif
+                                </div>
+                              <div class="error-message">
+                                  @if($errors->has('title'))
+                                      <p class="alert-danger">{{$errors->first('title')}}</p>
+                                  @endif
+                              </div>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail3">Category</label>
@@ -395,6 +425,11 @@ margin-top: 50px">
                                 <label for="exampleInputPassword4">Descriptions</label>
                                 <textarea class="ckeditor" id="updateDescription" cols="98" rows="5"
                                           name="description">{{$post->description}}</textarea>
+                                <div class="error-message">
+                                    @if($errors->has('description'))
+                                        <p class="alert-danger">{{$errors->first('description')}}</p>
+                                    @endif
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="exampleSelectGender"> Mode: </label>
@@ -410,6 +445,11 @@ margin-top: 50px">
                                     {{'checked'}}
                                     @endif
                                     type="radio" value="private" name="mode"/>
+                                <div class="error-message">
+                                    @if($errors->has('mode'))
+                                        <p class="alert-danger">{{$errors->first('mode')}}</p>
+                                    @endif
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Upload image</label>
@@ -420,30 +460,34 @@ margin-top: 50px">
                                 ><br>
                                 <img id="image1" src="{{asset('storage/upload/images/'.$post->image) }}"
                                      style="height: 70px"/>
+                                <div class="error-message">
+                                    @if($errors->has('image'))
+                                        <p class="alert-danger">{{$errors->first('image')}}</p>
+                                    @endif
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword4">Material</label>
                                 <textarea class="ckeditor" id="updateMaterial" cols="98" rows="5"
                                           name="material">{{$post->material}}</textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Region</label><br>
-                                <label for="exampleSelectGender">
-                                    Northern</label>
-                                <input type="checkbox" value="Northern" name="region"/>
-                                <label for="exampleSelectGender">Central</label>
-                                <input type="checkbox" value="Central" name="region"/>
-                                <label for="exampleSelectGender">
-                                    South</label>
-                                <input type="checkbox" value="South" name="region"/>
+                                <div class="error-message">
+                                    @if($errors->has('material'))
+                                        <p class="alert- danger">{{$errors->first('material')}}</p>
+                                    @endif
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword4">Recipe</label>
                                 <textarea class="ckeditor" id="updateRecipe" cols="98" rows="5"
                                           name="recipe">{{$post->recipe}}</textarea>
+                                <div class="error-message">
+                                    @if($errors->has('recipe'))
+                                        <p class="alert-danger">{{$errors->first('recipe')}}</p>
+                                    @endif
+                                </div>
                             </div>
                             <a href="{{route('page.myPost',Auth::user()->id)}}">
-                                <button type="button" class="btn btn-light">Cancel</button>
+                                <button  type="button" class="btn btn-light">Cancel</button>
                             </a>
                             <button type="submit" class="btn btn-gradient-primary mr-2">Update</button>
                         </form>
@@ -455,7 +499,6 @@ margin-top: 50px">
 
 @endsection
 @push('js')
-    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
     <script>
         CKEDITOR.replace('description', {
@@ -526,18 +569,6 @@ margin-top: 50px">
             });
         });
     </script>
-    <script>
-        $('.modalRegisterForm').click(function(){
-            var buttonId = $(this).attr('id');
-            $('#modalRegisterForm').removeAttr('class').addClass(buttonId).find('.modal').height($(window).outerHeight(true));
-            $('body').addClass('modal-active');
-        })
 
-        $('#modalRegisterForm').click(function(){
-            $(this).addClass('out');
-            $('body').removeClass('modal-active');
-        });
-
-    </script>
 @endpush
 

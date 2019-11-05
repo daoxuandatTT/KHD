@@ -10,8 +10,8 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active"><a href="{{route('page.index')}}" class="nav-link">Trang chủ</a></li>
                 <li class="nav-item"><a href="{{route('page.about')}}" class="nav-link">Về chúng tôi</a></li>
-                <li class="nav-item"><a href="{{route('page.showPostShare')}}" class="nav-link">Tam Su</a></li>
-                <li class="nav-item"><a href="{{route('page.contact')}}" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="{{route('page.showPostShare')}}" class="nav-link">Mẹo Làm Bếp</a></li>
+                <li class="nav-item"><a href="{{route('page.contact')}}" class="nav-link">Liên Hệ</a></li>
                 <!-- Authentication Links -->
                 @guest
                     <li class="nav-item">

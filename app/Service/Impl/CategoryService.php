@@ -25,8 +25,10 @@ class CategoryService implements CategoryServiceInterface
     public function store($request)
     {
         $category = new Category();
+        $imageFile=$request->file('image');
+        $category->image= $imageFile->getClientOriginalName();
+        $imageFile->storeAs('public/upload/images', $imageFile->getClientOriginalName());
         $category->name = $request->name;
-        $category->image = $request->image;
         $this->categoryRepository->save($category);
     }
 
@@ -38,8 +40,18 @@ class CategoryService implements CategoryServiceInterface
     public function update($request, $id)
     {
         $category = $this->categoryRepository->findById($id);
+        $categoryImage=$category->image;
+        if ($request->hasFile('image')){
+            $imageFile = $request->file('image');
+            $imageFileName = $imageFile->getClientOriginalName();
+            $category->image=$imageFileName;
+            $imageFile->storeAs('public/upload/images', $imageFile->getClientOriginalName());
+
+        }
+        else{
+            $category->image=$categoryImage;
+        }
         $category->name = $request->name;
-        $category->image = $request->image;
         $this->categoryRepository->save($category);
     }
 

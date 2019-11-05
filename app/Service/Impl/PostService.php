@@ -34,7 +34,6 @@ class PostService implements PostServiceInterface
         $post->material = $request->material;
         $post->recipe = $request->recipe;
         $post->description = $request->description;
-        $post->region = $request->region;
         $post->mode = $request->mode;
         $post->link = $request->link;
         $post->image = $imageFile->getClientOriginalName();
@@ -60,14 +59,25 @@ class PostService implements PostServiceInterface
     public function update($request, $id)
     {
         $post = $this->postRepository->findById($id);
-        $imageFile = $request->file('image');
+        $postImage=$post->image;
+
+        if ($request->hasFile('image')){
+            $imageFile = $request->file('image');
+            $imageFileName = $imageFile->getClientOriginalName();
+            $post->image=$imageFileName;
+            $imageFile->storeAs('public/upload/images', $imageFile->getClientOriginalName());
+
+        }
+        else{
+            $post->image=$postImage;
+        }
+
+
         $post->title = $request->title;
         $post->material = $request->material;
         $post->recipe = $request->recipe;
         $post->description = $request->description;
         $post->mode = $request->mode;
-        $post->image = $imageFile->getClientOriginalName();
-        $imageFile->storeAs('public/upload/images', $imageFile->getClientOriginalName());
         $post->category_id = $request->category_id;
         $this->postRepository->save($post);
     }

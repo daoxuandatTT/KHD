@@ -1,5 +1,6 @@
 <?php
 namespace App\Providers;
+use App\Category;
 use App\Post;
 use App\Repositories\Contract\CategoryRepositoryInterface;
 use App\Repositories\Contract\CommentRepositoryInterface;
@@ -99,6 +100,11 @@ class AppServiceProvider extends ServiceProvider
           $view->with('posts',$posts);
       });
         view()->composer('page.index',function ($view){
+
+            $categories=Category::all();
+            $view->with('categories',$categories);
+        });
+        view()->composer('page.index',function ($view){
             $postNewest=Post::where('mode','public')->orderBy('updated_at','desc')->first();
             $view->with('postNewest',$postNewest);
         });
@@ -106,6 +112,7 @@ class AppServiceProvider extends ServiceProvider
             $tags=Tag::all();
             $view->with('tags',$tags);
         });
+
         if (!Collection::hasMacro('paginate')) {
 
             Collection::macro('paginate',

@@ -38,7 +38,7 @@ Route::prefix('post')->group(function () {
     Route::post('search', 'PostController@search')->name('post.search');
 });
 Route::prefix('category')->group(function () {
-    Route::get('/', 'CategoryController@getAll')->name('category.list');
+    Route::get('/', 'CategoryController@getAll')->name('category.index');
     Route::get('/create', 'CategoryController@create')->name('category.create');
     Route::post('/store', 'CategoryController@store')->name('category.store');
     Route::get('{id}/edit', 'CategoryController@edit')->name('category.edit');
